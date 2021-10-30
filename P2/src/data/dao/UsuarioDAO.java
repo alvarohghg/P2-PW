@@ -79,16 +79,16 @@ public class UsuarioDAO {
 			// Important: This query is hard-coded here for illustrative purposes only
 			switch(opcion) {
 				case 1:
-					query = "UPDATE usuario SET nick = 'None' WHERE [Last correo] = " + nuevocorreo;
+					query = "UPDATE usuario SET nick = "+ nuevonick +"WHERE [Last correo] = " + correo;
 				break;
 				case 2:
-					query = "UPDATE usuario SET nombre = 'None' WHERE [Last correo] = " + nuevocorreo;
+					query = "UPDATE usuario SET nombre =  "+ nuevonombre +"WHERE [Last correo] = " + correo;
 				break;
 				case 3:
-					query = "UPDATE usuario SET apellidos = 'None' WHERE [Last correo] = " + nuevocorreo;
+					query = "UPDATE usuario SET apellidos = "+ nuevoapellidos +"WHERE [Last correo] = " + correo;
 				break;
 				case 4:
-					query = "UPDATE usuario SET correo = 'None' WHERE [Last correo] = " + nuevocorreo;
+					query = "UPDATE usuario SET correo =  "+ nuevocorreo +"WHERE [Last correo] = " + correo;
 				break;
 			}
 			
