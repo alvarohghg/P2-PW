@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
 import java.io.*;
+import data.dao.CriticasDAO;
+import data.dao.UsuarioDAO;
 
 /**
  * Una clase que representa al gestor de criticas
@@ -14,6 +16,7 @@ import java.io.*;
 
 public class GestorCriticas {
 	/* Atributos */
+	CriticasDAO CDAO=new CriticasDAO();
 	private ArrayList<Criticas> ListaCriticas = new ArrayList<Criticas>();
 	Scanner entrada = new Scanner(System.in);
 	private ArrayList<Usuario> ListaUsuario  = new ArrayList<Usuario>();
@@ -81,7 +84,7 @@ public class GestorCriticas {
 	 */
 	public void subirCritica(Criticas c)throws IOException {
 		this.ListaCriticas.add(c);
-		escribirFicheroCritica(c);
+		CDAO.escribirCriticasBD(c);
 		
 	}
 	/**
@@ -106,12 +109,10 @@ public class GestorCriticas {
 		for(int i=0; i< ListaCriticas.size(); i++) {
 			if(correo.equals(ListaCriticas.get(i).getAutor()) && titulo.equals(ListaCriticas.get(i).getTitulo())){
 				ListaCriticas.remove(i);
+				CDAO.borraCriticaBD(titulo,correo);
 			}
 		}
-		new FileWriter(propiedades(0), false).close();
-		for(int i=0; i< ListaCriticas.size(); i++) {
-			escribirFicheroCritica(ListaCriticas.get(i));
-		}
+		
 		
 	}
 	/**
@@ -156,7 +157,9 @@ public class GestorCriticas {
 						}
 						String op=Float.toString((puntuacion+estrellas)/2);
 						ListaCriticas.get(i).setValoraciones(op);
+						CDAO.actualizarCriticaBDpuntuacion(titulo, op);
 						ListaCriticas.get(i).setVotantes(ListaCriticas.get(i).getVotantes()+correo+",");
+						CDAO.actualizarCriticaBDvotantes(titulo,ListaCriticas.get(i).getVotantes()+correo+"," );
 					}
 				}
 			}
@@ -164,10 +167,7 @@ public class GestorCriticas {
 				System.out.println("No puede votar 2 veces la misma critica\n");
 			}
 			
-			new FileWriter(propiedades(0), false).close();
-			for(int i=0; i< ListaCriticas.size(); i++) {			
-				escribirFicheroCritica(ListaCriticas.get(i));
-			}
+			
 		}
 		
 		
@@ -204,6 +204,7 @@ public class GestorCriticas {
 	 * Nos dan una critica y la escribimos en el fichero correspondiente 
 	 * @param C Critica a escribir en el fichero
 	 */
+	/*
 	public void escribirFicheroCritica(Criticas C){
 		FileWriter fichero = null;
 		String f=null;
@@ -230,11 +231,12 @@ public class GestorCriticas {
 			System.out.println("Mensaje de la excepción: " + ex.getMessage());
 		}
 	}
-	
+	*/
 	/**
 	 * Leemos el fichero de criticas y guardamos su contenido en nuestra lista de criticas para poder trabajar con ella
 	 * @throws IOException
 	 */
+	/*
 	public void leerFicheroCriticas() throws IOException {
 		BufferedReader in = null;
 		ArrayList<Criticas> lista = new ArrayList<Criticas>();
@@ -275,7 +277,7 @@ public class GestorCriticas {
 		
 	}
 		
-	
+	*/
 	/**
 	 * Leemos el fichero de usuarios y lo guardamos en nuestra lista de usuarios para poder trabajar en ella
 	 * @throws IOException
@@ -314,6 +316,7 @@ public class GestorCriticas {
 	 * @param correoViejo Correo viejo
 	 * @throws IOException
 	 */
+	
 	public void actualizarAutor(String correoNuevo, String correoViejo) throws IOException {
 		for(int i=0;i<ListaCriticas.size();i++) {
 			if(correoViejo.equals(ListaCriticas.get(i).getAutor())) {
@@ -321,10 +324,10 @@ public class GestorCriticas {
 			}
 		}
 
-		new FileWriter(propiedades(0), false).close();
-		for(int i=0; i< ListaCriticas.size(); i++) {			
-			escribirFicheroCritica(ListaCriticas.get(i));
-		}
+		
+				
+			CDAO.actualizarAutorBD(correoNuevo, correoViejo);
+		
 	}
 	
 }
