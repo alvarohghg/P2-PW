@@ -70,4 +70,66 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public void actualizarUsuarioBD(String correo,String nuevonombre,String nuevoapellidos,String nuevonick,String nuevocorreo,int opcion){
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query=null; 
+			// Important: This query is hard-coded here for illustrative purposes only
+			switch(opcion) {
+				case 1:
+					query = "UPDATE usuario SET nick = 'None' WHERE [Last correo] = " + nuevocorreo;
+				break;
+				case 2:
+					query = "UPDATE usuario SET nombre = 'None' WHERE [Last correo] = " + nuevocorreo;
+				break;
+				case 3:
+					query = "UPDATE usuario SET apellidos = 'None' WHERE [Last correo] = " + nuevocorreo;
+				break;
+				case 4:
+					query = "UPDATE usuario SET correo = 'None' WHERE [Last correo] = " + nuevocorreo;
+				break;
+			}
+			
+					
+			
+			// Important: We can replace this direct invocation to CRUD operations in DBConnection
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void eliminarUsuarioBD(String correo){
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query="DELETE FROM usuario WHERE correo = "+ correo;
+			
+			// Important: We can replace this direct invocation to CRUD operations in DBConnection
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	
 }
