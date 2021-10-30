@@ -114,10 +114,7 @@ public class GestorUsuario {
 			/*
 			 * Tenemos k aser funsion especial para solo eliminar 
 			 */
-			new FileWriter(propiedades(), false).close();
-			for(int i=0; i< ListaUsuarios.size(); i++) {
-				UDAO.escribirUsuarioBD(ListaUsuarios.get(i));
-			}
+			UDAO.eliminarUsuarioBD(correo);
 			return var;
 
 	}
@@ -177,10 +174,12 @@ public class GestorUsuario {
 		/*
 		 * funcion para actualisar
 		 */
-		new FileWriter(propiedades(), false).close();
+		UDAO.actualizarUsuarioBD(correo, nuevonombre, nuevoapellidos, nuevonick, nuevocorreo, opcion);
+		
+		/*new FileWriter(propiedades(), false).close();
 		for(int i=0; i< ListaUsuarios.size(); i++) {
 			UDAO.escribirUsuarioBD(ListaUsuarios.get(i));
-		}
+		}*/
 		
 }
 	/////////////////////////
@@ -204,7 +203,7 @@ public class GestorUsuario {
 	 * Escribe un usuario en el fichero "ficheroU.txt"
 	 * @param u El usuario que se va a escribir
 	 */
-	public void escribirFicheroUsuario(Usuario u){
+	/*public void escribirFicheroUsuario(Usuario u){
 		FileWriter fichero = null;
 		String f=null;
 		f=propiedades();
@@ -220,7 +219,7 @@ public class GestorUsuario {
 		} catch (Exception ex) {
 			System.out.println("Mensaje de la excepci?n: " + ex.getMessage());
 		}
-	}
+	}*/
 	/**
 	 * Copia el contenido del fichero de usuarios a
 	 * la lista interna de usuarios del gestor
@@ -228,7 +227,7 @@ public class GestorUsuario {
 	 * informaci?n de los usuarios del fichero
 	 * @throws IOException
 	 */
-	public void leerFicheroUsuarios(ArrayList<Usuario> lista)throws IOException  {
+	/*public void leerFicheroUsuarios(ArrayList<Usuario> lista)throws IOException  {
 		BufferedReader in = null;
 		ArrayList<String>  vec = new ArrayList<String>();
 		File file = new File("ficheroU.txt");
@@ -254,6 +253,6 @@ public class GestorUsuario {
 		}
 			
 		lista=ListaUsuarios;
-	}
+	}*/
 		
 	}
