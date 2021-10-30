@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
+import data.dao.UsuarioDAO;
+
 /**
  * Una clase que representa al gestor de usuarios
  * @author Alvaro Berjillos
@@ -20,7 +22,7 @@ public class GestorUsuario {
 	private ArrayList<Usuario> ListaUsuarios=new ArrayList<Usuario>();
 	Scanner entrada = new Scanner(System.in);
 	Scanner entrada2 = new Scanner(System.in);
-	
+	UsuarioDAO UDAO=new UsuarioDAO();
 	/**
 	 * Constructor parametrizado
 	 * @param listausers Lista de los usuarios
@@ -41,7 +43,7 @@ public class GestorUsuario {
 	public void addUser(Usuario newuser) {
 				
 		this.ListaUsuarios.add(newuser);	
-		escribirFicheroUsuario(newuser);
+		UDAO.escribirUsuarioBD(newuser);
 		
 	}
 	/**
@@ -109,9 +111,12 @@ public class GestorUsuario {
 					var=true;
 				}
 			}
+			/*
+			 * Tenemos k aser funsion especial para solo eliminar 
+			 */
 			new FileWriter(propiedades(), false).close();
 			for(int i=0; i< ListaUsuarios.size(); i++) {
-				escribirFicheroUsuario(ListaUsuarios.get(i));
+				UDAO.escribirUsuarioBD(ListaUsuarios.get(i));
 			}
 			return var;
 
@@ -169,10 +174,12 @@ public class GestorUsuario {
 			}
 		}
 		
-		
+		/*
+		 * funcion para actualisar
+		 */
 		new FileWriter(propiedades(), false).close();
 		for(int i=0; i< ListaUsuarios.size(); i++) {
-			escribirFicheroUsuario(ListaUsuarios.get(i));
+			UDAO.escribirUsuarioBD(ListaUsuarios.get(i));
 		}
 		
 }
