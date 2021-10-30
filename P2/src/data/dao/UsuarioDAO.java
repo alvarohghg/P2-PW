@@ -10,7 +10,7 @@ import data.common.DBConnection;
 
 
 public class UsuarioDAO {
-	public ArrayList<Usuario>obtenerUsuarios(){
+	public ArrayList<Usuario> obtenerUsuarios(){
 		ArrayList<Usuario> listOfUsers = new ArrayList<Usuario>();
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -40,5 +40,34 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}
 		return listOfUsers;
+	}
+	
+	public void escribirUsuarioBD(Usuario user) {
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			// Important: This query is hard-coded here for illustrative purposes only
+			String nombre=user.getNombre();
+			String apellido=user.getApellidos();
+			String tipo=user.getTipo();
+			String correo=user.getCorreo();
+			String nick=user.getNick();
+			String query = "INSERT INTO  `usuario` (`nombre`, `apellidos`, `tipo` , `correo`, `nick`) VALUES ( "
+						+ nombre + apellido + tipo + correo + nick + " )";
+					
+			
+			// Important: We can replace this direct invocation to CRUD operations in DBConnection
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
 	}
 }
