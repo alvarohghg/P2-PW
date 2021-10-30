@@ -20,6 +20,7 @@ import business.AbstractEspectaculo.categoria;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import data.*;
+import data.dao.CriticasDAO;
 import data.dao.UsuarioDAO;
 
 
@@ -37,6 +38,8 @@ public class Main{
 		GestorCriticas GC1= GestorCriticas.getInstancia();
 		GestorEspectaculos GE=new GestorEspectaculos();
 		UsuarioDAO UDAO=new UsuarioDAO();
+		CriticasDAO CDAO=new CriticasDAO();
+		
 		int opcion;
 		int intentos=0;
 		int op=0;
@@ -52,7 +55,9 @@ public class Main{
 		GE.leerFicheroTemporada();
 		//gu1.leerFicheroUsuarios(listausuarios);
 		UDAO.obtenerUsuarios();
-		GC1.leerFicheroCriticas();
+		//GC1.leerFicheroCriticas();
+		CDAO.obtenerCriticas();
+		
 		
 		System.out.println("Desea registrarse [1] o iniciar sesion [2] o salir [0]\n");
 		opcion=entradaInt.nextInt();
