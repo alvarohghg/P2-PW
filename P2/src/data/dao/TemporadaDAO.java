@@ -45,6 +45,39 @@ public class TemporadaDAO {
 		}
 		return listaT;
 	}
+public void escribirTemporadaBD(EspectaculoTemporada temporada) {
+	try {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		// Important: This query is hard-coded here for illustrative purposes only
+		String titulo_temp=temporada.getTitulo();
+		String descripcion_temp=temporada.getDescripcion();
+		String categoria_temp=temporada.getCategoria().toString();
+		String aforolocalidades_temp=String.valueOf(temporada.getAforolocalidades());
+		String localidadesvendidas_temp=String.valueOf(temporada.getLocalidadesvendidas());
+		String dia_temp=temporada.getDia();
+		String inicio_temp=String.valueOf(temporada.getInicio());
+		String fin_temp=String.valueOf(temporada.getFin());
+		String query = "INSERT INTO `espectaculotemporada` ( `titulo_temp` , `descripcion_temp` , `categoria_temp` , `aforolocalidades_temp` , `localidadesvendidas_temp` , `dia_temp` , `inicio_temp` , `fin_temp` ) "
+				+ "VALUES ( "
+				+ titulo_temp +"," + descripcion_temp +"," + categoria_temp +"," +  aforolocalidades_temp + "," +localidadesvendidas_temp + "," + dia_temp+"," + inicio_temp + "," + fin_temp
+				+ ");";
+				
+		
+		// Important: We can replace this direct invocation to CRUD operations in DBConnection
+		Statement stmt = connection.createStatement();
+		ResultSet rs = (ResultSet) stmt.executeQuery(query);
+
+
+		if (stmt != null){ 
+			stmt.close(); 
+		}
+		dbConnection.closeConnection();
+	} catch (Exception e){
+		System.err.println(e);
+		e.printStackTrace();
+	}
+	}
 
 }
 
