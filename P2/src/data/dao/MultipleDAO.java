@@ -1,5 +1,6 @@
 package data.dao;
 
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -7,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import business.EspectaculoPuntual;
+import business.Usuario;
 import business.AbstractEspectaculo.categoria;
 import business.EspectaculoMultiple;
 import data.common.DBConnection;
@@ -59,5 +61,89 @@ public class MultipleDAO {
 			e.printStackTrace();
 		}
 		return listaM;
+	}
+	public void escribirMultipleBD(EspectaculoMultiple multiple ) {
+        try {
+        	
+            DBConnection dbConnection = new DBConnection();
+            Connection connection = dbConnection.getConnection();
+            // Important: This query is hard-coded here for illustrative purposes only
+            String titulo=multiple.getTitulo();
+            String descripcion=multiple.getDescripcion();
+            String cate=multiple.getCategoria().toString();
+            String aforo=String.valueOf(multiple.getAforolocalidades());
+            String vendidas=String.valueOf(multiple.getLocalidadesvendidas());
+            ArrayList<Date> listaFechas=multiple.getListaFechas();
+            String query = "INSERT INTO  `espectaculomultiple` (`titulo_mult`, `descripcion_mult`, `cate_mult` , `aforo_mult`, `vendidas_mult`) VALUES ( "
+                        + titulo+", " + descripcion +", "+ cate +", "+ aforo +", "+ vendidas + " )";
+            String query2=null;
+            int i=0;
+            while(i<listaFechas.size()) {
+                query2 = "INSERT INTO  `multiplefechas` (`titulo_mult`, `fecha_mult`) "
+                		+ "VALUES ( "+titulo+", " + String.valueOf(listaFechas.get(i))+ " )";
+                i++;
+            }
+                    
+            
+            // Important: We can replace this direct invocation to CRUD operations in DBConnection
+            Statement stmt = connection.createStatement();
+            ResultSet rs = (ResultSet) stmt.executeQuery(query);
+
+
+            if (stmt != null){ 
+                stmt.close(); 
+            }
+            dbConnection.closeConnection();
+        } catch (Exception e){
+            System.err.println(e);
+            e.printStackTrace();
+        }
+    }
+	
+	public void actualizarMultipleBD(String titulo,String nuevotitulo,String nuevadescripcion,categoria nuevacategoria,int nuevoaforolocalidades,
+			int localidadesvendidas,Date fecha1,Date fecha2,int opcion){
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query=null; 
+			String query2=null;
+			// Important: This query is hard-coded here for illustrative purposes only
+			switch(opcion) {
+				case 1:
+					query = "UPDATE espectaculomultiple SET titulo_mult = "+ nuevotitulo +"WHERE [Last titulo_mult] = " + titulo;
+				break;
+				case 2:
+					query = "UPDATE espectaculomultiple SET descripcion_mult =  "+ nuevadescripcion +"WHERE [Last titulo_mult] = " + titulo;
+				break;
+				case 3:
+					query = "UPDATE espectaculomultiple SET categoria = "+ nuevacategoria +"WHERE [Last titulo_mult] = " + titulo;
+				break;
+				case 4:
+					query = "UPDATE espectaculomultiple SET aforolocalidades =  "+ String.valueOf(nuevoaforolocalidades) +"WHERE [Last titulo_mult] = " + titulo;
+				break;
+				case 5:
+					query = "UPDATE espectaculomultiple SET localidadesvendidas =  "+ String.valueOf(nuevoaforolocalidades) +"WHERE [Last titulo_mult] = " + titulo;
+				break;
+				case 6:
+					query2 = "UPDATE multiplefechas SET fecha_mult =  "+ String.valueOf(fecha2) +"WHERE [Last titulo_mult] = " + titulo+ "AND [Last fecha_mult] ="+String.valueOf(fecha1);
+						
+				break;
+			}
+			
+					
+			
+			// Important: We can replace this direct invocation to CRUD operations in DBConnection
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
 	}
 }
