@@ -119,6 +119,47 @@ public class PuntualDAO {
 		}
 	}
 	
+	public void eliminarPuntualTitulo(String titulo){
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query="DELETE FROM espectaculopuntual WHERE titulo_puntual = "+ titulo;
+			
+			// Important: We can replace this direct invocation to CRUD operations in DBConnection
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminarPuntualFecha(String titulo, Date fecha){
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query = "DELETE FROM espectaculopuntual WHERE titulo_puntual = "+ titulo + "AND fecha_puntual ="+ fecha;
+			
+			// Important: We can replace this direct invocation to CRUD operations in DBConnection
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
 	
 }
 

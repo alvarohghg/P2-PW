@@ -22,6 +22,9 @@ import java.time.format.DateTimeFormatter;
 import data.*;
 import data.dao.CriticasDAO;
 import data.dao.UsuarioDAO;
+import data.dao.PuntualDAO;
+
+
 
 
 public class Main{
@@ -39,6 +42,7 @@ public class Main{
 		GestorEspectaculos GE=new GestorEspectaculos();
 		UsuarioDAO UDAO=new UsuarioDAO();
 		CriticasDAO CDAO=new CriticasDAO();
+		PuntualDAO PDAO= new PuntualDAO();
 		
 		int opcion;
 		int intentos=0;
@@ -49,15 +53,18 @@ public class Main{
 		String autor2;
 		String nombreRegister,apellidosRegister,nickRegister,correoRegister, tipoRegister;
 		String tituloCrear,espectaculoCrear,puntuacionCrear,reviewCrear ;
-
-		GE.leerFicheroMultiple();
-		GE.leerFicheroPuntual();
+		
+		GE.guardarBDlistas();
+		//GE.leerFicheroMultiple();
+		//GE.leerFicheroPuntual();
+		//PDAO.obtenerPuntual();
 		GE.leerFicheroTemporada();
 		//gu1.leerFicheroUsuarios(listausuarios);
-		UDAO.obtenerUsuarios();
+		gu1.guardarBDU();
+		//UDAO.obtenerUsuarios();
 		//GC1.leerFicheroCriticas();
-		CDAO.obtenerCriticas();
-		
+		//CDAO.obtenerCriticas();
+		GC1.guardarBDC();
 		
 		System.out.println("Desea registrarse [1] o iniciar sesion [2] o salir [0]\n");
 		opcion=entradaInt.nextInt();
@@ -799,11 +806,8 @@ public class Main{
 								GC1.votarCritica(correoInicioSesion, puntuacion,titulo3);
 							}
 							
-							
 						}
-						
-						
-						
+
 					break;
 				}
 			}while(op>=1 && op<=7);

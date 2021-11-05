@@ -10,7 +10,7 @@ import data.dao.UsuarioDAO;
  * Una clase que representa al gestor de criticas
  * @author Alvaro Berjillos
  * @author Alvaro Sanchez
- * @author Francisco Javier Díaz
+ * @author Francisco Javier Dï¿½az
  * @version 1.0
  * */
 
@@ -49,6 +49,10 @@ public class GestorCriticas {
 			}
 		} 
 		return existe;
+	}
+	
+	public void guardarBDC() {
+		ListaCriticas = CDAO.obtenerCriticas();
 	}
 	
 	/**
@@ -228,7 +232,7 @@ public class GestorCriticas {
 			fichero.close();
 
 		} catch (Exception ex) {
-			System.out.println("Mensaje de la excepción: " + ex.getMessage());
+			System.out.println("Mensaje de la excepciï¿½n: " + ex.getMessage());
 		}
 	}
 	*/

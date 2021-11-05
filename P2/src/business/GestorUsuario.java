@@ -46,6 +46,11 @@ public class GestorUsuario {
 		UDAO.escribirUsuarioBD(newuser);
 		
 	}
+	
+	public void guardarBDU() {
+		ListaUsuarios=UDAO.obtenerUsuarios();
+	}
+	
 	/**
 	 * Comprueba si existe un usuario dado el correo
 	 * @param correo El correo a buscar

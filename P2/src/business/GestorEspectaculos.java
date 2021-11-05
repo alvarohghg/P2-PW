@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import business.AbstractEspectaculo.categoria;
+import data.dao.PuntualDAO;
+import data.dao.TemporadaDAO;
+import data.dao.MultipleDAO;
+
 /**
  * 
  * @author Alvaro Berjillos
@@ -20,6 +24,9 @@ import business.AbstractEspectaculo.categoria;
  */
 public class GestorEspectaculos {
 	/*Atributos*/
+	PuntualDAO PDAO= new PuntualDAO();
+	MultipleDAO MDAO= new MultipleDAO();
+	TemporadaDAO TDAO= new TemporadaDAO();
 	
 	private ArrayList<EspectaculoMultiple> ListaEspectaculosM=new ArrayList<EspectaculoMultiple>();
 	private ArrayList<EspectaculoPuntual> ListaEspectaculosP=new ArrayList<EspectaculoPuntual>();
@@ -54,9 +61,16 @@ public class GestorEspectaculos {
 		ListaEspectaculosM = listaEspectaculosM;
 	}
 	
+	
+	public void guardarBDlistas() {
+		ListaEspectaculosP = PDAO.obtenerPuntual();
+		ListaEspectaculosT = TDAO.obtenerTemporada();
+		ListaEspectaculosM = MDAO.obtenerMultiple();
+	}
+	
 	/**
-	 * Añade un espectaculo multiple a la lista de espectaculos multiples y lo escribe en su fichero
-	 * @param newespectaculo El espectaculo a añadir
+	 * Aï¿½ade un espectaculo multiple a la lista de espectaculos multiples y lo escribe en su fichero
+	 * @param newespectaculo El espectaculo a aï¿½adir
 	 */
 	public void addEspectM(EspectaculoMultiple newespectaculo) {
 
@@ -65,8 +79,8 @@ public class GestorEspectaculos {
 		
 	}
 	/**
-	 * Añade un espectaculo de temporada a la lista de espectaculos de temporada y lo escribe en su fichero
-	 * @param newespectaculo El espectaculo a añadir
+	 * Aï¿½ade un espectaculo de temporada a la lista de espectaculos de temporada y lo escribe en su fichero
+	 * @param newespectaculo El espectaculo a aï¿½adir
 	 */
 	public void addEspectT(EspectaculoTemporada newespectaculo) {
 
@@ -75,13 +89,15 @@ public class GestorEspectaculos {
 		
 	}
 	/**
-	 * Añade un espectaculo puntual a la lista de espectaculos puntuales y lo escribe en su fichero
-	 * @param newespectaculo El espectaculo a añadir
+	 * Aï¿½ade un espectaculo puntual a la lista de espectaculos puntuales y lo escribe en su fichero
+	 * @param newespectaculo El espectaculo a aï¿½adir
 	 */
 	public void addEspectP(EspectaculoPuntual newespectaculo) {
 
 		this.ListaEspectaculosP.add(newespectaculo);
-		escribirFicheroPuntual(newespectaculo);
+		//escribirFicheroPuntual(newespectaculo);
+		PDAO.escribirPuntualBD(newespectaculo);
+		
 		
 	}
 	/**
@@ -113,7 +129,7 @@ public class GestorEspectaculos {
 		return false;
 	}
 	/**
-	 * Devuelve una lista con los titulos de todos los espectáculos
+	 * Devuelve una lista con los titulos de todos los espectï¿½culos
 	 * @return l Lista con todos los espectaculos
 	 */
 	public ArrayList<String> verEspectaculos(){
@@ -130,7 +146,7 @@ public class GestorEspectaculos {
 		return l;
 	}
 	/**
-	 * Funcion para registrar un espectaculo múltiple en la lista de espectaculos múltiples y en el fichero
+	 * Funcion para registrar un espectaculo mï¿½ltiple en la lista de espectaculos mï¿½ltiples y en el fichero
 	 * @param titulo El titulo del espectaculo
 	 * @param descripcion La descripcion del espectaculo 
 	 * @param categoria La categoria del espectaculo 
@@ -252,30 +268,36 @@ public class GestorEspectaculos {
 						var=true;
 					}
 				}
+				
 				new FileWriter(propiedades(3), false).close();
 				for(int i=0; i< ListaEspectaculosM.size(); i++) {
 					escribirFicheroMultiple(ListaEspectaculosM.get(i));
 				}
+				
 				for(int i=0;i<ListaEspectaculosT.size();i++) {
 					if(titulo.equals(ListaEspectaculosT.get(i).getTitulo())) {
 						ListaEspectaculosT.remove(i);
 						var=true;
 					}
 				}
+				
 				new FileWriter(propiedades(2), false).close();
 				for(int i=0; i< ListaEspectaculosT.size(); i++) {
 					escribirFicheroTemporal(ListaEspectaculosT.get(i));
 				}
+				
 				for(int i=0;i<ListaEspectaculosP.size();i++) {
 					if(titulo.equals(ListaEspectaculosP.get(i).getTitulo())) {
 						ListaEspectaculosP.remove(i);
+						PDAO.eliminarPuntualTitulo(titulo);
 						var=true;
 					}
 				}
+				/*
 				new FileWriter(propiedades(1), false).close();
 				for(int i=0; i< ListaEspectaculosP.size(); i++) {
 					escribirFicheroPuntual(ListaEspectaculosP.get(i));
-				}
+				}*/
 				
 				return var;
 
@@ -324,13 +346,16 @@ public class GestorEspectaculos {
 				for(int i=0;i<ListaEspectaculosP.size();i++) {
 					if(titulo.equals(ListaEspectaculosP.get(i).getTitulo()) && fecha.compareTo(ListaEspectaculosP.get(i).getFechaPuntual())==0) {
 						ListaEspectaculosP.remove(i);
+						PDAO.eliminarPuntualFecha(titulo, fecha);
 						var=true;
 					}
 				}
+				
+				/*
 				new FileWriter(propiedades(1), false).close();
 				for(int i=0; i< ListaEspectaculosP.size(); i++) {
 					escribirFicheroPuntual(ListaEspectaculosP.get(i));
-				}
+				}*/
 				return var;
 		}
 		/**
@@ -442,10 +467,8 @@ public class GestorEspectaculos {
 							}
 				}
 			}
-			new FileWriter(propiedades(1), false).close();
-			for(int i=0; i< ListaEspectaculosP.size(); i++) {
-				escribirFicheroPuntual(ListaEspectaculosP.get(i));
-			}
+			PDAO.actualizarPuntualBD(titulo, nuevotitulo, nuevadescripcion, nuevacategoria, nuevoaforolocalidades, localidadesvendidas, fecha2, opcion);
+			
 			
 	}
 		/**
@@ -483,13 +506,10 @@ public class GestorEspectaculos {
 									this.ListaEspectaculosT.get(i).setLocalidadesvendidas(localidadesvendidas);
 								break;
 								case 6:
-									
 									this.ListaEspectaculosT.get(i).setDia(dia);
-									
 								break;
 								case 7:
 									this.ListaEspectaculosT.get(i).setInicio(nuevafechainicio);
-									
 								break;
 								case 8:
 									this.ListaEspectaculosT.get(i).setFin(nuevafechafin);
@@ -545,7 +565,7 @@ public class GestorEspectaculos {
 		}
 		/**
 		 * Devuelve una lista de los titulos de los espectaculos con entradas y sesiones posteriores a uan fecha
-		 * @param fecha Fecha a partir de la cual se calculan los próximos espectaculos (en el main se introduce la actual)
+		 * @param fecha Fecha a partir de la cual se calculan los prï¿½ximos espectaculos (en el main se introduce la actual)
 		 * @return lista Lista de cadenas con los titulos de los espectaculos proximos
 		 */
 		public ArrayList<String> proximosEspectaculos(Date fecha) {
@@ -735,7 +755,7 @@ public class GestorEspectaculos {
 		
 		/**
 		 * Escribe un espectaculo puntual en el fichero de espectaculos puntuales
-		 * @param p Espectaculo puntual a añadir al fichero
+		 * @param p Espectaculo puntual a aï¿½adir al fichero
 		 */
 		public void escribirFicheroPuntual(EspectaculoPuntual p){
 			FileWriter fichero = null;
@@ -756,7 +776,7 @@ public class GestorEspectaculos {
 				fichero.close();
 
 			} catch (Exception ex) {
-				System.out.println("Mensaje de la excepción: " + ex.getMessage());
+				System.out.println("Mensaje de la excepciï¿½n: " + ex.getMessage());
 			}
 		}
 		/**
@@ -811,7 +831,7 @@ public class GestorEspectaculos {
 		}
 		/**
 		 * Escribe un espectaculo de temporada en el fichero de espectaculos de temporada
-		 * @param e Espectaculo de temporada a añadir al fichero
+		 * @param e Espectaculo de temporada a aï¿½adir al fichero
 		 */
 		public void escribirFicheroTemporal(EspectaculoTemporada e){
             FileWriter fichero = null;
@@ -838,7 +858,7 @@ public class GestorEspectaculos {
                 fichero.close();
 
             } catch (Exception ex) {
-                System.out.println("Mensaje de la excepción: " + ex.getMessage());
+                System.out.println("Mensaje de la excepciï¿½n: " + ex.getMessage());
             }
         }
 		/**
@@ -890,7 +910,7 @@ public class GestorEspectaculos {
         }
 		/**
 		 * Escribe un espectaculo multiple en el fichero de espectaculos multiples
-		 * @param p Espectaculo multiple a añadir al fichero
+		 * @param p Espectaculo multiple a aï¿½adir al fichero
 		 */
 		public void escribirFicheroMultiple(EspectaculoMultiple p){
             FileWriter fichero = null;

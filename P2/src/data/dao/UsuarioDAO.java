@@ -53,7 +53,7 @@ public class UsuarioDAO {
 			String correo=user.getCorreo();
 			String nick=user.getNick();
 			String query = "INSERT INTO  `usuario` (`nombre`, `apellidos`, `tipo` , `correo`, `nick`) VALUES ( "
-						+ nombre + apellido + tipo + correo + nick + " )";
+						+ nombre +"," + apellido +"," + tipo +"," + correo +"," + nick + " )";
 					
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection

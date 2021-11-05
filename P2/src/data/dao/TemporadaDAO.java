@@ -11,7 +11,7 @@ import business.AbstractEspectaculo.categoria;
 import data.common.DBConnection;
 
 public class TemporadaDAO {
-	public ArrayList<EspectaculoTemporada> obtenerPuntual(){
+	public ArrayList<EspectaculoTemporada> obtenerTemporada(){
 		ArrayList<EspectaculoTemporada> listaT = new ArrayList<EspectaculoTemporada>();
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -80,4 +80,3 @@ public void escribirTemporadaBD(EspectaculoTemporada temporada) {
 	}
 
 }
-
