@@ -40,7 +40,7 @@ public class MultipleDAO {
 				localidades = rs.getInt("localidadesvendidas_mult");
 				String query2="select fecha_mult from multiplefechas when titulo_mult="+titulo;
 				Statement stmt2 = connection.createStatement();
-				ResultSet rs2 = (ResultSet) stmt.executeQuery(query2);
+				ResultSet rs2 = (ResultSet) stmt2.executeQuery(query2);
 				while (rs2.next()) {
 					Date fecha=rs.getDate("fecha");
 					listaFechas.add(fecha);
@@ -131,6 +131,50 @@ public class MultipleDAO {
 			}
 			
 					
+			
+			// Important: We can replace this direct invocation to CRUD operations in DBConnection
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	public void eliminarMultipleTitulo(String titulo){
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query="DELETE FROM espectaculomultiple WHERE titulo_mult = "+ titulo;
+			String query2="DELETE FROM multiplefechas WHERE titulo_mult = "+ titulo;
+			// Important: We can replace this direct invocation to CRUD operations in DBConnection
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			Statement stmt2 = connection.createStatement();
+			ResultSet rs2 = (ResultSet) stmt2.executeQuery(query2);
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			if (stmt2 != null){ 
+				stmt2.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	public void eliminarMultipleFecha(String titulo, Date fecha){
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query = "DELETE FROM multiplefechas WHERE titulo_mult = "+ titulo + "AND fecha_mult ="+ fecha;
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
