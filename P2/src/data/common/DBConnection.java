@@ -1,7 +1,11 @@
 package data.common;
+import java.io.*;
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+
 /**
  * A class to manage the MySQL connection (general methods and configuration).
  * @author Alvaro Berjillos
@@ -13,11 +17,11 @@ public class DBConnection {
 
 	// Important: This configuration is hard-coded here for illustrative purposes only
 	
-	protected String url = "jdbc:mysql://oraclepr.uco.es:3306/i92dicaf";
+	protected String url = propiedades(1);
 
-	protected String user = "i92dicaf";
-
-	protected String password = "pw2021";
+	protected String user = propiedades(2);
+ 
+	protected String password = propiedades(3);
 
 	public Connection getConnection(){
 
@@ -49,4 +53,34 @@ public class DBConnection {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public String propiedades(int r) {
+		
+		Properties prop = new Properties();
+		String filename = "conf.propierties";
+		String f=null;
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
+			prop.load(reader);
+			if(r==1) {
+				f = prop.getProperty("url");
+			}
+			else if(r==2) {
+				f = prop.getProperty("user");
+			}
+			else {
+				f = prop.getProperty("password");
+			}
+			//System.out.println(f);			
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return f;
+	}
+	
 }
