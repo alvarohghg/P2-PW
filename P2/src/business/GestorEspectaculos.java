@@ -75,7 +75,8 @@ public class GestorEspectaculos {
 	public void addEspectM(EspectaculoMultiple newespectaculo) {
 
 		this.ListaEspectaculosM.add(newespectaculo);
-		escribirFicheroMultiple(newespectaculo);
+		//escribirFicheroMultiple(newespectaculo);
+		MDAO.escribirMultipleBD(newespectaculo);
 		
 	}
 	/**
@@ -85,7 +86,8 @@ public class GestorEspectaculos {
 	public void addEspectT(EspectaculoTemporada newespectaculo) {
 
 		this.ListaEspectaculosT.add(newespectaculo);	
-		escribirFicheroTemporal(newespectaculo);
+		//escribirFicheroTemporal(newespectaculo);
+		TDAO.escribirTemporadaBD(newespectaculo);
 		
 	}
 	/**
@@ -265,26 +267,18 @@ public class GestorEspectaculos {
 				for(int i=0;i<ListaEspectaculosM.size();i++) {
 					if(titulo.equals(ListaEspectaculosM.get(i).getTitulo())) {
 						ListaEspectaculosM.remove(i);
+						MDAO.eliminarMultipleTitulo(titulo);
 						var=true;
 					}
-				}
-				
-				new FileWriter(propiedades(3), false).close();
-				for(int i=0; i< ListaEspectaculosM.size(); i++) {
-					escribirFicheroMultiple(ListaEspectaculosM.get(i));
 				}
 				
 				for(int i=0;i<ListaEspectaculosT.size();i++) {
 					if(titulo.equals(ListaEspectaculosT.get(i).getTitulo())) {
 						ListaEspectaculosT.remove(i);
+						TDAO.eliminarTemporadaTitulo(titulo);
 						var=true;
 					}
-				}
-				
-				new FileWriter(propiedades(2), false).close();
-				for(int i=0; i< ListaEspectaculosT.size(); i++) {
-					escribirFicheroTemporal(ListaEspectaculosT.get(i));
-				}
+				}				
 				
 				for(int i=0;i<ListaEspectaculosP.size();i++) {
 					if(titulo.equals(ListaEspectaculosP.get(i).getTitulo())) {
@@ -293,12 +287,7 @@ public class GestorEspectaculos {
 						var=true;
 					}
 				}
-				/*
-				new FileWriter(propiedades(1), false).close();
-				for(int i=0; i< ListaEspectaculosP.size(); i++) {
-					escribirFicheroPuntual(ListaEspectaculosP.get(i));
-				}*/
-				
+								
 				return var;
 
 		}
@@ -318,20 +307,19 @@ public class GestorEspectaculos {
 							
 							if(ListaEspectaculosM.get(i).getListaFechas().size()==1) { //si solo queda una sesion al eliminar se elimina el espectaculo entero
 								ListaEspectaculosM.remove(i);
+								MDAO.eliminarMultipleTitulo(titulo);
 								break;
-									}else {
-										ListaEspectaculosM.get(i).getListaFechas().remove(j);
-									}
+							}else {
+								ListaEspectaculosM.get(i).getListaFechas().remove(j);
+								MDAO.eliminarMultipleFecha(titulo, fecha);
+							}
 
 							var=true;
 						}
 					}
 				}
 				
-				new FileWriter(propiedades(3), false).close();
-				for(int i=0; i< ListaEspectaculosM.size(); i++) {
-					escribirFicheroMultiple(ListaEspectaculosM.get(i));
-				}
+				
 				return var;
 		}
 		/**
@@ -351,11 +339,7 @@ public class GestorEspectaculos {
 					}
 				}
 				
-				/*
-				new FileWriter(propiedades(1), false).close();
-				for(int i=0; i< ListaEspectaculosP.size(); i++) {
-					escribirFicheroPuntual(ListaEspectaculosP.get(i));
-				}*/
+				
 				return var;
 		}
 		/**
@@ -372,13 +356,11 @@ public class GestorEspectaculos {
 						&&ListaEspectaculosT.get(i).getFin().compareTo(fecha)>0 || ListaEspectaculosT.get(i).getFin().compareTo(fecha)==0
 						||ListaEspectaculosT.get(i).getInicio().compareTo(fecha)==0) {
 					ListaEspectaculosT.remove(i);
+					TDAO.eliminarTemporadaFecha(titulo, fecha);
 					var=true;
 				}
 			}
-			new FileWriter(propiedades(2), false).close();
-			for(int i=0; i< ListaEspectaculosT.size(); i++) {
-				escribirFicheroTemporal(ListaEspectaculosT.get(i));
-			}
+			
 				return var;
 		}
 		
@@ -422,10 +404,7 @@ public class GestorEspectaculos {
 							}
 				}
 			}
-			new FileWriter(propiedades(3), false).close();
-			for(int i=0; i< ListaEspectaculosM.size(); i++) {
-				escribirFicheroMultiple(ListaEspectaculosM.get(i));
-			}
+			MDAO.actualizarMultipleBD(titulo, nuevotitulo, nuevadescripcion, nuevacategoria, nuevoaforolocalidades, localidadesvendidas, fecha1, fecha2, opcion);
 			
 	}
 		/**
@@ -517,10 +496,8 @@ public class GestorEspectaculos {
 							}
 				}
 			}
-			new FileWriter(propiedades(2), false).close();
-			for(int i=0; i< ListaEspectaculosT.size(); i++) {
-				escribirFicheroTemporal(ListaEspectaculosT.get(i));
-			}
+			TDAO.actualizarTemporadaBD(titulo, nuevotitulo, nuevadescripcion, nuevacategoria, nuevoaforolocalidades, localidadesvendidas, nuevafechafin, nuevafechainicio, dia, opcion);
+			
 			
 			
 	}
@@ -757,7 +734,7 @@ public class GestorEspectaculos {
 		 * Escribe un espectaculo puntual en el fichero de espectaculos puntuales
 		 * @param p Espectaculo puntual a a�adir al fichero
 		 */
-		public void escribirFicheroPuntual(EspectaculoPuntual p){
+		/*public void escribirFicheroPuntual(EspectaculoPuntual p){
 			FileWriter fichero = null;
 			String f=null;
 			f=propiedades(1);	
@@ -778,12 +755,12 @@ public class GestorEspectaculos {
 			} catch (Exception ex) {
 				System.out.println("Mensaje de la excepci�n: " + ex.getMessage());
 			}
-		}
+		}*/
 		/**
 		 * Vuelca los espectaculos puntuales a la lista de espectaculos puntuales del gestor de espectaculos
 		 * @throws IOException
 		 */
-		public void leerFicheroPuntual() throws IOException {
+		/*public void leerFicheroPuntual() throws IOException {
 			BufferedReader in = null;
 			ArrayList<EspectaculoPuntual> lista = new ArrayList<EspectaculoPuntual>();
 			ArrayList<String>  vec = new ArrayList<String>();
@@ -828,12 +805,12 @@ public class GestorEspectaculos {
 			
 			ListaEspectaculosP=lista;
 			
-		}
+		}*/
 		/**
 		 * Escribe un espectaculo de temporada en el fichero de espectaculos de temporada
 		 * @param e Espectaculo de temporada a a�adir al fichero
 		 */
-		public void escribirFicheroTemporal(EspectaculoTemporada e){
+		/*public void escribirFicheroTemporal(EspectaculoTemporada e){
             FileWriter fichero = null;
             String f=null;
             f=propiedades(2);
@@ -860,12 +837,12 @@ public class GestorEspectaculos {
             } catch (Exception ex) {
                 System.out.println("Mensaje de la excepci�n: " + ex.getMessage());
             }
-        }
+        }*/
 		/**
 		 * Vuelca los espectaculos de temporada a la lista de espectaculos de temporada del gestor de espectaculos
 		 * @throws IOException
 		 */
-		public void leerFicheroTemporada() throws IOException {
+		/*public void leerFicheroTemporada() throws IOException {
             BufferedReader in = null;
             ArrayList<EspectaculoTemporada> lista = new ArrayList<EspectaculoTemporada>();
             ArrayList<String>  vec = new ArrayList<String>();
@@ -907,12 +884,12 @@ public class GestorEspectaculos {
                 
             ListaEspectaculosT=lista;
             
-        }
+        }*/
 		/**
 		 * Escribe un espectaculo multiple en el fichero de espectaculos multiples
 		 * @param p Espectaculo multiple a a�adir al fichero
 		 */
-		public void escribirFicheroMultiple(EspectaculoMultiple p){
+		/*public void escribirFicheroMultiple(EspectaculoMultiple p){
             FileWriter fichero = null;
             String f=null;
             f=propiedades(3);
@@ -941,12 +918,12 @@ public class GestorEspectaculos {
             } catch (Exception ex) {
                 System.out.println("Mensaje de la excepción: " + ex.getMessage());
             }
-        }
+        }*/
 		/**
 		 * Vuelca los espectaculos multiples a la lista de espectaculos multiples del gestor de espectaculos
 		 * @throws IOException
 		 */
-         public void leerFicheroMultiple() throws IOException {
+         /*public void leerFicheroMultiple() throws IOException {
             BufferedReader in = null;
             ArrayList<EspectaculoMultiple> lista = new ArrayList<EspectaculoMultiple>();
             ArrayList<String>  vec = new ArrayList<String>();
@@ -987,7 +964,7 @@ public class GestorEspectaculos {
             
             ListaEspectaculosM=lista;
 
-        }
+        }*/
 		 
 	
 }
