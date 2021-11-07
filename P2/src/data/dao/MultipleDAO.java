@@ -22,7 +22,7 @@ import data.common.DBConnection;
 public class MultipleDAO {
 	public String propiedades(int r) {
         Properties prop = new Properties();
-        String filename = "sqlT.propierties";
+        String filename = "sqlM.propierties";
         String f=null;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
