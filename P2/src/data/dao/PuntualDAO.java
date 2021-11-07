@@ -1,10 +1,16 @@
 package data.dao;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import business.*;
 import business.AbstractEspectaculo.categoria;
@@ -17,7 +23,7 @@ public class PuntualDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			// Important: This query is hard-coded here for illustrative purposes only
-			String query = "select * from espectaculopuntual";
+			String query = propiedades(1);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
@@ -55,8 +61,7 @@ public class PuntualDAO {
 			String aforo=String.valueOf(puntual.getAforolocalidades());
 			String vendidas=String.valueOf(puntual.getLocalidadesvendidas());
 			String fecha= String.valueOf(puntual.getFechaPuntual());
-			String query = "INSERT INTO  `espectaculopuntual` (`titulo_puntual`, `descripcion_puntual`, `categoria_puntual` , `aforolocalidades_puntual`, `localidadesvendidas_puntual`, `fecha_puntual`) VALUES ( "
-						+ titulo +"," + descripcion +"," + cate +"," + aforo +"," + vendidas +","+ fecha + " )";
+			String query = propiedades(2);
 					
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
@@ -83,22 +88,22 @@ public class PuntualDAO {
 			// Important: This query is hard-coded here for illustrative purposes only
 			switch(opcion) {
 				case 1:
-					query = "UPDATE espectaculopuntual SET titulo_puntual = "+ nuevotitulo + "WHERE [Last titulo_puntual] = " + titulo;
+					query = propiedades(3);
 				break;
 				case 2:
-					query = "UPDATE espectaculopuntual SET descripcion_puntual =  "+ nuevadescripcion + "WHERE [Last titulo_puntual] = " + titulo;
+					query = propiedades(4);
 				break;
 				case 3:
-					query = "UPDATE espectaculopuntual SET categoria_puntual = "+ nuevacategoria +"WHERE [Last titulo_puntual] = " + titulo;
+					query = propiedades(5);
 				break;
 				case 4:
-					query = "UPDATE espectaculopuntual SET aforolocalidades_puntual =  "+ String.valueOf(nuevoaforolocalidades) +"WHERE [Last titulo_puntual] = " + titulo;
+					query = propiedades(6);
 				break;
 				case 5:
-					query = "UPDATE espectaculopuntual SET localidadesvendidas_puntual = "+ String.valueOf(localidadesvendidas) +"WHERE [Last titulo_puntual] = " + titulo;
+					query = propiedades(7);
 				break;
 				case 6:
-					query = "UPDATE espectaculopuntual SET fecha_puntual =  "+ String.valueOf(fecha) +"WHERE [Last titulo_puntual] = " + titulo;
+					query = propiedades(8);
 				break;
 			}
 			
@@ -123,7 +128,7 @@ public class PuntualDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query="DELETE FROM espectaculopuntual WHERE titulo_puntual = "+ titulo;
+			String query=propiedades(9);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
@@ -144,7 +149,7 @@ public class PuntualDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "DELETE FROM espectaculopuntual WHERE titulo_puntual = "+ titulo + "AND fecha_puntual ="+ fecha;
+			String query = propiedades(10);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
@@ -160,6 +165,53 @@ public class PuntualDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public String propiedades(int r) {
+		Properties prop = new Properties();
+		String filename = "sqlP.propierties";
+		String f=null;
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
+			prop.load(reader);
+			if(r==1) {
+				f = prop.getProperty("obtenerPuntual");
+			}
+			else if(r==2) {
+				f = prop.getProperty("escribirPuntualBD");
+			}
+			else if(r==3) {
+				f = prop.getProperty("actualizarPuntualBD1");
+			}
+			else if(r==4) {
+				f = prop.getProperty("actualizarPuntualBD2");
+			}
+			else if(r==5) {
+				f = prop.getProperty("actualizarPuntualBD3");
+			}
+			else if(r==6) {
+				f = prop.getProperty("actualizarPuntualBD4");
+			}
+			else if(r==7) {
+				f = prop.getProperty("actualizarPuntualBD5");
+			}
+			else if(r==8) {
+				f = prop.getProperty("actualizarPuntualBD6");
+			}
+			else if(r==9) {
+				f = prop.getProperty("eliminarPuntualTitulo");
+			}
+			else {
+				f = prop.getProperty("eliminarPuntualFecha");
+			}
+			//System.out.println(f);			
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return f;
+	}
 }
 
