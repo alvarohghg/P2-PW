@@ -1,11 +1,17 @@
 package data.dao;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import business.EspectaculoPuntual;
 import business.Usuario;
@@ -14,6 +20,62 @@ import business.EspectaculoMultiple;
 import data.common.DBConnection;
 
 public class MultipleDAO {
+	public String propiedades(int r) {
+        Properties prop = new Properties();
+        String filename = "sqlT.propierties";
+        String f=null;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
+            prop.load(reader);
+            if(r==1) {
+                f = prop.getProperty("obtenerMultiple1");
+            }
+            else if(r==2) {
+                f = prop.getProperty("obtenerMultiple2");
+            }
+            else if(r==3) {
+                f = prop.getProperty("escribirMultipleBD1");
+            }
+            else if(r==4) {
+                f = prop.getProperty("escribirMultipleBD2");
+            }
+            else if(r==5) {
+                f = prop.getProperty("actualizarMultipleBD1");
+            }
+            else if(r==6) {
+                f = prop.getProperty("actualizarMultipleBD2");
+            }
+            else if(r==7) {
+                f = prop.getProperty("actualizarMultipleBD3");
+            }
+            else if(r==8) {
+                f = prop.getProperty("actualizarMultipleBD4");
+            }
+            else if(r==9) {
+            	 f = prop.getProperty("actualizarMultipleBD5");
+            }
+            else if(r==10) {
+           	 f = prop.getProperty("actualizarMultipleBD6");
+            }
+            else if(r==11) {
+           	 f = prop.getProperty("eliminarTemporadaTitulo1");
+           }
+            else if(r==12) {
+              	 f = prop.getProperty("eliminarTemporadaTitulo2");
+              }
+            else {
+                f = prop.getProperty("eliminarMultipleFecha");
+            }
+            //System.out.println(f);            
+        } catch (FileNotFoundException e) {
+            
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return f;
+    }
 	public ArrayList<EspectaculoMultiple> obtenerMultiple(){
 		ArrayList<EspectaculoMultiple> listaM = new ArrayList<EspectaculoMultiple>();
 		ArrayList<Date> listaFechas=new ArrayList<Date>();
@@ -21,7 +83,7 @@ public class MultipleDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			// Important: This query is hard-coded here for illustrative purposes only
-			String query = "select * from espectaculomultiple";
+			String query = propiedades(1);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
@@ -38,7 +100,7 @@ public class MultipleDAO {
 				cate =business.AbstractEspectaculo.categoria.valueOf(rs.getString("categoria_mult"));
 				aforo = rs.getInt("aforolocalidades_mult");
 				localidades = rs.getInt("localidadesvendidas_mult");
-				String query2="select fecha_mult from multiplefechas when titulo_mult="+titulo;
+				String query2=propiedades(2);
 				Statement stmt2 = connection.createStatement();
 				ResultSet rs2 = (ResultSet) stmt2.executeQuery(query2);
 				while (rs2.next()) {
@@ -74,13 +136,11 @@ public class MultipleDAO {
             String aforo=String.valueOf(multiple.getAforolocalidades());
             String vendidas=String.valueOf(multiple.getLocalidadesvendidas());
             ArrayList<Date> listaFechas=multiple.getListaFechas();
-            String query = "INSERT INTO  `espectaculomultiple` (`titulo_mult`, `descripcion_mult`, `cate_mult` , `aforo_mult`, `vendidas_mult`) VALUES ( "
-                        + titulo+", " + descripcion +", "+ cate +", "+ aforo +", "+ vendidas + " )";
+            String query = propiedades(3);
             String query2=null;
             int i=0;
             while(i<listaFechas.size()) {
-                query2 = "INSERT INTO  `multiplefechas` (`titulo_mult`, `fecha_mult`) "
-                		+ "VALUES ( "+titulo+", " + String.valueOf(listaFechas.get(i))+ " )";
+                query2 = propiedades(4);
                 i++;
             }
                     
@@ -110,24 +170,23 @@ public class MultipleDAO {
 			// Important: This query is hard-coded here for illustrative purposes only
 			switch(opcion) {
 				case 1:
-					query = "UPDATE espectaculomultiple SET titulo_mult = "+ nuevotitulo +"WHERE [Last titulo_mult] = " + titulo;
+					query = propiedades(5);
 				break;
 				case 2:
-					query = "UPDATE espectaculomultiple SET descripcion_mult =  "+ nuevadescripcion +"WHERE [Last titulo_mult] = " + titulo;
-				break;
+					query = propiedades(6);
+					break;
 				case 3:
-					query = "UPDATE espectaculomultiple SET categoria = "+ nuevacategoria +"WHERE [Last titulo_mult] = " + titulo;
-				break;
+					query = propiedades(7);
+					break;
 				case 4:
-					query = "UPDATE espectaculomultiple SET aforolocalidades =  "+ String.valueOf(nuevoaforolocalidades) +"WHERE [Last titulo_mult] = " + titulo;
-				break;
+					query = propiedades(8);
+					break;
 				case 5:
-					query = "UPDATE espectaculomultiple SET localidadesvendidas =  "+ String.valueOf(nuevoaforolocalidades) +"WHERE [Last titulo_mult] = " + titulo;
-				break;
+					query = propiedades(9);
+					break;
 				case 6:
-					query2 = "UPDATE multiplefechas SET fecha_mult =  "+ String.valueOf(fecha2) +"WHERE [Last titulo_mult] = " + titulo+ "AND [Last fecha_mult] ="+String.valueOf(fecha1);
-						
-				break;
+					query = propiedades(10);
+					break;
 			}
 			
 					
@@ -150,8 +209,8 @@ public class MultipleDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query="DELETE FROM espectaculomultiple WHERE titulo_mult = "+ titulo;
-			String query2="DELETE FROM multiplefechas WHERE titulo_mult = "+ titulo;
+			String query=propiedades(11);
+			String query2=propiedades(12);
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
@@ -174,7 +233,7 @@ public class MultipleDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "DELETE FROM multiplefechas WHERE titulo_mult = "+ titulo + "AND fecha_mult ="+ fecha;
+			String query = propiedades(13);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();

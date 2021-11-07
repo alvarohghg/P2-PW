@@ -1,5 +1,6 @@
 package data.dao;
-
+import java.io.*;
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,19 +8,73 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import business.*;
 import business.AbstractEspectaculo.categoria;
 import data.common.DBConnection;
 
 public class TemporadaDAO {
+	public String propiedades(int r) {
+        Properties prop = new Properties();
+        String filename = "sqlT.propierties";
+        String f=null;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
+            prop.load(reader);
+            if(r==1) {
+                f = prop.getProperty("obtenerTemporada");
+            }
+            else if(r==2) {
+                f = prop.getProperty("escribirTemporadaBD");
+            }
+            else if(r==3) {
+                f = prop.getProperty("actualizarTemporadaBD1");
+            }
+            else if(r==4) {
+                f = prop.getProperty("actualizarTemporadaBD2");
+            }
+            else if(r==5) {
+                f = prop.getProperty("actualizarTemporadaBD3");
+            }
+            else if(r==6) {
+                f = prop.getProperty("actualizarTemporadaBD4");
+            }
+            else if(r==7) {
+                f = prop.getProperty("actualizarTemporadaBD5");
+            }
+            else if(r==8) {
+                f = prop.getProperty("actualizarTemporadaBD6");
+            }
+            else if(r==9) {
+            	 f = prop.getProperty("actualizarTemporadaBD7");
+            }
+            else if(r==10) {
+           	 f = prop.getProperty("actualizarTemporadaBD8");
+            }
+            else if(r==11) {
+           	 f = prop.getProperty("eliminarTemporadaTitulo");
+           }
+            else {
+                f = prop.getProperty("eliminarTemporadaFecha");
+            }
+            //System.out.println(f);            
+        } catch (FileNotFoundException e) {
+            
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return f;
+    }
 	public ArrayList<EspectaculoTemporada> obtenerTemporada(){
 		ArrayList<EspectaculoTemporada> listaT = new ArrayList<EspectaculoTemporada>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			// Important: This query is hard-coded here for illustrative purposes only
-			String query = "select * from espectaculotemporada";
+			String query = propiedades(1);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
@@ -60,10 +115,7 @@ public void escribirTemporadaBD(EspectaculoTemporada temporada) {
 		String dia_temp=temporada.getDia();
 		String inicio_temp=String.valueOf(temporada.getInicio());
 		String fin_temp=String.valueOf(temporada.getFin());
-		String query = "INSERT INTO `espectaculotemporada` ( `titulo_temp` , `descripcion_temp` , `categoria_temp` , `aforolocalidades_temp` , `localidadesvendidas_temp` , `dia_temp` , `inicio_temp` , `fin_temp` ) "
-				+ "VALUES ( "
-				+ titulo_temp +"," + descripcion_temp +"," + categoria_temp +"," +  aforolocalidades_temp + "," +localidadesvendidas_temp + "," + dia_temp+"," + inicio_temp + "," + fin_temp
-				+ ");";
+		String query =propiedades(2);
 				
 		
 		// Important: We can replace this direct invocation to CRUD operations in DBConnection
@@ -90,29 +142,29 @@ public void actualizarTemporadaBD(String titulo,String nuevotitulo,String nuevad
 		// Important: This query is hard-coded here for illustrative purposes only
 		switch(opcion) {
 		case 1:
-			query = "UPDATE espectaculotemporada SET titulo_temp = "+ nuevotitulo + "WHERE [Last titulo_temp] = " + titulo;
+			query = propiedades(3);
 		break;
 		case 2:
-			query = "UPDATE espectaculotemporada SET descripcion_temp =  "+ nuevadescripcion + "WHERE [Last titulo_temp] = " + titulo;
+			query = propiedades(4);		
 		break;
 		case 3:
-			query = "UPDATE espectaculotemporada SET categoria_temp = "+ nuevacategoria +"WHERE [Last titulo_temp] = " + titulo;
+			query = propiedades(5);		
 		break;
 		case 4:
-			query = "UPDATE espectaculotemporada SET aforolocalidades_temp =  "+ String.valueOf(nuevoaforolocalidades) +"WHERE [Last titulo_temp] = " + titulo;
+			query = propiedades(6);		
 		break;
 		case 5:
-			query = "UPDATE espectaculotemporada SET localidadesvendidas_temp = "+ String.valueOf(localidadesvendidas) +"WHERE [Last titulo_temp] = " + titulo;
+			query = propiedades(7);		
 		break;
 		case 6:
-			query = "UPDATE espectaculotemporada SET dia_temp =  "+ String.valueOf(dia) +"WHERE [Last titulo_temp] = " + titulo;
-		break;
+			query = propiedades(8);		
+			break;
 		case 7:
-			query = "UPDATE espectaculotemporada SET inicio_temp =  "+ String.valueOf(nuevafechainicio) +"WHERE [Last titulo_temp] = " + titulo;
-		break;
+			query = propiedades(9);		
+			break;
 		case 8:
-			query = "UPDATE espectaculotemporada SET fin_temp =  "+ String.valueOf(nuevafechafin) +"WHERE [Last titulo_temp] = " + titulo;
-		break;
+			query = propiedades(10);		
+			break;
 		}
 		
 				
@@ -135,7 +187,8 @@ public void eliminarTemporadaTitulo(String titulo){
 	try {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		String query="DELETE FROM espectaculotemporada WHERE titulo_temp = "+ titulo;
+		String query= propiedades(11);		
+		
 		
 		// Important: We can replace this direct invocation to CRUD operations in DBConnection
 		Statement stmt = connection.createStatement();
@@ -151,13 +204,12 @@ public void eliminarTemporadaTitulo(String titulo){
 		e.printStackTrace();
 	}
 }
-//QUE HACEMOS PARA ELIMINAR ESPECTACULOS CUYA FECHA QUE LE PASES POR ESTA FUNCION ESTÃ‰ EN MEDIO?Â¿?Â¿
+//QUE HACEMOS PARA ELIMINAR ESPECTACULOS CUYA FECHA QUE LE PASES POR ESTA FUNCION ESTÉ EN MEDIO?¿?¿
 public void eliminarTemporadaFecha(String titulo, Date fecha){
 	try {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		String query = "DELETE FROM espectaculotemporada WHERE titulo_temp = "+ titulo + "AND inicio_temp ='"+ fecha +"' OR fin_temp ='"+fecha
-				+"' OR( '"+fecha+"' >=inicio_temp AND '"+fecha+"'<=fin_temp)";
+		String query = propiedades(12);
 		
 		// Important: We can replace this direct invocation to CRUD operations in DBConnection
 		Statement stmt = connection.createStatement();
