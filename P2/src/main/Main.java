@@ -58,7 +58,7 @@ public class Main{
 		//GE.leerFicheroMultiple();
 		//GE.leerFicheroPuntual();
 		//PDAO.obtenerPuntual();
-		GE.leerFicheroTemporada();
+		//GE.leerFicheroTemporada();
 		//gu1.leerFicheroUsuarios(listausuarios);
 		gu1.guardarBDU();
 		//UDAO.obtenerUsuarios();
