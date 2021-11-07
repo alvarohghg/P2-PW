@@ -295,9 +295,7 @@ public class Main{
 					break;
 					case 2:
 						System.out.println("Quiere cancelar todo el espectaculo [0] o una fecha en particular [1]");
-						GE.leerFicheroMultiple();
-				        GE.leerFicheroPuntual();
-				        GE.leerFicheroTemporada();
+						GE.guardarBDlistas();
 						int j=entradaInt.nextInt();
 						System.out.println("Que espectaculo quieres cancelar");
 						String titc=entradaSt.nextLine();
