@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -51,10 +52,13 @@ public class CriticasDAO {
 	}
 	
 	public void escribirCriticasBD(Criticas critica) {
+		
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			// Important: This query is hard-coded here for illustrative purposes only
+			String query = propiedades(2);
+			PreparedStatement ps=connection.prepareStatement(query);
 			
 			String titulo=critica.getTitulo();
 			String puntuacion=critica.getPuntuacion();
@@ -64,18 +68,17 @@ public class CriticasDAO {
 			String controlarPrimeraVez=critica.getcontrolarPrimeraVez();
 			String autor=critica.getAutor();
 			String votantes=critica.getVotantes();
-			String query = propiedades(2);
-					
 			
-			// Important: We can replace this direct invocation to CRUD operations in DBConnection
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
-
-			if (stmt != null){ 
-				stmt.close(); 
-			}
-			dbConnection.closeConnection();
+			ps.setString(1,titulo);
+			ps.setString(2,puntuacion);
+			ps.setString(3,espectaculo);
+			ps.setString(4,review);
+			ps.setString(5,valoraciones);
+			ps.setString(6,controlarPrimeraVez);
+			ps.setString(7,autor);
+			ps.setString(8,votantes);
+			
+			
 		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
@@ -86,18 +89,11 @@ public class CriticasDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query=null; 
-			// Important: This query is hard-coded here for illustrative purposes only
-			query = propiedades(3);
-			// Important: We can replace this direct invocation to CRUD operations in DBConnection
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
-
-			if (stmt != null){ 
-				stmt.close(); 
-			}
-			dbConnection.closeConnection();
+			String query=propiedades(3); 
+			
+			PreparedStatement ps=connection.prepareStatement(query);
+			ps.setString(1,correonuevo);
+			ps.setString(2,correoviejo);
 		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
@@ -111,14 +107,13 @@ public class CriticasDAO {
 			String query=propiedades(4);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			PreparedStatement ps=connection.prepareStatement(query);
+
+			ps.setString(1,titulo);
+			ps.setString(2,correo);
 
 
-			if (stmt != null){ 
-				stmt.close(); 
-			}
-			dbConnection.closeConnection();
+			
 		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
@@ -129,16 +124,11 @@ public class CriticasDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			String query = propiedades(5);
+			PreparedStatement ps=connection.prepareStatement(query);
+			ps.setString(1,titulo);
+			ps.setString(2,votantes);
 			
-			// Important: We can replace this direct invocation to CRUD operations in DBConnection
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
-
-			if (stmt != null){ 
-				stmt.close(); 
-			}
-			dbConnection.closeConnection();
+			
 		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
@@ -149,16 +139,9 @@ public class CriticasDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			String query = propiedades(6);
-			
-			// Important: We can replace this direct invocation to CRUD operations in DBConnection
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
-
-			if (stmt != null){ 
-				stmt.close(); 
-			}
-			dbConnection.closeConnection();
+			PreparedStatement ps=connection.prepareStatement(query);
+			ps.setString(1,titulo);
+			ps.setString(2,puntuacion);
 		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
@@ -167,7 +150,7 @@ public class CriticasDAO {
 	
 	public String propiedades(int r) {
         Properties prop = new Properties();
-        String filename = "sqlT.propierties";
+        String filename = "sqlT.properties";
         String f=null;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
