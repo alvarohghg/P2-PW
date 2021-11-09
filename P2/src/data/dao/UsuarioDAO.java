@@ -55,6 +55,7 @@ public class UsuarioDAO {
 		}
 		return f;
 	}
+	
 	public ArrayList<Usuario> obtenerUsuarios(){
 		ArrayList<Usuario> listOfUsers = new ArrayList<Usuario>();
 		try {
@@ -93,7 +94,7 @@ public class UsuarioDAO {
 			Connection connection = dbConnection.getConnection();
 			// Important: This query is hard-coded here for illustrative purposes only
 			String query =propiedades(2);
-			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
+			PreparedStatement ps=connection.prepareStatement(query);
 			ps.setString(1, user.getNombre());
 			ps.setString(2, user.getApellidos());
 			ps.setString(3, user.getTipo());
@@ -118,28 +119,28 @@ public class UsuarioDAO {
 			switch(opcion) {
 				case 1:
 					query = propiedades(3);
-					PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
+					PreparedStatement ps=connection.prepareStatement(query);
 					ps.setString(1, nuevonick);
 					ps.setString(2, correo);
 					ps.executeUpdate();
 				break;
 				case 2:
 					query = propiedades(4);
-					PreparedStatement ps1=((Connection) dbConnection).prepareStatement(query);
+					PreparedStatement ps1=connection.prepareStatement(query);
 					ps1.setString(1, nuevonick);
 					ps1.setString(2, correo);
 					ps1.executeUpdate();
 				break;
 				case 3:
 					query = propiedades(5);
-					PreparedStatement ps2=((Connection) dbConnection).prepareStatement(query);
+					PreparedStatement ps2=connection.prepareStatement(query);
 					ps2.setString(1, nuevonick);
 					ps2.setString(2, correo);
 					ps2.executeUpdate();
 					break;
 				case 4:
 					query = propiedades(6);
-					PreparedStatement ps3=((Connection) dbConnection).prepareStatement(query);
+					PreparedStatement ps3=connection.prepareStatement(query);
 					ps3.setString(1, nuevonick);
 					ps3.setString(2, correo);
 					ps3.executeUpdate();
@@ -164,7 +165,7 @@ public class UsuarioDAO {
 			String query=propiedades(7);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
-			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
+			PreparedStatement ps=connection.prepareStatement(query);
 			ps.setString(1, correo);
 			ps.executeUpdate();
 

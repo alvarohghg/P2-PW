@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,9 +12,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
-
-import business.EspectaculoPuntual;
-import business.Usuario;
 import business.AbstractEspectaculo.categoria;
 import business.EspectaculoMultiple;
 import data.common.DBConnection;
@@ -136,7 +132,7 @@ public class MultipleDAO {
             String cate=multiple.getCategoria().toString();
             ArrayList<Date> listaFechas=multiple.getListaFechas();
             String query =propiedades(3);
-			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
+			PreparedStatement ps=connection.prepareStatement(query);
 			ps.setString(1,titulo);
 			ps.setString(2,descripcion);
 			ps.setString(3,cate);
@@ -147,7 +143,7 @@ public class MultipleDAO {
             int i=0;
             while(i<listaFechas.size()) {
                 query2 = propiedades(4);
-    			PreparedStatement ps1=((Connection) dbConnection).prepareStatement(query2);
+    			PreparedStatement ps1=connection.prepareStatement(query2);
     			ps1.setString(1,titulo);
     			ps1.setDate(2, listaFechas.get(i));
     			ps1.executeUpdate();
@@ -167,47 +163,46 @@ public class MultipleDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			String query=null; 
-			String query2=null;
 			// Important: This query is hard-coded here for illustrative purposes only
 			switch(opcion) {
 				case 1:
 					query = propiedades(5);
-					PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
+					PreparedStatement ps=connection.prepareStatement(query);
 					ps.setString(1, nuevotitulo);
 					ps.setString(2, titulo);
 					ps.executeUpdate();
 				break;
 				case 2:
 					query = propiedades(6);
-					PreparedStatement ps1=((Connection) dbConnection).prepareStatement(query);
+					PreparedStatement ps1=connection.prepareStatement(query);
 					ps1.setString(1, nuevadescripcion);
 					ps1.setString(2, titulo);
 					ps1.executeUpdate();
 					break;
 				case 3:
 					query = propiedades(7);
-					PreparedStatement ps2=((Connection) dbConnection).prepareStatement(query);
+					PreparedStatement ps2=connection.prepareStatement(query);
 					ps2.setString(1, nuevacategoria.toString());
 					ps2.setString(2, titulo);
 					ps2.executeUpdate();
 					break;
 				case 4:
 					query = propiedades(8);
-					PreparedStatement ps3=((Connection) dbConnection).prepareStatement(query);
+					PreparedStatement ps3=connection.prepareStatement(query);
 					ps3.setInt(1, nuevoaforolocalidades);
 					ps3.setString(2, titulo);
 					ps3.executeUpdate();
 					break;
 				case 5:
 					query = propiedades(9);
-					PreparedStatement ps4=((Connection) dbConnection).prepareStatement(query);
+					PreparedStatement ps4=connection.prepareStatement(query);
 					ps4.setInt(1, localidadesvendidas);
 					ps4.setString(2, titulo);
 					ps4.executeUpdate();
 					break;
 				case 6:
 					query = propiedades(10);
-					PreparedStatement ps5=((Connection) dbConnection).prepareStatement(query);
+					PreparedStatement ps5=connection.prepareStatement(query);
 					ps5.setDate(1, fecha2);
 					ps5.setString(2, titulo);
 					ps5.setDate(3,fecha1);
@@ -227,8 +222,8 @@ public class MultipleDAO {
 			Connection connection = dbConnection.getConnection();
 			String query=propiedades(11);
 			String query2=propiedades(12);
-			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
-			PreparedStatement ps1=((Connection) dbConnection).prepareStatement(query2);
+			PreparedStatement ps=connection.prepareStatement(query);
+			PreparedStatement ps1=connection.prepareStatement(query2);
 			ps.setString(1,titulo);
 			ps1.setString(1,titulo);
 			ps.executeUpdate();
@@ -246,7 +241,7 @@ public class MultipleDAO {
 			Connection connection = dbConnection.getConnection();
 			String query = propiedades(13);
 			
-			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
+			PreparedStatement ps=connection.prepareStatement(query);
 			ps.setString(1, titulo);
 			ps.setDate(2, fecha);
 			ps.executeUpdate();
