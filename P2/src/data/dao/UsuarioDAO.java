@@ -166,6 +166,7 @@ public class UsuarioDAO {
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
 			ps.setString(1, correo);
+			ps.executeUpdate();
 
 			dbConnection.closeConnection();
 		} catch (Exception e){
