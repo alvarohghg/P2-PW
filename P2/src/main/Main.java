@@ -4,7 +4,7 @@ package main;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-//import java.util.Date;
+import java.sql.*;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,9 +17,6 @@ import business.GestorUsuario;
 import business.Usuario;
 import business.AbstractEspectaculo.categoria;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import data.*;
 import data.dao.CriticasDAO;
 import data.dao.UsuarioDAO;
 import data.dao.PuntualDAO;
@@ -93,7 +90,7 @@ public class Main{
 				System.out.println("Saliendo del programa, intentos superados...");
 				System.exit(0);
 			}
-			System.out.println("Introduzca su correo (3 intentos):");
+			System.out.println("Introduzca su correo ("+ (3-intentos) +" intentos):");
 			correoInicioSesion=entradacorreo.nextLine();
 			intentos++;
 			}while(!gu1.existeUsuario(correoInicioSesion) && intentos<=3);

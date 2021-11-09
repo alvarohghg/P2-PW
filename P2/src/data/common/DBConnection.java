@@ -58,7 +58,7 @@ public class DBConnection {
 	public String propiedades(int r) {
 		
 		Properties prop = new Properties();
-		String filename = "conf.propierties";
+		String filename = "config.properties";
 		String f=null;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));

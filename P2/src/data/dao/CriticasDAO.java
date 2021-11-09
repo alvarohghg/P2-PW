@@ -77,7 +77,7 @@ public class CriticasDAO {
 			ps.setString(6,controlarPrimeraVez);
 			ps.setString(7,autor);
 			ps.setString(8,votantes);
-			ps.executeUpdate();
+			
 			
 		} catch (Exception e){
 			System.err.println(e);
@@ -94,7 +94,6 @@ public class CriticasDAO {
 			PreparedStatement ps=connection.prepareStatement(query);
 			ps.setString(1,correonuevo);
 			ps.setString(2,correoviejo);
-			ps.executeUpdate();
 		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
@@ -112,7 +111,7 @@ public class CriticasDAO {
 
 			ps.setString(1,titulo);
 			ps.setString(2,correo);
-			ps.executeUpdate();
+
 
 			
 		} catch (Exception e){
@@ -128,7 +127,7 @@ public class CriticasDAO {
 			PreparedStatement ps=connection.prepareStatement(query);
 			ps.setString(1,titulo);
 			ps.setString(2,votantes);
-			ps.executeUpdate();
+			
 			
 		} catch (Exception e){
 			System.err.println(e);
@@ -143,7 +142,6 @@ public class CriticasDAO {
 			PreparedStatement ps=connection.prepareStatement(query);
 			ps.setString(1,titulo);
 			ps.setString(2,puntuacion);
-			ps.executeUpdate();
 		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
@@ -152,7 +150,7 @@ public class CriticasDAO {
 	
 	public String propiedades(int r) {
         Properties prop = new Properties();
-        String filename = "sqlT.properties";
+        String filename = "sqlC.properties";
         String f=null;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
