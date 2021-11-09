@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import data.common.DBConnection;
 public class MultipleDAO {
 	public String propiedades(int r) {
         Properties prop = new Properties();
-        String filename = "sqlM.propierties";
+        String filename = "sqlM.properties";
         String f=null;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
@@ -133,26 +134,26 @@ public class MultipleDAO {
             String titulo=multiple.getTitulo();
             String descripcion=multiple.getDescripcion();
             String cate=multiple.getCategoria().toString();
-            String aforo=String.valueOf(multiple.getAforolocalidades());
-            String vendidas=String.valueOf(multiple.getLocalidadesvendidas());
             ArrayList<Date> listaFechas=multiple.getListaFechas();
-            String query = propiedades(3);
+            String query =propiedades(3);
+			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
+			ps.setString(1,titulo);
+			ps.setString(2,descripcion);
+			ps.setString(3,cate);
+			ps.setInt(4, multiple.getAforolocalidades());
+			ps.setInt(5, multiple.getLocalidadesvendidas());
+			ps.executeUpdate();
             String query2=null;
             int i=0;
             while(i<listaFechas.size()) {
                 query2 = propiedades(4);
+    			PreparedStatement ps1=((Connection) dbConnection).prepareStatement(query2);
+    			ps1.setString(1,titulo);
+    			ps1.setDate(2, listaFechas.get(i));
+    			ps1.executeUpdate();
                 i++;
             }
-                    
-            
-            // Important: We can replace this direct invocation to CRUD operations in DBConnection
-            Statement stmt = connection.createStatement();
-            ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
-
-            if (stmt != null){ 
-                stmt.close(); 
-            }
+          
             dbConnection.closeConnection();
         } catch (Exception e){
             System.err.println(e);
@@ -171,34 +172,49 @@ public class MultipleDAO {
 			switch(opcion) {
 				case 1:
 					query = propiedades(5);
+					PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
+					ps.setString(1, nuevotitulo);
+					ps.setString(2, titulo);
+					ps.executeUpdate();
 				break;
 				case 2:
 					query = propiedades(6);
+					PreparedStatement ps1=((Connection) dbConnection).prepareStatement(query);
+					ps1.setString(1, nuevadescripcion);
+					ps1.setString(2, titulo);
+					ps1.executeUpdate();
 					break;
 				case 3:
 					query = propiedades(7);
+					PreparedStatement ps2=((Connection) dbConnection).prepareStatement(query);
+					ps2.setString(1, nuevacategoria.toString());
+					ps2.setString(2, titulo);
+					ps2.executeUpdate();
 					break;
 				case 4:
 					query = propiedades(8);
+					PreparedStatement ps3=((Connection) dbConnection).prepareStatement(query);
+					ps3.setInt(1, nuevoaforolocalidades);
+					ps3.setString(2, titulo);
+					ps3.executeUpdate();
 					break;
 				case 5:
 					query = propiedades(9);
+					PreparedStatement ps4=((Connection) dbConnection).prepareStatement(query);
+					ps4.setInt(1, localidadesvendidas);
+					ps4.setString(2, titulo);
+					ps4.executeUpdate();
 					break;
 				case 6:
 					query = propiedades(10);
+					PreparedStatement ps5=((Connection) dbConnection).prepareStatement(query);
+					ps5.setDate(1, fecha2);
+					ps5.setString(2, titulo);
+					ps5.setDate(3,fecha1);
+					ps5.executeUpdate();
 					break;
 			}
-			
-					
-			
-			// Important: We can replace this direct invocation to CRUD operations in DBConnection
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
-
-			if (stmt != null){ 
-				stmt.close(); 
-			}
+		
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -214,7 +230,10 @@ public class MultipleDAO {
 			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
 			PreparedStatement ps1=((Connection) dbConnection).prepareStatement(query2);
 			ps.setString(1,titulo);
-			ps1.setString(1, titulo);
+			ps1.setString(1,titulo);
+			ps.executeUpdate();
+			ps1.executeUpdate();
+
 			
 		} catch (Exception e){
 			System.err.println(e);
@@ -230,6 +249,7 @@ public class MultipleDAO {
 			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
 			ps.setString(1, titulo);
 			ps.setDate(2, fecha);
+			ps.executeUpdate();
 		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
