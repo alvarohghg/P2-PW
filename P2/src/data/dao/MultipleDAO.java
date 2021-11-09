@@ -211,19 +211,11 @@ public class MultipleDAO {
 			Connection connection = dbConnection.getConnection();
 			String query=propiedades(11);
 			String query2=propiedades(12);
-			// Important: We can replace this direct invocation to CRUD operations in DBConnection
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-			Statement stmt2 = connection.createStatement();
-			ResultSet rs2 = (ResultSet) stmt2.executeQuery(query2);
-
-			if (stmt != null){ 
-				stmt.close(); 
-			}
-			if (stmt2 != null){ 
-				stmt2.close(); 
-			}
-			dbConnection.closeConnection();
+			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
+			PreparedStatement ps1=((Connection) dbConnection).prepareStatement(query2);
+			ps.setString(1,titulo);
+			ps1.setString(1, titulo);
+			
 		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
@@ -235,15 +227,9 @@ public class MultipleDAO {
 			Connection connection = dbConnection.getConnection();
 			String query = propiedades(13);
 			
-			// Important: We can replace this direct invocation to CRUD operations in DBConnection
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
-
-			if (stmt != null){ 
-				stmt.close(); 
-			}
-			dbConnection.closeConnection();
+			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
+			ps.setString(1, titulo);
+			ps.setDate(2, fecha);
 		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
