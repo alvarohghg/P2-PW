@@ -94,20 +94,19 @@ public class MultipleDAO {
 			while (rs.next()) {
 				titulo = rs.getString("titulo_mult");
 				descripcion = rs.getString("descripcion_mult");
-				cate =business.AbstractEspectaculo.categoria.valueOf(rs.getString("categoria_mult"));
+				cate = business.AbstractEspectaculo.categoria.valueOf(rs.getString("categoria_mult"));
 				aforo = rs.getInt("aforolocalidades_mult");
 				localidades = rs.getInt("localidadesvendidas_mult");
 				String query2=propiedades(2);
-				Statement stmt2 = connection.createStatement();
-				ResultSet rs2 = (ResultSet) stmt2.executeQuery(query2);
-				while (rs2.next()) {
-					Date fecha=rs.getDate("fecha");
+				PreparedStatement ps=connection.prepareStatement(query2);
+				ps.setString(1, titulo);
+				ResultSet rs2 =  ps.executeQuery();
+				while(rs2.next()) {
+					Date fecha=rs2.getDate("fecha_mult");
 					listaFechas.add(fecha);
 				}
 				listaM.add(new EspectaculoMultiple(titulo, descripcion, cate,aforo,localidades,listaFechas));
-				if (stmt2 != null){ 
-					stmt2.close(); 
-				}
+				
 			}
 			
 			if (stmt != null){ 
@@ -226,8 +225,9 @@ public class MultipleDAO {
 			PreparedStatement ps1=connection.prepareStatement(query2);
 			ps.setString(1,titulo);
 			ps1.setString(1,titulo);
-			ps.executeUpdate();
 			ps1.executeUpdate();
+			ps.executeUpdate();
+			
 
 			
 		} catch (Exception e){
