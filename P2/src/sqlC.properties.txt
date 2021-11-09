@@ -1,6 +1,0 @@
-obtenerCriticas = "select * from criticas"
-escribirCriticasBD = "INSERT INTO  criticas (titulo, puntuacion, espectaculo , review, valoraciones,controlarPrimeraVez,autor,votantes) VALUES ( ?,?,?,?,?,?,?,?)"
-actualizarAutor = "UPDATE criticas SET autor =? WHERE [Last autor] = ?"
-borrarCriticaBD = "DELETE FROM criticas WHERE titulo = ? AND autor =?"
-actualizarCriticaBDvotantes = "UPDATE criticas SET votantes = ? WHERE titulo = ?"
-actualizarCriticaBDpuntuacion = "UPDATE criticas SET puntuacion = ? WHERE titulo = ?"
