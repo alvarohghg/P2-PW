@@ -1,0 +1,7 @@
+obtenerUsuarios ="select * from usuario"
+escribirUsuarioBD ="INSERT INTO  `usuario` (`nombre`, `apellidos`, `tipo` , `correo`, `nick`) VALUES ( "+ nombre +"," + apellido +"," + tipo +"," + correo +"," + nick + " )"
+actualizarUsuarioBD1 ="UPDATE usuario SET nick = "+ nuevonick +"WHERE [Last correo] = " + correo
+actualizarUsuarioBD2 ="UPDATE usuario SET nombre =  "+ nuevonombre +"WHERE [Last correo] = " + correo
+actualizarUsuarioBD3 ="UPDATE usuario SET apellidos = "+ nuevoapellidos +"WHERE [Last correo] = " + correo
+actualizarUsuarioBD4 ="UPDATE usuario SET correo =  "+ nuevocorreo +"WHERE [Last correo] = " + correo
+eliminarUsuarioBD ="DELETE FROM usuario WHERE correo = "+ correo
