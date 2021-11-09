@@ -17,12 +17,13 @@ import data.dao.UsuarioDAO;
 public class GestorCriticas {
 	/* Atributos */
 	CriticasDAO CDAO=new CriticasDAO();
+	UsuarioDAO UDAO=new UsuarioDAO();
 	private ArrayList<Criticas> ListaCriticas = new ArrayList<Criticas>();
 	Scanner entrada = new Scanner(System.in);
 	private ArrayList<Usuario> ListaUsuario  = new ArrayList<Usuario>();
 	GestorEspectaculos GE=new GestorEspectaculos();
 	//GestorUsuario GU=new GestorUsuario();
-
+	
 	/* Patron de diseno singlenton */
 	private static GestorCriticas instancia;
 	
@@ -66,13 +67,14 @@ public class GestorCriticas {
 	 * @throws IOException
 	 */
 	public boolean crearCritica(String titulo,String espectaculo,String puntuacion,String review, String correo, String valoraciones)throws IOException{
+		ListaUsuario = UDAO.obtenerUsuarios();
 		ListaCriticas= CDAO.obtenerCriticas();
 		boolean correcto=false;
 		for(int i=0; i< ListaUsuario.size(); i++){
 			if(correo.equals(ListaUsuario.get(i).getCorreo())){
 					Criticas C1 = new Criticas(titulo,espectaculo,puntuacion,review,correo,valoraciones,"0","");
-					subirCritica(C1);
 					correcto=true;				
+					subirCritica(C1);
 			}
 		}
 		
