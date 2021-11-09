@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -54,24 +55,20 @@ public class PuntualDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
+			String query =propiedades(2);
+			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
 			// Important: This query is hard-coded here for illustrative purposes only
-			String titulo=puntual.getTitulo();
-			String descripcion=puntual.getDescripcion();
-			String cate=puntual.getCategoria().toString();
-			String aforo=String.valueOf(puntual.getAforolocalidades());
-			String vendidas=String.valueOf(puntual.getLocalidadesvendidas());
-			String fecha= String.valueOf(puntual.getFechaPuntual());
-			String query = propiedades(2);
-					
+			ps.setString(1, puntual.getTitulo());
+			ps.setString(2, puntual.getDescripcion());
+			ps.setString(3, puntual.getCategoria().toString());
+			ps.setInt(4, puntual.getAforolocalidades());
+			ps.setInt(5,puntual.getLocalidadesvendidas());
+			ps.setDate(6, puntual.getFechaPuntual());
+			ps.executeUpdate();
+			
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
-
-			if (stmt != null){ 
-				stmt.close(); 
-			}
+			
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -89,34 +86,52 @@ public class PuntualDAO {
 			switch(opcion) {
 				case 1:
 					query = propiedades(3);
+					PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
+					ps.setString(1, nuevotitulo);
+					ps.setString(2, titulo);
+					ps.executeUpdate();
 				break;
 				case 2:
 					query = propiedades(4);
+					PreparedStatement ps1=((Connection) dbConnection).prepareStatement(query);
+					ps1.setString(1, nuevadescripcion);
+					ps1.setString(2, titulo);
+					ps1.executeUpdate();
 				break;
 				case 3:
 					query = propiedades(5);
+					PreparedStatement ps2=((Connection) dbConnection).prepareStatement(query);
+					ps2.setString(1, nuevacategoria.toString());
+					ps2.setString(2, titulo);
+					ps2.executeUpdate();
 				break;
 				case 4:
 					query = propiedades(6);
+					PreparedStatement ps3=((Connection) dbConnection).prepareStatement(query);
+					ps3.setInt(1, nuevoaforolocalidades);
+					ps3.setString(2, titulo);
+					ps3.executeUpdate();
 				break;
 				case 5:
 					query = propiedades(7);
+					PreparedStatement ps4=((Connection) dbConnection).prepareStatement(query);
+					ps4.setInt(1, localidadesvendidas);
+					ps4.setString(2, titulo);
+					ps4.executeUpdate();
 				break;
 				case 6:
 					query = propiedades(8);
+					PreparedStatement ps5=((Connection) dbConnection).prepareStatement(query);
+					ps5.setDate(1, fecha);
+					ps5.setString(2, titulo);
+					ps5.executeUpdate();
 				break;
 			}
 			
 					
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
-
-			if (stmt != null){ 
-				stmt.close(); 
-			}
+			
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -130,14 +145,11 @@ public class PuntualDAO {
 			Connection connection = dbConnection.getConnection();
 			String query=propiedades(9);
 			
-			// Important: We can replace this direct invocation to CRUD operations in DBConnection
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
+			ps.setString(1, titulo);
+			ps.executeUpdate();
 
 
-			if (stmt != null){ 
-				stmt.close(); 
-			}
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -151,14 +163,13 @@ public class PuntualDAO {
 			Connection connection = dbConnection.getConnection();
 			String query = propiedades(10);
 			
-			// Important: We can replace this direct invocation to CRUD operations in DBConnection
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			PreparedStatement ps=((Connection) dbConnection).prepareStatement(query);
+			ps.setString(1, titulo);
+			ps.setDate(2, fecha);
+			ps.executeUpdate();
 
 
-			if (stmt != null){ 
-				stmt.close(); 
-			}
+			
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -168,7 +179,7 @@ public class PuntualDAO {
 
 	public String propiedades(int r) {
 		Properties prop = new Properties();
-		String filename = "sqlP.propierties";
+		String filename = "sqlP.properties";
 		String f=null;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
