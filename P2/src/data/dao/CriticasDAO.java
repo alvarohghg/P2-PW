@@ -1,9 +1,15 @@
 package data.dao;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import business.Criticas;
 import data.common.DBConnection;
@@ -15,7 +21,7 @@ public class CriticasDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			// Important: This query is hard-coded here for illustrative purposes only
-			String query = "select * from usuario";
+			String query = propiedades(1);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
@@ -58,8 +64,7 @@ public class CriticasDAO {
 			String controlarPrimeraVez=critica.getcontrolarPrimeraVez();
 			String autor=critica.getAutor();
 			String votantes=critica.getVotantes();
-			String query = "INSERT INTO  `criticas` (`titulo`, `puntuacion`, `espectaculo` , `review`, `valoraciones`,`controlarPrimeraVez`,`autor`,`votantes`) VALUES ( "
-			+ titulo + puntuacion + espectaculo + review + valoraciones +controlarPrimeraVez+autor+votantes+ " )";
+			String query = propiedades(2);
 					
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
@@ -83,7 +88,7 @@ public class CriticasDAO {
 			Connection connection = dbConnection.getConnection();
 			String query=null; 
 			// Important: This query is hard-coded here for illustrative purposes only
-			query = "UPDATE criticas SET autor = "+correonuevo+" WHERE [Last autor] = " + correoviejo;
+			query = propiedades(3);
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
@@ -103,7 +108,7 @@ public class CriticasDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query="DELETE FROM criticas WHERE titulo = "+ titulo+"AND autor ="+correo;
+			String query=propiedades(4);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
@@ -123,7 +128,7 @@ public class CriticasDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "UPDATE criticas SET votantes = "+votantes+" WHERE titulo = " + titulo;
+			String query = propiedades(5);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
@@ -143,7 +148,7 @@ public class CriticasDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "UPDATE criticas SET puntuacion = "+puntuacion+" WHERE titulo = " + titulo;
+			String query = propiedades(6);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
@@ -159,4 +164,41 @@ public class CriticasDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public String propiedades(int r) {
+        Properties prop = new Properties();
+        String filename = "sqlT.propierties";
+        String f=null;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
+            prop.load(reader);
+            if(r==1) {
+                f = prop.getProperty("obtenerCriticas");
+            }
+            else if(r==2) {
+                f = prop.getProperty("escribirCriticasBD");
+            }
+            else if(r==3) {
+                f = prop.getProperty("actualizarAutor");
+            }
+            else if(r==4) {
+                f = prop.getProperty("borrarCriticaBD");
+            }
+            else if(r==5) {
+                f = prop.getProperty("actualizarCriticaBDvotantes");
+            }
+            else {
+                f = prop.getProperty("actualizarCriticaBDpuntuacion");
+            }
+            //System.out.println(f);            
+        } catch (FileNotFoundException e) {
+            
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return f;
+    }
+	
 }
