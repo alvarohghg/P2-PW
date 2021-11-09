@@ -1,6 +1,12 @@
 package data.dao;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
 //import com.mysql.jdbc.ResultSet;
 
@@ -10,13 +16,52 @@ import data.common.DBConnection;
 
 
 public class UsuarioDAO {
+	public String propiedades(int r) {
+		Properties prop = new Properties();
+		String filename = "sqlU.propierties";
+		String f=null;
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
+			prop.load(reader);
+			if(r==1) {
+				f = prop.getProperty("obtenerUsuarios");
+			}
+			else if(r==2) {
+				f = prop.getProperty("escribirUsuarioBD");
+			}
+			else if(r==3) {
+				f = prop.getProperty("actualizarUsuarioBD1");
+			}
+			else if(r==4) {
+				f = prop.getProperty("actualizarUsuarioBD2");
+			}
+			else if(r==5) {
+				f = prop.getProperty("actualizarUsuarioBD3");
+			}
+			else if(r==6) {
+				f = prop.getProperty("actualizarUsuarioBD4");
+			}
+			else {
+				f = prop.getProperty("eliminarUsuarioBD");
+			}
+			
+			//System.out.println(f);			
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return f;
+	}
 	public ArrayList<Usuario> obtenerUsuarios(){
 		ArrayList<Usuario> listOfUsers = new ArrayList<Usuario>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			// Important: This query is hard-coded here for illustrative purposes only
-			String query = "select * from usuario";
+			String query = propiedades(1);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
@@ -52,9 +97,7 @@ public class UsuarioDAO {
 			String tipo=user.getTipo();
 			String correo=user.getCorreo();
 			String nick=user.getNick();
-			String query = "INSERT INTO  `usuario` (`nombre`, `apellidos`, `tipo` , `correo`, `nick`) VALUES ( "
-						+ nombre +"," + apellido +"," + tipo +"," + correo +"," + nick + " )";
-					
+			String query = propiedades(2);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
@@ -79,17 +122,17 @@ public class UsuarioDAO {
 			// Important: This query is hard-coded here for illustrative purposes only
 			switch(opcion) {
 				case 1:
-					query = "UPDATE usuario SET nick = "+ nuevonick +"WHERE [Last correo] = " + correo;
+					query = propiedades(3);
 				break;
 				case 2:
-					query = "UPDATE usuario SET nombre =  "+ nuevonombre +"WHERE [Last correo] = " + correo;
+					query = propiedades(4);
 				break;
 				case 3:
-					query = "UPDATE usuario SET apellidos = "+ nuevoapellidos +"WHERE [Last correo] = " + correo;
-				break;
+					query = propiedades(5);
+					break;
 				case 4:
-					query = "UPDATE usuario SET correo =  "+ nuevocorreo +"WHERE [Last correo] = " + correo;
-				break;
+					query = propiedades(6);
+					break;
 			}
 			
 					
@@ -114,7 +157,7 @@ public class UsuarioDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query="DELETE FROM usuario WHERE correo = "+ correo;
+			String query=propiedades(7);
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
