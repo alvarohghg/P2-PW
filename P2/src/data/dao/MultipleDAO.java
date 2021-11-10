@@ -19,7 +19,7 @@ import data.common.DBConnection;
 public class MultipleDAO {
 	public String propiedades(int r) {
         Properties prop = new Properties();
-        String filename = "sqlM.properties";
+        String filename = "C:\\Users\\xboxn\\AppData\\Roaming\\SPB_16.6\\git\\P2-PW\\P2\\sqlM.properties";
         String f=null;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
@@ -55,10 +55,10 @@ public class MultipleDAO {
            	 f = prop.getProperty("actualizarMultipleBD6");
             }
             else if(r==11) {
-           	 f = prop.getProperty("eliminarTemporadaTitulo1");
+           	 f = prop.getProperty("eliminarMultipleTitulo1");
            }
             else if(r==12) {
-              	 f = prop.getProperty("eliminarTemporadaTitulo2");
+              	 f = prop.getProperty("eliminarMultipleTitulo2");
               }
             else {
                 f = prop.getProperty("eliminarMultipleFecha");
@@ -217,6 +217,7 @@ public class MultipleDAO {
 	}
 	public void eliminarMultipleTitulo(String titulo){
 		try {
+			System.out.println("NOmbre en dao "+ titulo);
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			String query=propiedades(11);
