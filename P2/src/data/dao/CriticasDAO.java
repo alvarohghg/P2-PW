@@ -127,8 +127,8 @@ public class CriticasDAO {
 			Connection connection = dbConnection.getConnection();
 			String query = propiedades(5);
 			PreparedStatement ps=connection.prepareStatement(query);
-			ps.setString(1,titulo);
-			ps.setString(2,votantes);
+			ps.setString(1,votantes);
+			ps.setString(2,titulo);
 			ps.executeUpdate();
 			
 		} catch (Exception e){
@@ -142,9 +142,25 @@ public class CriticasDAO {
 			Connection connection = dbConnection.getConnection();
 			String query = propiedades(6);
 			PreparedStatement ps=connection.prepareStatement(query);
-			ps.setString(1,titulo);
-			ps.setString(2,puntuacion);
+			ps.setString(1,puntuacion);
+			ps.setString(2,titulo);
 			ps.executeUpdate();
+			
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void primeraVez(String titulo) {
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query = propiedades(7);
+			PreparedStatement ps=connection.prepareStatement(query);
+			ps.setString(1,titulo);
+			ps.executeUpdate();
+			
 		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
@@ -173,8 +189,11 @@ public class CriticasDAO {
             else if(r==5) {
                 f = prop.getProperty("actualizarCriticaBDvotantes");
             }
-            else {
+            else if (r==6){
                 f = prop.getProperty("actualizarCriticaBDpuntuacion");
+            }
+            else {
+                f = prop.getProperty("primeraVez");
             }
             //System.out.println(f);            
         } catch (FileNotFoundException e) {
