@@ -74,7 +74,8 @@ public class UsuarioDAO {
 				String tipo = rs.getString("tipo");
 				String correo = rs.getString("correo");
 				String nick = rs.getString("nick");
-				listOfUsers.add(new Usuario(nombre, apellidos, nick,correo,tipo));
+				Date fecha = rs.getDate("fecha");
+				listOfUsers.add(new Usuario(nombre, apellidos, nick,correo,tipo,fecha));
 			}
 
 			if (stmt != null){ 
@@ -100,6 +101,7 @@ public class UsuarioDAO {
 			ps.setString(3, user.getTipo());
 			ps.setString(4, user.getCorreo());
 			ps.setString(5, user.getNick());
+			//ps.setDate(6, user.getFecha());
 			ps.executeUpdate();
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
