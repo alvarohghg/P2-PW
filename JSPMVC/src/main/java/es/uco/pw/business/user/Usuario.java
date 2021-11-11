@@ -1,4 +1,7 @@
 package es.uco.pw.business.user;
+
+import java.sql.Date;
+
 /**
  * Una clase que representa al usuario
  * @author Alvaro Berjillos
@@ -11,7 +14,7 @@ public class Usuario {
 	private String nick;
 	private String correo;
 	private String tipo;
-	
+	private Date fecha;
 	/* Constructors */
 	
 	/**
@@ -30,7 +33,7 @@ public class Usuario {
 	 * @param tipo El tipo de usuario
 	 * */
 	public Usuario(String nombre,String apellidos,
-			String nick,String correo,String tipo) {
+			String nick,String correo,String tipo,Date fecha) {
 		this.nombre=nombre;
 		this.apellidos=apellidos;
 		this.nick=nick;
@@ -52,6 +55,9 @@ public class Usuario {
 	public String getCorreo() {
 		return correo;
 	}
+	public Date getFecha() {
+		return fecha;
+	}
 	public void setNombre(String nuevonombre) {
 		this.nombre=nuevonombre;
 	}
@@ -70,6 +76,9 @@ public class Usuario {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 	/* Otros m�todos */
 	/**
