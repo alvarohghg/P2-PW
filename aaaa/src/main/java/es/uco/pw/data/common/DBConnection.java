@@ -17,11 +17,11 @@ public class DBConnection {
 
 	// Important: This configuration is hard-coded here for illustrative purposes only
 	
-	protected String url = propiedades(1);
+	protected String url = "jdbc:mysql://oraclepr.uco.es:3306/i92dicaf";
 
-	protected String user = propiedades(2);
+	protected String user = "i92dicaf";
  
-	protected String password = propiedades(3);
+	protected String password = "pw2021";
 
 	public Connection getConnection(){
 

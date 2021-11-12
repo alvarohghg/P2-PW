@@ -73,7 +73,6 @@ public class Usuario {
 	public String getTipo() {
 		return tipo;
 	}
-
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
@@ -86,8 +85,8 @@ public class Usuario {
 	 * @return infoUsuario Una frase con los datos del usuario
 	 */
 	public String toString() {
-		String infoUsuario= "Mi nick es "+this.nick+", mi nombre y apellidos "+
-		this.nombre+" "+this.apellidos+",  mi correo es "+this.correo+ "soy un usuario "+this.tipo;
+		String infoUsuario= "Soy puto, Mi nick es "+this.nick+", mi nombre y apellidos "+
+		this.nombre+" "+this.apellidos+",  mi correo es "+this.correo+ " soy un usuario "+this.tipo+ " fecha: "+ this.fecha;
 		return infoUsuario;
 				
 	}

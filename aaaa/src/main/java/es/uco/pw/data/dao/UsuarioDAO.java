@@ -62,19 +62,19 @@ public class UsuarioDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			// Important: This query is hard-coded here for illustrative purposes only
-			String query = propiedades(1);
+			String query = "select * from usuarioEJ2";
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
 			while (rs.next()) {
-				String nombre = rs.getString("nombre");
-				String apellidos = rs.getString("apellidos");
-				String tipo = rs.getString("tipo");
-				String correo = rs.getString("correo");
-				String nick = rs.getString("nick");
-				Date fecha = rs.getDate("fecha");
+				String nombre = rs.getString("nombreEJ2");
+				String apellidos = rs.getString("apellidosEJ2");
+				String tipo = rs.getString("tipoEJ2");
+				String correo = rs.getString("correoEJ2");
+				String nick = rs.getString("nickEJ2");
+				Date fecha = rs.getDate("fechaEJ2");
 				listOfUsers.add(new Usuario(nombre, apellidos, nick,correo,tipo,fecha));
 			}
 
@@ -94,14 +94,14 @@ public class UsuarioDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			// Important: This query is hard-coded here for illustrative purposes only
-			String query =propiedades(2);
+			String query ="INSERT INTO usuarioEJ2 (nombreEJ2, apellidosEJ2 , tipoEJ2 , correoEJ2, nickEJ2, fechaEJ2) VALUES ( ?,?,?,?,?,? )";
 			PreparedStatement ps=connection.prepareStatement(query);
 			ps.setString(1, user.getNombre());
 			ps.setString(2, user.getApellidos());
 			ps.setString(3, user.getTipo());
 			ps.setString(4, user.getCorreo());
 			ps.setString(5, user.getNick());
-			//ps.setDate(6, user.getFecha());
+			ps.setDate(6, user.getFecha());
 			ps.executeUpdate();
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection

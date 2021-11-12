@@ -70,10 +70,44 @@ public class GestorUsuario {
 			if(correo.equals(ListaUsuarios.get(i).getCorreo())) {	
 				return true;
 			}
-			
 		} 
 		
 		return existe;
+	}
+	
+	public boolean existeNick(String correo, String nick) {
+		boolean existe=false;
+		System.out.println("entra");
+		for(int i=0;i<ListaUsuarios.size();i++) {
+			System.out.println(ListaUsuarios.get(i));
+			if(correo.equals(ListaUsuarios.get(i).getCorreo()) && nick.equals(ListaUsuarios.get(i).getNick())) {	
+				return true;
+			}
+		} 
+		return existe;
+	}
+	
+	public boolean esAdmim(String correo) {
+		boolean existe=false;
+		for(int i=0;i<ListaUsuarios.size();i++) {
+			if(correo.equals(ListaUsuarios.get(i).getCorreo())) {	
+				if(ListaUsuarios.get(i).getTipo().equals("0")) {
+					return true;
+				}
+			}
+		} 
+		return existe;
+	}
+	
+	public void ponerFecha(String correo) {
+		Date date = null;
+  		long timeInMilliSeconds = date.getTime();
+		java.sql.Date fecha = new java.sql.Date(timeInMilliSeconds) ;
+		for(int i=0;i<ListaUsuarios.size();i++) {
+			if(correo.equals(ListaUsuarios.get(i).getCorreo())) {	
+				ListaUsuarios.get(i).setFecha(fecha);
+			}
+		} 
 	}
 	
 	public ArrayList<String> verAutores(){
@@ -195,76 +229,5 @@ public class GestorUsuario {
 		
 }
 	/////////////////////////
-	
-	public String propiedades() {
-		Properties prop = new Properties();
-		String filename = "conf.propierties";
-		String f=null;
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
-			prop.load(reader);
-			f = prop.getProperty("usuario");			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return f;
-	}
-	/**
-	 * Escribe un usuario en el fichero "ficheroU.txt"
-	 * @param u El usuario que se va a escribir
-	 */
-	/*public void escribirFicheroUsuario(Usuario u){
-		FileWriter fichero = null;
-		String f=null;
-		f=propiedades();
-		try {
-			fichero = new FileWriter(f, true);
-			fichero.write(u.getCorreo()+"\n");
-			fichero.write(u.getNombre()+"\n");
-			fichero.write(u.getApellidos()+"\n");
-			fichero.write(u.getNick()+"\n");
-			fichero.write(u.getTipo()+"\n");
-			fichero.close();
 
-		} catch (Exception ex) {
-			System.out.println("Mensaje de la excepci?n: " + ex.getMessage());
-		}
-	}*/
-	/**
-	 * Copia el contenido del fichero de usuarios a
-	 * la lista interna de usuarios del gestor
-	 * @param lista Lista auxiliar a la que se le a?ade la 
-	 * informaci?n de los usuarios del fichero
-	 * @throws IOException
-	 */
-	/*public void leerFicheroUsuarios(ArrayList<Usuario> lista)throws IOException  {
-		BufferedReader in = null;
-		ArrayList<String>  vec = new ArrayList<String>();
-		File file = new File("ficheroU.txt");
-        file.createNewFile();
-		String f=null;
-		f=propiedades();
-		try {   
-			in = new BufferedReader(new FileReader(f));
-		    String str;
-		    while ((str = in.readLine()) != null) {
-		        vec.add(str);
-		        
-		    }
-		} catch (FileNotFoundException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-		
-		for(int ind=0;ind<vec.size();ind+=5) {
-				Usuario aux=new Usuario(vec.get(ind+1),vec.get(ind+2),vec.get(ind+3),vec.get(ind),vec.get(ind+4));
-				lista.add(aux);
-		}
-			
-		lista=ListaUsuarios;
-	}*/
-		
 	}
