@@ -14,7 +14,15 @@
        
             <a href="/aaaa/mvc/view/loginView.jsp">Iniciar Sesion</a>
             <a href="/aaaa/mvc/controller/Registro.jsp">Registrase</a>
-            
+           
+	<article>
+		  <marquee behavior="slide" direction="right">
+		            <b> <img src="https://i.imgur.com/NUyttbnb.jpg"> </font></b>
+		        </marquee>
+        <marquee behavior="slide" direction="left">
+            <b> <img src="https://i.imgur.com/ldOHlwF.jpg"> </font></b>
+        </marquee>
+ 	</article>
 
         
 

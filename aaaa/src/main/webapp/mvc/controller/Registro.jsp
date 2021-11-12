@@ -21,13 +21,10 @@
 		<form method="post" action= "../../comprobarUsuario.jsp" >
 			<label for="nombre">Nombre: </label>
 			<input type="text" name="nombre" value="" id="nombre"><br/><br/>
-			<%// String nombre = request.getParameter("nombre"); %>
 			<label for="apellidos">Apellidos: </label>
 			<input type="text" name="apellidos" value="" id="apellidos"><br/><br/>
-			<%//String apellidos = request.getParameter("apellidos"); %>
 			<label for="nick">Nick: </label>
 			<input type="text" name="nick" value="" id="nick"><br/><br/>	
-			<% //String nick = request.getParameter("nick"); %>
 			<label for="correo">Correo: </label>
 			<input type="text" name="correo" value="" id="correo"><br/><br/>
 � 			<input type="radio" id="tipo" name="tipo" value="0">

@@ -14,7 +14,9 @@ public class Usuario {
 	private String nick;
 	private String correo;
 	private String tipo;
-	private Date fecha;
+	private Date fechaRegistro;
+	private Date ultimaConexion;
+
 	/* Constructors */
 	
 	/**
@@ -33,12 +35,14 @@ public class Usuario {
 	 * @param tipo El tipo de usuario
 	 * */
 	public Usuario(String nombre,String apellidos,
-			String nick,String correo,String tipo,Date fecha) {
+			String nick,String correo,String tipo,Date fechaRegistro, Date ultimaConexion) {
 		this.nombre=nombre;
 		this.apellidos=apellidos;
 		this.nick=nick;
 		this.correo=correo;
 		this.tipo=tipo;
+		this.fechaRegistro=fechaRegistro;
+		this.ultimaConexion=ultimaConexion;
 		
 	}
 	/* Getters y setters */
@@ -55,8 +59,20 @@ public class Usuario {
 	public String getCorreo() {
 		return correo;
 	}
-	public Date getFecha() {
-		return fecha;
+	public String getTipo() {
+		return tipo;
+	}
+	public Date getFechaRegistro() {
+		return fechaRegistro;
+	}
+	public Date getUltimaConexion() {
+		return ultimaConexion;
+	}
+	public void setRegistro(Date registro) {
+		this.fechaRegistro=registro;
+	}
+	public void setUltima(Date ultima) {
+		this.ultimaConexion=ultima;
 	}
 	public void setNombre(String nuevonombre) {
 		this.nombre=nuevonombre;
@@ -70,26 +86,21 @@ public class Usuario {
 	public void setCorreo(String nuevocorreo) {
 		this.correo=nuevocorreo;
 	}
-	public String getTipo() {
-		return tipo;
-	}
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
+	
 	/* Otros m�todos */
 	/**
 	 * Devuelve los datos de un usuario en una cadena
 	 * @return infoUsuario Una frase con los datos del usuario
 	 */
-	public String toString() {
-		String infoUsuario= "Soy puto, Mi nick es "+this.nick+", mi nombre y apellidos "+
-		this.nombre+" "+this.apellidos+",  mi correo es "+this.correo+ " soy un usuario "+this.tipo+ " fecha: "+ this.fecha;
-		return infoUsuario;
+	/*public String toString() {
+		//String infoUsuario= "Soy puto, Mi nick es "+this.nick+", mi nombre y apellidos "+
+		//this.nombre+" "+this.apellidos+",  mi correo es "+this.correo+ " soy un usuario "+this.tipo+ " fecha: "+ this.fecha;
+		//return infoUsuario;
 				
-	}
+	}*/
 
 	
 	

@@ -74,8 +74,10 @@ public class UsuarioDAO {
 				String tipo = rs.getString("tipoEJ2");
 				String correo = rs.getString("correoEJ2");
 				String nick = rs.getString("nickEJ2");
-				Date fecha = rs.getDate("fechaEJ2");
-				listOfUsers.add(new Usuario(nombre, apellidos, nick,correo,tipo,fecha));
+				Date registro = rs.getDate("fechaRegistroEJ2");
+				Date ultima = rs.getDate("ultimaConexion");
+
+				listOfUsers.add(new Usuario(nombre, apellidos, nick,correo,tipo,registro,ultima));
 			}
 
 			if (stmt != null){ 
@@ -94,14 +96,15 @@ public class UsuarioDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			// Important: This query is hard-coded here for illustrative purposes only
-			String query ="INSERT INTO usuarioEJ2 (nombreEJ2, apellidosEJ2 , tipoEJ2 , correoEJ2, nickEJ2, fechaEJ2) VALUES ( ?,?,?,?,?,? )";
+			String query ="INSERT INTO usuarioEJ2 (nombreEJ2, apellidosEJ2 , tipoEJ2 , correoEJ2, nickEJ2, fechaRegistroEJ2, ultimaConexion ) VALUES ( ?,?,?,?,?,?,? )";
 			PreparedStatement ps=connection.prepareStatement(query);
 			ps.setString(1, user.getNombre());
 			ps.setString(2, user.getApellidos());
 			ps.setString(3, user.getTipo());
 			ps.setString(4, user.getCorreo());
 			ps.setString(5, user.getNick());
-			ps.setDate(6, user.getFecha());
+			ps.setDate(6, user.getFechaRegistro());
+			ps.setDate(7, user.getUltimaConexion());
 			ps.executeUpdate();
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
@@ -120,36 +123,34 @@ public class UsuarioDAO {
 			// Important: This query is hard-coded here for illustrative purposes only
 			switch(opcion) {
 				case 1:
-					query = propiedades(3);
+					query = "UPDATE usuarioEJ2 SET nickEJ2 = ? WHERE correoEJ2 = ?";
 					PreparedStatement ps=connection.prepareStatement(query);
 					ps.setString(1, nuevonick);
 					ps.setString(2, correo);
 					ps.executeUpdate();
 				break;
 				case 2:
-					query = propiedades(4);
+					query = "UPDATE usuarioEJ2 SET nombreEJ2 =  ? WHERE correoEJ2 = ?";
 					PreparedStatement ps1=connection.prepareStatement(query);
-					ps1.setString(1, nuevonick);
+					ps1.setString(1, nuevonombre);
 					ps1.setString(2, correo);
 					ps1.executeUpdate();
 				break;
 				case 3:
-					query = propiedades(5);
+					query = "UPDATE usuarioEJ2 SET apellidosEJ2 = ? WHERE correoEJ2 = ?";
 					PreparedStatement ps2=connection.prepareStatement(query);
-					ps2.setString(1, nuevonick);
+					ps2.setString(1, nuevoapellidos);
 					ps2.setString(2, correo);
 					ps2.executeUpdate();
 					break;
 				case 4:
 					query = propiedades(6);
 					PreparedStatement ps3=connection.prepareStatement(query);
-					ps3.setString(1, nuevonick);
+					ps3.setString(1, nuevocorreo);
 					ps3.setString(2, correo);
 					ps3.executeUpdate();
 					break;
 			}
-
-			
 
 
 			dbConnection.closeConnection();
@@ -169,6 +170,25 @@ public class UsuarioDAO {
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			PreparedStatement ps=connection.prepareStatement(query);
 			ps.setString(1, correo);
+			ps.executeUpdate();
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void actualizarUltima(String correo, Date fecha){
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query="UPDATE usuarioEJ2 SET ultimaConexion = ? WHERE correoEJ2 = ? ";
+			
+			// Important: We can replace this direct invocation to CRUD operations in DBConnection
+			PreparedStatement ps=connection.prepareStatement(query);
+			ps.setDate(1, fecha);
+			ps.setString(2, correo);
 			ps.executeUpdate();
 
 			dbConnection.closeConnection();

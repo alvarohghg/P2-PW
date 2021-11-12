@@ -6,10 +6,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Properties;
 import java.util.Scanner;
-
+import java.time.*;
 import es.uco.pw.business.user.Usuario;
 import es.uco.pw.data.dao.UsuarioDAO;
 
@@ -77,9 +77,7 @@ public class GestorUsuario {
 	
 	public boolean existeNick(String correo, String nick) {
 		boolean existe=false;
-		System.out.println("entra");
 		for(int i=0;i<ListaUsuarios.size();i++) {
-			System.out.println(ListaUsuarios.get(i));
 			if(correo.equals(ListaUsuarios.get(i).getCorreo()) && nick.equals(ListaUsuarios.get(i).getNick())) {	
 				return true;
 			}
@@ -100,14 +98,16 @@ public class GestorUsuario {
 	}
 	
 	public void ponerFecha(String correo) {
-		Date date = null;
-  		long timeInMilliSeconds = date.getTime();
+		Date date = new Date(System.currentTimeMillis()) ;
+		long timeInMilliSeconds = date.getTime();
 		java.sql.Date fecha = new java.sql.Date(timeInMilliSeconds) ;
 		for(int i=0;i<ListaUsuarios.size();i++) {
 			if(correo.equals(ListaUsuarios.get(i).getCorreo())) {	
-				ListaUsuarios.get(i).setFecha(fecha);
+				ListaUsuarios.get(i).setUltima(fecha);
+				UDAO.actualizarUltima(correo, fecha);
 			}
 		} 
+		
 	}
 	
 	public ArrayList<String> verAutores(){
@@ -125,8 +125,8 @@ public class GestorUsuario {
 	 * @param nick El nick del nuevo usuario
 	 * @param correo El correo del nuevo usuario
 	 * */
-	public void register(String nombre,String apellidos,String nick,String correo,String tipo,Date fecha) {
-		Usuario nuevouser=new Usuario(nombre,apellidos,nick,correo,tipo,fecha);
+	public void register(String nombre,String apellidos,String nick,String correo,String tipo,Date registro, Date ultima) {
+		Usuario nuevouser=new Usuario(nombre,apellidos,nick,correo,tipo,registro,ultima);
 		addUser(nuevouser);
 	}
 	
@@ -173,6 +173,16 @@ public class GestorUsuario {
 		for(int i=0; i< ListaUsuarios.size(); i++) {
 			System.out.println(ListaUsuarios.get(i).getCorreo()+"\n");
 		}
+	}
+	
+	public Date fechaRegistro(String correo) {
+		Date devolver=null;
+		for(int i=0; i< ListaUsuarios.size(); i++) {
+			if(correo.equals(ListaUsuarios.get(i).getCorreo())) {
+				return ListaUsuarios.get(i).getFechaRegistro();
+			}
+		}
+		return devolver;
 	}
 	/**
 	 * Imprime todos los datos de los usuarios registrados
@@ -222,10 +232,7 @@ public class GestorUsuario {
 		 */
 		UDAO.actualizarUsuarioBD(correo, nuevonombre, nuevoapellidos, nuevonick, nuevocorreo, opcion);
 		
-		/*new FileWriter(propiedades(), false).close();
-		for(int i=0; i< ListaUsuarios.size(); i++) {
-			UDAO.escribirUsuarioBD(ListaUsuarios.get(i));
-		}*/
+		
 		
 }
 	/////////////////////////

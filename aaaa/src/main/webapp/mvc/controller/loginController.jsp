@@ -10,9 +10,10 @@
 	GestorUsuario GU =new GestorUsuario();
 	int op;
 	GU.guardarBDU();
+	
 	if(GU.existeNick(correo, nick)==true){
+		GU.ponerFecha(correo);
 		if(GU.esAdmim(correo)==true){
-			GU.ponerFecha(correo);
 			op=0;
 		}else{
 			op=1;
@@ -33,15 +34,16 @@
 		<% if(op==0){%>
 			 <h1>Sesion inicia correctamente</h1>
 				
-				<a href="/aaaa/mvc/controller/Registro.jsp">
-				    <button type="button">Continuar</button>
-				</a>
+				<form methon="post" action="/aaaa/pagAdmin.jsp">
+			    	<button type=submit value=<%= correo %> id="correo" name="correo">Continuar</button>
+				</form>
 		<%}
 		else if(op==1){%>
 			<h1>Sesion inicia correctamente</h1>
-			<a href="/aaaa/mvc/controller/Registro.jsp">
-			    <button type="button">Continuar</button>
-			</a>
+			<form methon="post" action="/aaaa/pagEspec.jsp">
+			    	<button type=submit value=<%= correo %> id="correo" name="correo">Continuar</button>
+
+				</form>
 		<%}
 		else{%>
 			 <h1>Usuario no registrado</h1>

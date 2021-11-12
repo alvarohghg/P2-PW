@@ -29,13 +29,9 @@
 			user.setNick(nick);
 			user.setCorreo(correo);
 			user.setTipo(tipo);
-			user.setFecha(null);
-			if(tipo.equals("1")==true){
-				user.setFecha(fecha);
-			}
+			user.setRegistro(fecha);
+			user.setUltima(null);
 			UDAO.escribirUsuarioBD(user);%>
-			
-			
 			<%op=1;
 		}
 	%>
