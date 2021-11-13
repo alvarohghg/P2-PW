@@ -35,14 +35,11 @@ public class UsuarioDAO {
 			else if(r==4) {
 				f = prop.getProperty("actualizarUsuarioBD2");
 			}
-			else if(r==5) {
+			else if (r==5) {
 				f = prop.getProperty("actualizarUsuarioBD3");
 			}
-			else if(r==6) {
-				f = prop.getProperty("actualizarUsuarioBD4");
-			}
 			else {
-				f = prop.getProperty("eliminarUsuarioBD");
+				f = prop.getProperty("actualizarUltima");
 			}
 			
 			//System.out.println(f);			
@@ -62,8 +59,9 @@ public class UsuarioDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			// Important: This query is hard-coded here for illustrative purposes only
-			String query = "select * from usuarioEJ2";
-			
+			//String query = "select * from usuarioEJ2";
+			String query = propiedades(1);
+
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
@@ -96,6 +94,7 @@ public class UsuarioDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			// Important: This query is hard-coded here for illustrative purposes only
+			//String query = propiedades(2);
 			String query ="INSERT INTO usuarioEJ2 (nombreEJ2, apellidosEJ2 , tipoEJ2 , correoEJ2, nickEJ2, fechaRegistroEJ2, ultimaConexion ) VALUES ( ?,?,?,?,?,?,? )";
 			PreparedStatement ps=connection.prepareStatement(query);
 			ps.setString(1, user.getNombre());
@@ -123,6 +122,7 @@ public class UsuarioDAO {
 			// Important: This query is hard-coded here for illustrative purposes only
 			switch(opcion) {
 				case 1:
+					//query = propiedades(3);
 					query = "UPDATE usuarioEJ2 SET nickEJ2 = ? WHERE correoEJ2 = ?";
 					PreparedStatement ps=connection.prepareStatement(query);
 					ps.setString(1, nuevonick);
@@ -130,6 +130,7 @@ public class UsuarioDAO {
 					ps.executeUpdate();
 				break;
 				case 2:
+					//query = propiedades(4);
 					query = "UPDATE usuarioEJ2 SET nombreEJ2 =  ? WHERE correoEJ2 = ?";
 					PreparedStatement ps1=connection.prepareStatement(query);
 					ps1.setString(1, nuevonombre);
@@ -137,18 +138,12 @@ public class UsuarioDAO {
 					ps1.executeUpdate();
 				break;
 				case 3:
+					//query = propiedades(5);
 					query = "UPDATE usuarioEJ2 SET apellidosEJ2 = ? WHERE correoEJ2 = ?";
 					PreparedStatement ps2=connection.prepareStatement(query);
 					ps2.setString(1, nuevoapellidos);
 					ps2.setString(2, correo);
 					ps2.executeUpdate();
-					break;
-				case 4:
-					query = propiedades(6);
-					PreparedStatement ps3=connection.prepareStatement(query);
-					ps3.setString(1, nuevocorreo);
-					ps3.setString(2, correo);
-					ps3.executeUpdate();
 					break;
 			}
 
@@ -160,7 +155,7 @@ public class UsuarioDAO {
 		}
 	}
 	
-	
+	/*
 	public void eliminarUsuarioBD(String correo){
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -177,12 +172,13 @@ public class UsuarioDAO {
 			System.err.println(e);
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	public void actualizarUltima(String correo, Date fecha){
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
+			//String query = propiedades(6);
 			String query="UPDATE usuarioEJ2 SET ultimaConexion = ? WHERE correoEJ2 = ? ";
 			
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection

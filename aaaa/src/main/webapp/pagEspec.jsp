@@ -38,7 +38,12 @@
 				text-align: center;
 				border-radius: 8px;
 			}
-			
+			body {
+			  background-image: url(" https://i.imgur.com/l4nKkCG.png ");
+			  background-repeat: no-repeat;
+			  background-attachment: fixed;  
+			  background-size: cover;
+			}
 		</style>
 	</head>
 	<body>
@@ -51,10 +56,11 @@
 		<div style="text-align:center">
 	      <form methon="post" action= "/aaaa/modificarDatos.jsp">
 	 		 <button class="button button1" type=submit value=<%=correo%> id="correo" name="correo">Modificar datos</button>
+	 		 <a  href="/aaaa/index.jsp">
+		    		<button class="button button1" type="button">Desconectar</button>
+				</a> 
 			</form>
-          	 	<a  href="/aaaa/index.jsp">
-		    	<button class="button button1" type="button">Desconectar</button>
-			</a>      
+          	 	     
 		</div>
 		
 		

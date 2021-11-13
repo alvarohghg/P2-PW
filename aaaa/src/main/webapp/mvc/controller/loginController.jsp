@@ -1,7 +1,7 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="es.uco.pw.business.user.Usuario, es.uco.pw.data.dao.UsuarioDAO, es.uco.pw.business.user.GestorUsuario,
-	 java.time.LocalDate, java.util.Date, java.sql.*, java.util.* " %>
+	 java.time.LocalDate, java.util.Date, java.sql.*, java.util.* , java.util.Properties" %>
 
 <% 	String nick = request.getParameter("nick");
 	String correo = request.getParameter("correo"); 
@@ -47,7 +47,12 @@
 				text-align: center;
 				border-radius: 8px;
 			}
-			
+			body {
+			  background-image: url(" https://i.imgur.com/l4nKkCG.png ");
+			  background-repeat: no-repeat;
+			  background-attachment: fixed;  
+			  background-size: cover;
+			}
 		</style>
 	</head>
 	<body>

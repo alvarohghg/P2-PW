@@ -149,7 +149,7 @@ public class GestorUsuario {
 	 * que es toma el valor a true si se ha
 	 * eliminado de la lista correctamente
 	 * */
-	public boolean unregister(String correo) throws IOException {
+	/*public boolean unregister(String correo) throws IOException {
 		boolean var=false;
 			for(int i=0;i<ListaUsuarios.size();i++) {
 				if(correo.equals(ListaUsuarios.get(i).getCorreo())) {
@@ -157,13 +157,11 @@ public class GestorUsuario {
 					var=true;
 				}
 			}
-			/*
-			 * Tenemos k aser funsion especial para solo eliminar 
-			 */
+			
 			UDAO.eliminarUsuarioBD(correo);
 			return var;
 
-	}
+	}*/
 	
 	
 	/**

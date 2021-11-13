@@ -26,6 +26,12 @@
 				background-color: #AA5C88;
 				color:black;
 			}
+			body {
+			  background-image: url(" https://i.imgur.com/l4nKkCG.png ");
+			  background-repeat: no-repeat;
+			  background-attachment: fixed;  
+			  background-size: cover;
+			}
 		</style>
 
 	</head>
@@ -34,16 +40,16 @@
 
 		<form method="post" action= "../../comprobarUsuario.jsp" >
 			<label for="nombre">Nombre</label><br>
-			<input type="text" name="nombre" value="" id="nombre"><br/><br/>
+			<input type="text" name="nombre" value="" id="nombre" required><br/><br/>
 			<label for="apellidos">Apellidos</label><br>
-			<input type="text" name="apellidos" value="" id="apellidos"><br/><br/>
+			<input type="text" name="apellidos" value="" id="apellidos" required><br/><br/>
 			<label for="nick">Nick</label><br>
-			<input type="text" name="nick" value="" id="nick"><br/><br/>	
+			<input type="text" name="nick" value="" id="nick" required><br/><br/>	
 			<label for="correo">Correo</label><br>
-			<input type="text" name="correo" value="" id="correo"><br/><br/>
-			<input type="radio" id="tipo" name="tipo" value="0">
+			<input type="text" name="correo" value="" id="correo" required><br/><br/>
+			<input type="radio" id="tipo" name="tipo" value="1">
  			<label for="Admin">Admin</label><br>
- 			<input type="radio"  id="tipo" name="tipo" value="1" checked>
+ 			<input type="radio"  id="tipo" name="tipo" value="0" checked>
  			<label for="Espectador">Espectador</label><br><br>
 			<input type="submit" value="Registrarse">
 		</form>

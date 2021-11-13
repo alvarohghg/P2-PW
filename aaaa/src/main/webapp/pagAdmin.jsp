@@ -43,7 +43,12 @@
 				text-align: center;
 				border-radius: 8px;
 			}
-			
+			body {
+			  background-image: url(" https://i.imgur.com/l4nKkCG.png ");
+			  background-repeat: no-repeat;
+			  background-attachment: fixed;  
+			  background-size: cover;
+			}
 			tr:nth-child(even) {background-color: #f2f2f2;}
 		</style>
 	</head>
@@ -59,7 +64,7 @@
             <% for(int i=0; i< ListaUsuarios.size();i++){ 
             	String nick=ListaUsuarios.get(i).getNick();
                 String tipo;
-                if(ListaUsuarios.get(i).getTipo().equals("0")){
+                if(ListaUsuarios.get(i).getTipo().equals("1")){
                 	tipo="Administrador";
                 }
                 else{

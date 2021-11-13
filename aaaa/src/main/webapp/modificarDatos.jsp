@@ -26,7 +26,12 @@
 	color:black;
 	
 	}
-	
+	body {
+	  background-image: url(" https://i.imgur.com/l4nKkCG.png ");
+	  background-repeat: no-repeat;
+	  background-attachment: fixed;  
+	  background-size: cover;
+	}
 	</style>
 	</head>
 	<body>
