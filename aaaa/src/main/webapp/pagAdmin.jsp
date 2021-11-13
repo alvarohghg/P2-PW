@@ -20,7 +20,7 @@
 		<style>
 			table {
 			  border-collapse: collapse;
-			  width: 100%;
+			  width: 50%;
 			}
 			th, td {
 			  text-align: left;
@@ -38,23 +38,30 @@
 			  margin: 1px 1px;
 			  cursor: pointer;
 			}
-			
-			.button1 {
-				text-align: center;
-				border-radius: 8px;
-			}
 			body {
-			  background-image: url(" https://i.imgur.com/l4nKkCG.png ");
+			  background-image: url(" https://i.imgur.com/l4nKkCG.png");
 			  background-repeat: no-repeat;
 			  background-attachment: fixed;  
 			  background-size: cover;
+			} 
+			
+			.button1 {
+			 	
+				text-align: center;
+				border-radius: 8px;
 			}
-			tr:nth-child(even) {background-color: #f2f2f2;}
+			tr:nth-child(odd) {background-color: #cc6699;}
+			tr:nth-child(even) {background-color: #993366;}
+			td:nth-child(4n){background-color:#48465d;
+			
+			}
+			
+			tr:hover {background-color: pink;}
 		</style>
 	</head>
 	<body>
 		<div align="center">
-        <table border="1" cellpadding="5">
+        <table border="0" cellpadding="5">
             <caption><h2 style="text-align:left">Lista de usuarios</h2></caption>
             <tr>
                 <th>Nick</th>
@@ -64,7 +71,7 @@
             <% for(int i=0; i< ListaUsuarios.size();i++){ 
             	String nick=ListaUsuarios.get(i).getNick();
                 String tipo;
-                if(ListaUsuarios.get(i).getTipo().equals("1")){
+                if(ListaUsuarios.get(i).getTipo().equals("0")){
                 	tipo="Administrador";
                 }
                 else{
@@ -92,7 +99,7 @@
         
     </div>
      <br>
-          <a style="text-align:left" href="/aaaa/index.jsp">
+          <a style="text-align:right" href="/aaaa/index.jsp">
 				    <button class="button button1" type="button">Desconectar</button>
 			</a>
 	</body>
