@@ -89,7 +89,7 @@ public class GestorUsuario {
 		boolean existe=false;
 		for(int i=0;i<ListaUsuarios.size();i++) {
 			if(correo.equals(ListaUsuarios.get(i).getCorreo())) {	
-				if(ListaUsuarios.get(i).getTipo().equals("0")) {
+				if(ListaUsuarios.get(i).getTipo().equals("1")) {
 					return true;
 				}
 			}
