@@ -21,7 +21,7 @@
 		<meta charset="UTF-8">
 		<title>Eres espectador</title>
 		<style>
-			.button {
+			button {
 			  background-color: #bd7df280;
 			  border: none;
 			  color: black;
@@ -35,7 +35,6 @@
 			}
 			
 			.button1 {
-				text-align: center;
 				border-radius: 8px;
 			}
 			body {
@@ -44,6 +43,7 @@
 			  background-attachment: fixed;  
 			  background-size: cover;
 			}
+			
 		</style>
 	</head>
 	<body>
@@ -55,12 +55,11 @@
 		<br>
 		<div style="text-align:center">
 	      <form methon="post" action= "/aaaa/modificarDatos.jsp">
-	 		 <button class="button button1" type=submit value=<%=correo%> id="correo" name="correo">Modificar datos</button>
-	 		 <a  href="/aaaa/index.jsp">
-		    		<button class="button button1" type="button">Desconectar</button>
-				</a> 
+	 		 <button class="button1" type=submit value=<%=correo%> id="correo" name="correo">Modificar datos</button>
 			</form>
-          	 	     
+          	 	<a  href="/aaaa/index.jsp">
+		    	<button class="button button1" type="button">Desconectar</button>
+			</a>      
 		</div>
 		
 		
