@@ -30,7 +30,7 @@
 		<meta charset="UTF-8">
 		<title>Guardando datos</title>
 		<style>
-			.button {
+			button {
 			  background-color: #bd7df280;
 			  border: none;
 			  color: black;
@@ -44,22 +44,22 @@
 			}
 			
 			.button1 {
-				text-align: center;
 				border-radius: 8px;
 			}
 			body {
 			  background-image: url(" https://i.imgur.com/l4nKkCG.png ");
 			  background-repeat: no-repeat;
-			  background-attachment: fixed;  
+			  background-attachment: fixed; 
 			  background-size: cover;
 			}
+			
 		</style>
 	</head>
 	<body>
 		<caption><h2 style="text-align:left">Datos guardados correctamente</h2></caption>
 		
 		<a style="text-align:left" href="/aaaa/index.jsp">
-				    <button class="button button1"type="button">Desconectar</button>
+				    <button class="button1" type="button">Desconectar</button>
 		</a>
 	</body>
 </html>
