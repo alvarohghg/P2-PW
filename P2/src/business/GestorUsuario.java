@@ -36,7 +36,7 @@ public class GestorUsuario {
 		return ListaUsuarios;
 	}
 	/**
-	 * A?ade un usuario a la lista interna del gestor 
+	 * Añade un usuario a la lista interna del gestor 
 	 * y lo escribe en el fichero "ficheroU.txt"
 	 * @param newuser El usuario a a?adir
 	 * */
@@ -116,9 +116,7 @@ public class GestorUsuario {
 					var=true;
 				}
 			}
-			/*
-			 * Tenemos k aser funsion especial para solo eliminar 
-			 */
+			
 			UDAO.eliminarUsuarioBD(correo);
 			return var;
 
@@ -175,20 +173,9 @@ public class GestorUsuario {
 						}
 			}
 		}
-		
-		/*
-		 * funcion para actualisar
-		 */
 		UDAO.actualizarUsuarioBD(correo, nuevonombre, nuevoapellidos, nuevonick, nuevocorreo, opcion);
 		
-		/*new FileWriter(propiedades(), false).close();
-		for(int i=0; i< ListaUsuarios.size(); i++) {
-			UDAO.escribirUsuarioBD(ListaUsuarios.get(i));
-		}*/
-		
 }
-	/////////////////////////
-	
 	public String propiedades() {
 		Properties prop = new Properties();
 		String filename = "conf.propierties";
@@ -204,60 +191,5 @@ public class GestorUsuario {
 		}
 		return f;
 	}
-	/**
-	 * Escribe un usuario en el fichero "ficheroU.txt"
-	 * @param u El usuario que se va a escribir
-	 */
-	/*public void escribirFicheroUsuario(Usuario u){
-		FileWriter fichero = null;
-		String f=null;
-		f=propiedades();
-		try {
-			fichero = new FileWriter(f, true);
-			fichero.write(u.getCorreo()+"\n");
-			fichero.write(u.getNombre()+"\n");
-			fichero.write(u.getApellidos()+"\n");
-			fichero.write(u.getNick()+"\n");
-			fichero.write(u.getTipo()+"\n");
-			fichero.close();
-
-		} catch (Exception ex) {
-			System.out.println("Mensaje de la excepci?n: " + ex.getMessage());
-		}
-	}*/
-	/**
-	 * Copia el contenido del fichero de usuarios a
-	 * la lista interna de usuarios del gestor
-	 * @param lista Lista auxiliar a la que se le a?ade la 
-	 * informaci?n de los usuarios del fichero
-	 * @throws IOException
-	 */
-	/*public void leerFicheroUsuarios(ArrayList<Usuario> lista)throws IOException  {
-		BufferedReader in = null;
-		ArrayList<String>  vec = new ArrayList<String>();
-		File file = new File("ficheroU.txt");
-        file.createNewFile();
-		String f=null;
-		f=propiedades();
-		try {   
-			in = new BufferedReader(new FileReader(f));
-		    String str;
-		    while ((str = in.readLine()) != null) {
-		        vec.add(str);
-		        
-		    }
-		} catch (FileNotFoundException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-		
-		for(int ind=0;ind<vec.size();ind+=5) {
-				Usuario aux=new Usuario(vec.get(ind+1),vec.get(ind+2),vec.get(ind+3),vec.get(ind),vec.get(ind+4));
-				lista.add(aux);
-		}
-			
-		lista=ListaUsuarios;
-	}*/
 		
 	}
