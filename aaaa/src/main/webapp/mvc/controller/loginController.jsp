@@ -1,7 +1,7 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="es.uco.pw.business.user.Usuario, es.uco.pw.data.dao.UsuarioDAO, es.uco.pw.business.user.GestorUsuario,
-	 java.time.LocalDate, java.util.Date, java.sql.*, java.util.* , java.util.Properties" %>
+	 java.time.LocalDate, java.util.Date, java.sql.*, java.util.* " %>
 
 <% 	String nick = request.getParameter("nick");
 	String correo = request.getParameter("correo"); 
@@ -30,7 +30,7 @@
 		<meta charset="UTF-8">
 		<title>Comprobar inicio sesion</title>
 		<style>
-			.button {
+			button {
 			  background-color: #bd7df280;
 			  border: none;
 			  color: black;
@@ -44,15 +44,16 @@
 			}
 			
 			.button1 {
-				text-align: center;
+				
 				border-radius: 8px;
 			}
 			body {
-			  background-image: url(" https://i.imgur.com/l4nKkCG.png ");
+			  background-image: url(" https://i.imgur.com/l4nKkCG.png");
 			  background-repeat: no-repeat;
 			  background-attachment: fixed;  
 			  background-size: cover;
 			}
+			
 		</style>
 	</head>
 	<body>
@@ -74,10 +75,10 @@
 			 <h1>Usuario no registrado</h1>
 				
 				<a href="/aaaa/mvc/view/loginView.jsp">
-				    <button class="button button1" type="button">Reintentar</button>
+				    <button class="button1" type="button">Reintentar</button>
 				</a>
 				<a href="/aaaa/index.jsp">
-				    <button class="button button1" type="button">Salir</button>
+				    <button class="button1" type="button">Salir</button>
 				</a>
 		<%}
 		
