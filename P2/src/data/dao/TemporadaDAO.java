@@ -13,8 +13,22 @@ import java.util.Properties;
 import business.*;
 import business.AbstractEspectaculo.categoria;
 import data.common.DBConnection;
-
+/**
+ * Clase correspondiente a las funciones de creación/eliminación/modificación de
+ * espectaculos de temporada de la base de datos
+ * @author Alvaro Berjillos
+ * @author Francisco Javier Diaz
+ * @author Alvaro Sanchez
+ *
+ */
 public class TemporadaDAO {
+	/**
+	 * Funcion para obtener las secuencias de ordenes en sql del fichero
+	 * sqlT.properties 
+	 * @param r Opcion correspondiente a la línea 
+	 * que determinará los datos que se obtendrán
+	 * @return f
+	 */
 	public String propiedades(int r) {
         Properties prop = new Properties();
         String filename = "sqlT.properties";
@@ -68,6 +82,11 @@ public class TemporadaDAO {
         }
         return f;
     }
+	/**
+	 * Funcion para extraer los espectaculos de temporada de la BBDD a la lista
+	 * @return listaT Una lista de espectaculos de temporada
+	 * de la base de datos
+	 */
 	public ArrayList<EspectaculoTemporada> obtenerTemporada(){
 		ArrayList<EspectaculoTemporada> listaT = new ArrayList<EspectaculoTemporada>();
 		try {
@@ -102,6 +121,11 @@ public class TemporadaDAO {
 		}
 		return listaT;
 	}
+	/**
+	 * Funcion para escribir un espectaculo de temporada en la base de datos
+	 * pasado por argumento
+	 * @param temporada Espectaculo de temporada que sera añadido a la base de datos
+	 */
 public void escribirTemporadaBD(EspectaculoTemporada temporada) {
 	try {
 		DBConnection dbConnection = new DBConnection();
@@ -135,14 +159,26 @@ public void escribirTemporadaBD(EspectaculoTemporada temporada) {
 		e.printStackTrace();
 	}
 	}
-
+/**
+ * Actualiza un espectaculo de temporada almacenado en la
+ * base de datos dada una opcion
+ * @param titulo Titulo del espectaculo a modificar
+ * @param nuevotitulo Nuevo titulo del espectaculo
+ * @param nuevadescripcion Nueva descripcion del espectaculo
+ * @param nuevacategoria Nueva categoria
+ * @param nuevoaforolocalidades Nuevo aforo
+ * @param localidadesvendidas Nuevas localidades vendidas
+ * @param nuevafechafin Nueva fecha de fin de temporada del espectaculo a alterar
+ * @param nuevafechainicio Nueva fecha de inicio de temporada del espectaculo a alterar
+ * @param dia Nuevo dia de la semana del espectaculo a alterar
+ * @param opcion Entero que determina la operacion sql
+ */
 public void actualizarTemporadaBD(String titulo,String nuevotitulo,String nuevadescripcion,categoria nuevacategoria,int nuevoaforolocalidades,
 		int nuevalocalidadesvendidas,Date nuevafechafin,Date nuevafechainicio,String dia,int opcion) {
 	try {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		String query=null; 
-		// Important: This query is hard-coded here for illustrative purposes only
 		switch(opcion) {
 		case 1:
 			query = propiedades(3);
@@ -210,6 +246,10 @@ public void actualizarTemporadaBD(String titulo,String nuevotitulo,String nuevad
 		e.printStackTrace();
 	}
 }
+/**
+ * Borra un espectaculo de temporada de la base de datos dado el titulo
+ * @param titulo Titulo del espectaculo
+ */
 public void eliminarTemporadaTitulo(String titulo){
 	try {
 		DBConnection dbConnection = new DBConnection();
@@ -226,7 +266,11 @@ public void eliminarTemporadaTitulo(String titulo){
 		e.printStackTrace();
 	}
 }
-//QUE HACEMOS PARA ELIMINAR ESPECTACULOS CUYA FECHA QUE LE PASES POR ESTA FUNCION ESTÉ EN MEDIO?¿?¿
+/**
+ * Elimina un espectaculo de temporada dado el titulo y la fecha
+ * @param titulo Titulo del espectaculo
+ * @param fecha Sesion a eliminar
+ */
 public void eliminarTemporadaFecha(String titulo, Date fecha){
 	try {
 		DBConnection dbConnection = new DBConnection();
