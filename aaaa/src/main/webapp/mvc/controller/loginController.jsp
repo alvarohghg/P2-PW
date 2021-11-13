@@ -28,7 +28,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Comprobar inicio sesion</title>
+		<title>Comprobar inicio de sesion</title>
 		<style>
 			button {
 			  background-color: #bd7df280;
@@ -58,14 +58,14 @@
 	</head>
 	<body>
 		<% if(op==0){%>
-			 	<h1>Sesion inicia correctamente</h1>
+			 	<h1>Sesion iniciada correctamente</h1>
 				
 				<form methon="post" action="/aaaa/pagAdmin.jsp">
 			    	<button class="button button1" type=submit value=<%= correo %> id="correo" name="correo">Continuar</button>
 				</form>	
 		<%}
 		else if(op==1){%>
-			<h1>Sesion inicia correctamente</h1>
+			<h1>Sesion iniciada correctamente</h1>
 			<form methon="post" action="/aaaa/pagEspec.jsp">
 			    	<button class="button button1" type=submit value=<%= correo %> id="correo" name="correo">Continuar</button>
 
