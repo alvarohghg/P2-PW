@@ -76,7 +76,7 @@
 				</a>
 		<%}
 		else{%>
-			 <h1>Usuario registrado con existo</h1>
+			 <h1>Usuario registrado con éxito</h1>
 				
 				<a href="/aaaa/index.jsp">
 				    <button class="button1" type="button">Continuar</button>
