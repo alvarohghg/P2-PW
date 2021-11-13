@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
         <title>Inicio</title>
         <style>
-			.button {
+			button {
 			  background-color: #bd7df280;
 			  border: none;
 			  color: black;
@@ -24,24 +24,24 @@
 			}
 			
 			.button1 {
-				text-align: center;
+				
 				border-radius: 8px;
 			}
 			body {
-			  background-image: url(" https://i.imgur.com/l4nKkCG.png ");
+			  background-image: url("https://i.imgur.com/l4nKkCG.png");
 			  background-repeat: no-repeat;
 			  background-attachment: fixed;  
 			  background-size: cover;
-			}
+			} 
 			</style>
     </head>
     <body>
        		<div style="text-align:center">
 			      <a href="/aaaa/mvc/view/loginView.jsp">
-	       			<button class="button button1">Iniciar sesion</button>
+	       			<button class="button1">Iniciar sesion</button>
 	           	 </a>	
 	           	 <a href="/aaaa/mvc/controller/Registro.jsp">
-       					<button class="button button1">Registrarse</button>
+       					<button class="button1">Registrarse</button>
 					</a>	      
 		 	 </div>
 			<article>
