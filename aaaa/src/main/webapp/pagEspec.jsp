@@ -50,7 +50,7 @@
 		<div style="text-align:center" >
 			<h2>Actividad:</h2>
 			<p>Fecha actual: <%=fecha%> </p>
-			<p>Te registrastes un: <%=registro%></p>
+			<p>Te registraste un: <%=registro%></p>
 		</div>
 		<br>
 		<div style="text-align:center">
