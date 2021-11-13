@@ -29,12 +29,32 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Guardando datos</title>
+		<style>
+			.button {
+			  background-color: #bd7df280;
+			  border: none;
+			  color: black;
+			  padding: 20px;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  font-size: 16px;
+			  margin: 4px 2px;
+			  cursor: pointer;
+			}
+			
+			.button1 {
+				text-align: center;
+				border-radius: 8px;
+			}
+			
+		</style>
 	</head>
 	<body>
 		<caption><h2 style="text-align:left">Datos guardados correctamente</h2></caption>
 		
 		<a style="text-align:left" href="/aaaa/index.jsp">
-				    <button type="button">Desconectar</button>
+				    <button class="button button1"type="button">Desconectar</button>
 		</a>
 	</body>
 </html>

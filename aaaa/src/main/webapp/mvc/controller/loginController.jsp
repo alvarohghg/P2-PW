@@ -29,30 +29,50 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Comprobar inicio sesion</title>
+		<style>
+			.button {
+			  background-color: #bd7df280;
+			  border: none;
+			  color: black;
+			  padding: 20px;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  font-size: 16px;
+			  margin: 4px 2px;
+			  cursor: pointer;
+			}
+			
+			.button1 {
+				text-align: center;
+				border-radius: 8px;
+			}
+			
+		</style>
 	</head>
 	<body>
 		<% if(op==0){%>
-			 <h1>Sesion inicia correctamente</h1>
+			 	<h1>Sesion inicia correctamente</h1>
 				
 				<form methon="post" action="/aaaa/pagAdmin.jsp">
-			    	<button type=submit value=<%= correo %> id="correo" name="correo">Continuar</button>
-				</form>
+			    	<button class="button button1" type=submit value=<%= correo %> id="correo" name="correo">Continuar</button>
+				</form>	
 		<%}
 		else if(op==1){%>
 			<h1>Sesion inicia correctamente</h1>
 			<form methon="post" action="/aaaa/pagEspec.jsp">
-			    	<button type=submit value=<%= correo %> id="correo" name="correo">Continuar</button>
+			    	<button class="button button1" type=submit value=<%= correo %> id="correo" name="correo">Continuar</button>
 
-				</form>
+			</form>
 		<%}
 		else{%>
 			 <h1>Usuario no registrado</h1>
 				
 				<a href="/aaaa/mvc/view/loginView.jsp">
-				    <button type="button">Reintentar</button>
+				    <button class="button button1" type="button">Reintentar</button>
 				</a>
 				<a href="/aaaa/index.jsp">
-				    <button type="button">Salir</button>
+				    <button class="button button1" type="button">Salir</button>
 				</a>
 		<%}
 		

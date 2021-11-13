@@ -8,23 +8,42 @@
 <html>
     <head>
     <meta charset="UTF-8">
-        <title>Prueba de MVC</title>
+        <title>Inicio</title>
+        <style>
+			.button {
+			  background-color: #bd7df280;
+			  border: none;
+			  color: black;
+			  padding: 20px;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  font-size: 16px;
+			  margin: 4px 2px;
+			  cursor: pointer;
+			}
+			
+			.button1 {
+				text-align: center;
+				border-radius: 8px;
+			}
+			
+			</style>
     </head>
     <body>
+       		<div style="text-align:center">
+			      <a href="/aaaa/mvc/view/loginView.jsp">
+	       			<button class="button button1">Iniciar sesion</button>
+	           	 </a>	
+	           	 <a href="/aaaa/mvc/controller/Registro.jsp">
+       					<button class="button button1">Registrarse</button>
+					</a>	      
+		 	 </div>
+			<article>
+				  <marquee SCROLLAMOUNT=2500 LOOP=1>
+				            <b> <img src="https://i.imgur.com/NUyttbnb.jpg"> </font></b>
+				   </marquee>
        
-            <a href="/aaaa/mvc/view/loginView.jsp">Iniciar Sesion</a>
-            <a href="/aaaa/mvc/controller/Registro.jsp">Registrase</a>
-           
-	<article>
-		  <marquee behavior="slide" direction="right">
-		            <b> <img src="https://i.imgur.com/NUyttbnb.jpg"> </font></b>
-		        </marquee>
-        <marquee behavior="slide" direction="left">
-            <b> <img src="https://i.imgur.com/ldOHlwF.jpg"> </font></b>
-        </marquee>
- 	</article>
-
-        
-
+ 			</article>
     </body>
 </html> 

@@ -7,10 +7,24 @@
 		<meta charset="UTF-8">
 		<title>Registro</title>
 		<style>
-			form {
-				background-color: black;
-				color:  red;
-				text-align: center;
+			form,h2 {
+				 text-align:center;
+			}
+			input[type=text]{
+
+			  padding: 12px 20px;
+			  margin: 8px 0;
+			  box-sizing: border-box;
+			  border: none;
+			  background-color: #bd7df280;
+			  color: black;	
+			}
+			input{
+				background-color: #bd7df280;
+			}
+			input[type=submit]{
+				background-color: #AA5C88;
+				color:black;
 			}
 		</style>
 
@@ -19,18 +33,18 @@
 
 
 		<form method="post" action= "../../comprobarUsuario.jsp" >
-			<label for="nombre">Nombre: </label>
+			<label for="nombre">Nombre</label><br>
 			<input type="text" name="nombre" value="" id="nombre"><br/><br/>
-			<label for="apellidos">Apellidos: </label>
+			<label for="apellidos">Apellidos</label><br>
 			<input type="text" name="apellidos" value="" id="apellidos"><br/><br/>
-			<label for="nick">Nick: </label>
+			<label for="nick">Nick</label><br>
 			<input type="text" name="nick" value="" id="nick"><br/><br/>	
-			<label for="correo">Correo: </label>
+			<label for="correo">Correo</label><br>
 			<input type="text" name="correo" value="" id="correo"><br/><br/>
-� 			<input type="radio" id="tipo" name="tipo" value="0">
-� 			<label for="Admin">Admin</label><br>
-� 			<input type="radio" id="tipo" name="tipo" value="1" checked>
-� 			<label for="Espectador">Espectador</label><br><br>
+			<input type="radio" id="tipo" name="tipo" value="0">
+ 			<label for="Admin">Admin</label><br>
+ 			<input type="radio"  id="tipo" name="tipo" value="1" checked>
+ 			<label for="Espectador">Espectador</label><br><br>
 			<input type="submit" value="Registrarse">
 		</form>
 

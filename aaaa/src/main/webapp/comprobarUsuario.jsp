@@ -41,20 +41,39 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Comprobar Usuario</title>
+		<style>
+			.button {
+			  background-color: #bd7df280;
+			  border: none;
+			  color: black;
+			  padding: 20px;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  font-size: 16px;
+			  margin: 4px 2px;
+			  cursor: pointer;
+			}
+			
+			.button1 {
+				text-align: center;
+				border-radius: 8px;
+			}
+		</style>
 	</head>
 	<body>
 		<% if(op==0){%>
 			 <h1>Este correo ya está usado</h1>
 				
 				<a href="/aaaa/mvc/controller/Registro.jsp">
-				    <button type="button">Reintentar</button>
+				    <button class="button button1" type="button">Reintentar</button>
 				</a>
 		<%}
 		else{%>
 			 <h1>Usuario registrado con existo</h1>
 				
 				<a href="/aaaa/index.jsp">
-				    <button type="button">Continuar</button>
+				    <button class="button button1" type="button">Continuar</button>
 				</a>
 		<%}
 		

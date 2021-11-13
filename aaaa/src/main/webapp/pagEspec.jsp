@@ -20,17 +20,50 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Eres espectador</title>
+		<style>
+			.button {
+			  background-color: #bd7df280;
+			  border: none;
+			  color: black;
+			  padding: 20px;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  font-size: 16px;
+			  margin: 4px 2px;
+			  cursor: pointer;
+			}
+			
+			.button1 {
+				text-align: center;
+				border-radius: 8px;
+			}
+			
+		</style>
 	</head>
 	<body>
-		<h2>Actividad:</h2>
-		<p >Fecha actual: <p style="font-family:Monospace, Times, serif"><%=fecha%></p>
-		<p >Te registrastes un: <p style="font-family:Monospace, Times, serif"><%=registro%></p>
-		<form methon="post" action= "/aaaa/modificarDatos.jsp">
-			  <button type=submit value=<%=correo%> id="correo" name="correo">Modificar datos</button>
-		</form>
+		<div style="text-align:center" >
+			<h2>Actividad:</h2>
+			<p>Fecha actual: <%=fecha%> </p>
+			<p>Te registrastes un: <%=registro%></p>
+		</div>
 		<br>
-          <a style="text-align:left" href="/aaaa/index.jsp">
-				    <button type="button">Desconectar</button>
-			</a>
+		<div style="text-align:center">
+	      <form methon="post" action= "/aaaa/modificarDatos.jsp">
+	 		 <button class="button button1" type=submit value=<%=correo%> id="correo" name="correo">Modificar datos</button>
+			</form>
+          	 	<a  href="/aaaa/index.jsp">
+		    	<button class="button button1" type="button">Desconectar</button>
+			</a>      
+		</div>
+		
+		
+          
 	</body>
 </html>
+
+
+
+
+
+

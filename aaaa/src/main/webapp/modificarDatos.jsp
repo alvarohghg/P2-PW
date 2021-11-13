@@ -43,8 +43,7 @@
 		  <label for="apellidos">Nuevos apellidos</label>
 		  <input type="text" id="apellidos" name="apellidos" value="">
 		  <div style="text-align:right">
-		      <input type="submit" value="Modificar" >
-		      
+		      <input type="submit" value="Modificar" >		      
 		  </div>
 		</form>
 	

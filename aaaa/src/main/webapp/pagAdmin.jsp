@@ -26,6 +26,23 @@
 			  text-align: left;
 			  padding: 8px;
 			}
+			.button {
+			  background-color: #bd7df280;
+			  border: none;
+			  color: black;
+			  padding: 4px;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  font-size: 13.3px;
+			  margin: 1px 1px;
+			  cursor: pointer;
+			}
+			
+			.button1 {
+				text-align: center;
+				border-radius: 8px;
+			}
 			
 			tr:nth-child(even) {background-color: #f2f2f2;}
 		</style>
@@ -57,7 +74,7 @@
                     <% if(correo.equals(ListaUsuarios.get(i).getCorreo())==true){ %>
 	                    <td style="border:0px"> 
 	                    <form methon="post" action= "/aaaa/modificarDatos.jsp">
-			    			<button type=submit value=<%=ListaUsuarios.get(i).getCorreo()%> id="correo" name="correo">Modificar datos</button>
+			    			<button class="button button1" type=submit value=<%=ListaUsuarios.get(i).getCorreo()%> id="correo" name="correo">Modificar datos</button>
 						</form>
 	                    
 		          	<%} %>
@@ -71,7 +88,7 @@
     </div>
      <br>
           <a style="text-align:left" href="/aaaa/index.jsp">
-				    <button type="button">Desconectar</button>
+				    <button class="button button1" type="button">Desconectar</button>
 			</a>
 	</body>
 </html>
