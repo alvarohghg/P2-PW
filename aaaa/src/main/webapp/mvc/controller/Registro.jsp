@@ -17,14 +17,16 @@
 			  box-sizing: border-box;
 			  border: none;
 			  background-color: #bd7df280;
-			  color: black;	
+			  color: black;
+			  border-radius:8px;
 			}
 			input{
 				background-color: #bd7df280;
 			}
-			input[type=submit]{
-				background-color: #AA5C88;
+			input[type=submit]{			
 				color:black;
+				background-color: #bd7df280;
+				border-radius: 8px;
 			}
 			body {
 			  background-image: url(" https://i.imgur.com/l4nKkCG.png ");
