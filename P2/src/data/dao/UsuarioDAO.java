@@ -7,15 +7,26 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
-
-//import com.mysql.jdbc.ResultSet;
-
 import business.Usuario;
 import data.common.DBConnection;
 
-
+/**
+ * Clase correspondiente a las funciones de creación/eliminación/modificación de
+ * usuarios de temporada de la base de datos
+ * @author Alvaro Berjillos
+ * @author Francisco Javier Diaz
+ * @author Alvaro Sanchez
+ *
+ */
 
 public class UsuarioDAO {
+	/**
+	 * Funcion para obtener las secuencias de ordenes en sql del fichero
+	 * sqlU.properties 
+	 * @param r Opcion correspondiente a la línea 
+	 * que determinará los datos que se obtendrán
+	 * @return f
+	 */
 	public String propiedades(int r) {
 		Properties prop = new Properties();
 		String filename = "sqlU.properties";
@@ -55,7 +66,11 @@ public class UsuarioDAO {
 		}
 		return f;
 	}
-	
+	/**
+	 * Funcion para extraer los usuarios de la BBDD a la lista
+	 * @return listOfUsers Una lista de usuarios
+	 * de la base de datos
+	 */
 	public ArrayList<Usuario> obtenerUsuarios(){
 		ArrayList<Usuario> listOfUsers = new ArrayList<Usuario>();
 		try {
@@ -87,7 +102,11 @@ public class UsuarioDAO {
 		}
 		return listOfUsers;
 	}
-	
+	/**
+	 * Funcion para escribir usuario en la base de datos
+	 * pasado por argumento
+	 * @param user Usuario que sera añadido a la base de datos
+	 */
 	public void escribirUsuarioBD(Usuario user) {
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -109,7 +128,15 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Funcion para modificar los datos de un usuario existente en la base de datos
+	 * @param correo Correo del usuario a modificar
+	 * @param nuevonombre Nuevo nombre del usuario
+	 * @param nuevoapellidos Nuevos apellidos
+	 * @param nuevonick Nuevo nick del usuario
+	 * @param nuevocorreo Nuevo correo del usuario
+	 * @param opcion Opcion que determina la operación que se realizará
+	 */
 	public void actualizarUsuarioBD(String correo,String nuevonombre,String nuevoapellidos,String nuevonick,String nuevocorreo,int opcion){
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -157,7 +184,10 @@ public class UsuarioDAO {
 		}
 	}
 	
-	
+	/**
+	 * Borra un usuario de la base de datos dado el titulo
+	 * @param correo Correo del espectaculo
+	 */
 	public void eliminarUsuarioBD(String correo){
 		try {
 			DBConnection dbConnection = new DBConnection();
