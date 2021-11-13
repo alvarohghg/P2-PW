@@ -42,7 +42,7 @@
 		<meta charset="UTF-8">
 		<title>Comprobar Usuario</title>
 		<style>
-			.button {
+			button {
 			  background-color: #bd7df280;
 			  border: none;
 			  color: black;
@@ -56,14 +56,7 @@
 			}
 			
 			.button1 {
-				text-align: center;
 				border-radius: 8px;
-			}
-			body {
-			  background-image: url(" https://i.imgur.com/l4nKkCG.png ");
-			  background-repeat: no-repeat;
-			  background-attachment: fixed;  
-			  background-size: cover;
 			}
 		</style>
 	</head>
@@ -72,14 +65,14 @@
 			 <h1>Este correo ya está usado</h1>
 				
 				<a href="/aaaa/mvc/controller/Registro.jsp">
-				    <button class="button button1" type="button">Reintentar</button>
+				    <button class="button1" type="button">Reintentar</button>
 				</a>
 		<%}
 		else{%>
 			 <h1>Usuario registrado con existo</h1>
 				
 				<a href="/aaaa/index.jsp">
-				    <button class="button button1" type="button">Continuar</button>
+				    <button class="button1" type="button">Continuar</button>
 				</a>
 		<%}
 		
