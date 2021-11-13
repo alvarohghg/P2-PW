@@ -7,22 +7,21 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * A class to manage the MySQL connection (general methods and configuration).
+ * Una clase para manejar la conexión MySQL (métodos generales y configuración).
  * @author Alvaro Berjillos
  * @author Francisco Javier Diaz
  * @author Alvaro Sanchez
  * */
 public class DBConnection {
 	protected Connection connection = null;
-
-	// Important: This configuration is hard-coded here for illustrative purposes only
 	
 	protected String url = propiedades(1);
 
 	protected String user = propiedades(2);
  
 	protected String password = propiedades(3);
-
+	
+	/*Funciones para notificar apertura y cierre de conexión*/
 	public Connection getConnection(){
 
 		try{
@@ -39,9 +38,6 @@ public class DBConnection {
 		}
 		return this.connection;
 	}
-
-	// We can include here other methods to encapsulate CRUD commands...
-
 	public void closeConnection() {
 		try {
 			if(this.connection != null && !this.connection.isClosed()) {
@@ -54,7 +50,12 @@ public class DBConnection {
 		}
 	}
 	
-	
+	/**
+	 * Funcion propiedades para conectar a la base de datos
+	 * @param r Opcion correspondiente a la linea del fichero
+	 * @return f Cadena que contiene la información que se corresponda
+	 * con la linea deseada
+	 */
 	public String propiedades(int r) {
 		
 		Properties prop = new Properties();
@@ -72,12 +73,12 @@ public class DBConnection {
 			else {
 				f = prop.getProperty("password");
 			}
-			//System.out.println(f);			
+					
 		} catch (FileNotFoundException e) {
 			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return f;
