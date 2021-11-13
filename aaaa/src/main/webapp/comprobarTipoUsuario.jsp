@@ -24,7 +24,7 @@ if(tipo.equals("0")==true){
 			
 			for(int i=0; i< GU.devolverLista().size(); i++) {
 				if(GU.devolverLista().get(i).getCorreo().equals(correo)){
-					out.println("Ultimo inicio de sesión:"+GU.devolverLista().get(i).getUltimaConexion());
+					out.println("Ultimo inicio de sesión:"+GU.devolverLista().get(i).getFecha());
 				}
 			}
 		}
@@ -32,7 +32,7 @@ if(tipo.equals("0")==true){
 			for(int i=0; i< GU.devolverLista().size(); i++) {
 				out.println ("Fecha actual: "+fecha);
 				if(GU.devolverLista().get(i).getCorreo().equals(correo)){
-					out.println("Fecha de registro:"+GU.devolverLista().get(i).getFechaRegistro());
+					out.println("Fecha de registro:"+GU.devolverLista().get(i).getFecha());
 				}
 			}
 			
