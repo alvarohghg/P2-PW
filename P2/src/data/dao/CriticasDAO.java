@@ -14,17 +14,26 @@ import java.util.Properties;
 
 import business.Criticas;
 import data.common.DBConnection;
-
+/**
+ * Clase correspondiente a las funciones de creación/eliminación/modificación de
+ * criticas de la base de datos
+ * @author Alvaro Berjillos
+ * @author Francisco Javier Diaz
+ * @author Alvaro Sanchez
+ *
+ */
 public class CriticasDAO {
+	/**
+	 * Funcion para extraer las criticas de la BBDD a la lista
+	 * @return listOfCriticas Una lista de criticas con las criticas
+	 * de la base de datos
+	 */
 	public ArrayList<Criticas> obtenerCriticas(){
 		ArrayList<Criticas> listOfCriticas = new ArrayList<Criticas>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			// Important: This query is hard-coded here for illustrative purposes only
 			String query = propiedades(1);
-			
-			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
@@ -50,7 +59,11 @@ public class CriticasDAO {
 		}
 		return listOfCriticas;
 	}
-	
+	/**
+	 * Escribe una nueva critica en la base de datos a partir de los
+	 * atributos de una critica pasada por argumento
+	 * @param critica La critica cuyos datos escribimos en la base de datos
+	 */
 	public void escribirCriticasBD(Criticas critica) {
 		
 		try {
@@ -85,7 +98,12 @@ public class CriticasDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Cambia el autor de una critica existente en la base de datos a partir del autor
+	 * de la critica pasado por argumento
+	 * @param correonuevo Correo del autor nuevo de la critica
+	 * @param correoviejo Correo del autor de la critica a cambiar
+	 */
 	public void actualizarAutorBD(String correonuevo,String correoviejo){
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -101,7 +119,11 @@ public class CriticasDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Elimina una critica de la base de datos dato el titulo y el autor
+	 * @param titulo Titulo de la critica a eliminar
+	 * @param correo Autor de la critica a eliminar
+	 */
 	public void borraCriticaBD(String titulo, String correo){
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -121,6 +143,12 @@ public class CriticasDAO {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Altera los votantes de una critica de la base de datos
+	 * dado el titulo de ésta
+	 * @param titulo Titulo de la critica alterar
+	 * @param votantes Cadena de votantes de la critica
+	 */
 	public void actualizarCriticaBDvotantes(String titulo,String votantes) {
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -136,6 +164,12 @@ public class CriticasDAO {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Altera la puntuación de una critica de la base de datos
+	 * dado el titulo de ésta
+	 * @param titulo Titulo de la critica alterar
+	 * @param puntuacion Cadena de puntuacion de la critica
+	 */
 	public void actualizarCriticaBDpuntuacion(String titulo,String puntuacion) {
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -151,7 +185,11 @@ public class CriticasDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Funcion para alterar el valor que indica si una critica 
+	 * ha sido votada más de una vez 
+	 * @param titulo Titulo de la critica
+	 */
 	public void primeraVez(String titulo) {
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -166,7 +204,13 @@ public class CriticasDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Funcion para obtener las secuencias de ordenes en sql del fichero
+	 * sqlC.properties 
+	 * @param r Opcion correspondiente a la línea 
+	 * que determinará los datos que se obtendrán
+	 * @return f
+	 */
 	public String propiedades(int r) {
         Properties prop = new Properties();
         String filename = "sqlC.properties";
@@ -195,12 +239,12 @@ public class CriticasDAO {
             else {
                 f = prop.getProperty("primeraVez");
             }
-            //System.out.println(f);            
+                       
         } catch (FileNotFoundException e) {
             
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+           
             e.printStackTrace();
         }
         return f;
