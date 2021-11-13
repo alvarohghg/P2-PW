@@ -8,30 +8,46 @@
  <!DOCTYPE html>
 <html>
 	<head>
-	<style> 
-	input[type=text]{
-	  width: 100%;
-	  padding: 12px 20px;
-	  margin: 8px 0;
-	  box-sizing: border-box;
-	  border: none;
-	  background-color: #bd7df280;
-	  color: black;
-	}
-	form,h2 {
-	 text-align:center;
-	}
-	input[type=submit]{
-	background-color: #AA5C88;
-	color:black;
+	<style>
+			form,h2,p {
+				 text-align:center;
+			}
+			input[type=text]{
+
+			  padding: 12px 20px;
+			  margin: 8px 0;
+			  box-sizing: border-box;
+			  border: none;
+			  background-color: #bd7df280;
+			  color: black;
+			  border-radius: 8px;
+			}
+			input{
+				background-color: #bd7df280;
+			}
+			input[type=submit]{
+			  background-color: #bd7df280;
+			  border-radius: 8px;
+			  color: black;
+			  padding: 4px;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  font-size: 13.3px;
+			  margin: 1px 1px;
+			  cursor: pointer;
+			 
+				
+			}
+
+			 
+			body {
+			  background-image: url(" https://i.imgur.com/l4nKkCG.png");
+			  background-repeat: no-repeat;
+			  background-attachment: fixed;  
+			  background-size: cover;
+			} 
 	
-	}
-	body {
-	  background-image: url(" https://i.imgur.com/l4nKkCG.png ");
-	  background-repeat: no-repeat;
-	  background-attachment: fixed;  
-	  background-size: cover;
-	}
 	</style>
 	</head>
 	<body>
@@ -40,15 +56,16 @@
 		<p >Su correo actual es: <p style="font-family:Monospace, Times, serif"><%=correo%></p>
 		
 		<form method="post" action="/aaaa/guardarDatos.jsp">
-		  <input type="hidden" id="correo" name="correo" value=<%=correo %>>		 
-		  <label for="nick" >Nuevo nick</label>
-		  <input type="text" id="nick" name="nick" value="">
-		  <label for="nombre">Nuevo nombre</label>
-		  <input type="text" id="nombre" name="nombre" value="">
-		  <label for="apellidos">Nuevos apellidos</label>
-		  <input type="text" id="apellidos" name="apellidos" value="">
-		  <div style="text-align:right">
-		      <input type="submit" value="Modificar" >		      
+		  <input type="hidden" id="correo" name="correo" value=<%=correo %>><br>		 
+		  <label for="nick" >Nuevo nick</label><br>
+		  <input type="text" id="nick" name="nick" value=""><br>
+		  <label for="nombre">Nuevo nombre</label><br>
+		  <input type="text" id="nombre" name="nombre" value=""><br>
+		  <label for="apellidos">Nuevos apellidos</label><br>
+		  <input type="text" id="apellidos" name="apellidos" value=""><br>
+		  <div style="text-align:center ">
+		      <input type="submit" value="Modificar" >
+		      
 		  </div>
 		</form>
 	
