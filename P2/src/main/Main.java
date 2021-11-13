@@ -21,7 +21,13 @@ import data.dao.CriticasDAO;
 import data.dao.UsuarioDAO;
 import data.dao.PuntualDAO;
 
-
+/**
+ * Programa principal
+ * @author Alvaro Berjillos
+ * @author Francisco Javier Diaz
+ * @author Alvaro Sanchez
+ *
+ */
 
 
 public class Main{
@@ -52,15 +58,7 @@ public class Main{
 		String tituloCrear,espectaculoCrear,puntuacionCrear,reviewCrear ;
 		
 		GE.guardarBDlistas();
-		//GE.leerFicheroMultiple();
-		//GE.leerFicheroPuntual();
-		//PDAO.obtenerPuntual();
-		//GE.leerFicheroTemporada();
-		//gu1.leerFicheroUsuarios(listausuarios);
 		gu1.guardarBDU();
-		//UDAO.obtenerUsuarios();
-		//GC1.leerFicheroCriticas();
-		//CDAO.obtenerCriticas();
 		GC1.guardarBDC();
 		
 		System.out.println("Desea registrarse [1] o iniciar sesion [2] o salir [0]\n");
@@ -813,7 +811,7 @@ public class Main{
 			System.exit(0);
 		}
 		
-		System.out.println("�Saliendo del programa!\n");
+		System.out.println("¡Saliendo del programa!");
 		System.exit(0);
 	}
 
