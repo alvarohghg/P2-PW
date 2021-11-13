@@ -21,12 +21,9 @@
 			table {
 			  border-collapse: collapse;
 			  width: 50%;
+			  
 			}
-			th, td {
-			  text-align: left;
-			  padding: 8px;
-			}
-			.button {
+			button {
 			  background-color: #bd7df280;
 			  border: none;
 			  color: black;
@@ -38,31 +35,35 @@
 			  margin: 1px 1px;
 			  cursor: pointer;
 			}
-			body {
-			  background-image: url(" https://i.imgur.com/l4nKkCG.png");
-			  background-repeat: no-repeat;
-			  background-attachment: fixed;  
-			  background-size: cover;
-			} 
-			
 			.button1 {
 			 	
 				text-align: center;
 				border-radius: 8px;
 			}
+			th, td, {
+			  text-align: left;
+			  padding: 8px;
+			 border-bottom: 1px solid #ddd;
+			}
+			
+			
+			body {
+			  background-image: url(" https://i.imgur.com/l4nKkCG.png");
+			  background-repeat: no-repeat;
+			  background-attachment: fixed;  
+			  background-size: cover;
+			}
+			tr:hover {background-color: pink;}
 			tr:nth-child(odd) {background-color: #cc6699;}
 			tr:nth-child(even) {background-color: #993366;}
 			td:nth-child(4n){background-color:#48465d;
-			
-			}
-			
-			tr:hover {background-color: pink;}
+
 		</style>
 	</head>
 	<body>
 		<div align="center">
-        <table border="0" cellpadding="5">
-            <caption><h2 style="text-align:left">Lista de usuarios</h2></caption>
+        <table  border="0" cellpadding=5  >
+            <caption><h2 style="text-align:center">Lista de usuarios</h2></caption>
             <tr>
                 <th>Nick</th>
                 <th>Tipo</th>
@@ -79,14 +80,14 @@
                 }
                 Date fecha=ListaUsuarios.get(i).getUltimaConexion()	;
             %>
-                <tr>
-                    <td><%= nick %> </td>
+                <tr >
+                    <td ><%= nick %> </td>
                     <td><%= tipo %> </td>
                     <td><%= fecha %> </td>
                     <% if(correo.equals(ListaUsuarios.get(i).getCorreo())==true){ %>
-	                    <td style="border:0px"> 
-	                    <form methon="post" action= "/aaaa/modificarDatos.jsp">
-			    			<button class="button button1" type=submit value=<%=ListaUsuarios.get(i).getCorreo()%> id="correo" name="correo">Modificar datos</button>
+	                    <td > 
+	                    <form method="post" action= "/aaaa/modificarDatos.jsp">
+			    			<button class="button1" type=submit value=<%=ListaUsuarios.get(i).getCorreo()%> id="correo" name="correo">Modificar datos</button>
 						</form>
 	                    
 		          	<%} %>
@@ -97,10 +98,10 @@
         </table>
        
         
-    </div>
-     <br>
-          <a style="text-align:right" href="/aaaa/index.jsp">
-				    <button class="button button1" type="button">Desconectar</button>
-			</a>
+    </div><br>	<div style="text-align:center">
+    <br>
+          <a  href="/aaaa/index.jsp">
+				    <button class="button1" type="button">Desconectar</button>
+			</a></div>
 	</body>
 </html>
