@@ -17,7 +17,7 @@ import data.dao.TemporadaDAO;
 import data.dao.MultipleDAO;
 
 /**
- * 
+ * Una clase que representa al gestor de espectaculos
  * @author Alvaro Berjillos
  * @authos Alvaro Sanchez
  * @author Francisco Javier Diaz
@@ -70,8 +70,8 @@ public class GestorEspectaculos {
 	}
 	
 	/**
-	 * A�ade un espectaculo multiple a la lista de espectaculos multiples y lo escribe en su fichero
-	 * @param newespectaculo El espectaculo a a�adir
+	 * Añade un espectaculo multiple a la lista de espectaculos multiples y lo escribe en su fichero
+	 * @param newespectaculo El espectaculo a aï¿½adir
 	 */
 	public void addEspectM(EspectaculoMultiple newespectaculo) {
 
@@ -81,8 +81,8 @@ public class GestorEspectaculos {
 		
 	}
 	/**
-	 * A�ade un espectaculo de temporada a la lista de espectaculos de temporada y lo escribe en su fichero
-	 * @param newespectaculo El espectaculo a a�adir
+	 * Añade un espectaculo de temporada a la lista de espectaculos de temporada y lo escribe en su fichero
+	 * @param newespectaculo El espectaculo a aï¿½adir
 	 */
 	public void addEspectT(EspectaculoTemporada newespectaculo) {
 
@@ -92,8 +92,8 @@ public class GestorEspectaculos {
 		
 	}
 	/**
-	 * A�ade un espectaculo puntual a la lista de espectaculos puntuales y lo escribe en su fichero
-	 * @param newespectaculo El espectaculo a a�adir
+	 * Añade un espectaculo puntual a la lista de espectaculos puntuales y lo escribe en su fichero
+	 * @param newespectaculo El espectaculo a aï¿½adir
 	 */
 	public void addEspectP(EspectaculoPuntual newespectaculo) {
 
@@ -132,7 +132,7 @@ public class GestorEspectaculos {
 		return false;
 	}
 	/**
-	 * Devuelve una lista con los titulos de todos los espect�culos
+	 * Devuelve una lista con los titulos de todos los espectï¿½culos
 	 * @return l Lista con todos los espectaculos
 	 */
 	public ArrayList<String> verEspectaculos(){
@@ -149,7 +149,7 @@ public class GestorEspectaculos {
 		return l;
 	}
 	/**
-	 * Funcion para registrar un espectaculo m�ltiple en la lista de espectaculos m�ltiples y en el fichero
+	 * Funcion para registrar un espectaculo mï¿½ltiple en la lista de espectaculos mï¿½ltiples y en el fichero
 	 * @param titulo El titulo del espectaculo
 	 * @param descripcion La descripcion del espectaculo 
 	 * @param categoria La categoria del espectaculo 
@@ -543,7 +543,7 @@ public class GestorEspectaculos {
 		}
 		/**
 		 * Devuelve una lista de los titulos de los espectaculos con entradas y sesiones posteriores a uan fecha
-		 * @param fecha Fecha a partir de la cual se calculan los pr�ximos espectaculos (en el main se introduce la actual)
+		 * @param fecha Fecha a partir de la cual se calculan los prï¿½ximos espectaculos (en el main se introduce la actual)
 		 * @return lista Lista de cadenas con los titulos de los espectaculos proximos
 		 */
 		public ArrayList<String> proximosEspectaculos(Date fecha) {
@@ -728,244 +728,4 @@ public class GestorEspectaculos {
 			}
 			return f;
 		}
-		
-		
-		
-		/**
-		 * Escribe un espectaculo puntual en el fichero de espectaculos puntuales
-		 * @param p Espectaculo puntual a a�adir al fichero
-		 */
-		/*public void escribirFicheroPuntual(EspectaculoPuntual p){
-			FileWriter fichero = null;
-			String f=null;
-			f=propiedades(1);	
-			try {
-				fichero = new FileWriter(f, true);
-				fichero.write(p.getTitulo()+"\n");
-				fichero.write(p.getDescripcion()+"\n");
-				String auxCat=p.getCategoria().toString();
-                fichero.write(auxCat+"\n");
-				String aforo=String.valueOf(p.getAforolocalidades());
-				fichero.write(aforo+"\n");
-				String localidades=String.valueOf(p.getLocalidadesvendidas());
-				fichero.write(localidades+"\n");
-				String fecha=String.valueOf(p.getFechaPuntual());
-				fichero.write(fecha+"\n");
-				fichero.close();
-
-			} catch (Exception ex) {
-				System.out.println("Mensaje de la excepci�n: " + ex.getMessage());
-			}
-		}*/
-		/**
-		 * Vuelca los espectaculos puntuales a la lista de espectaculos puntuales del gestor de espectaculos
-		 * @throws IOException
-		 */
-		/*public void leerFicheroPuntual() throws IOException {
-			BufferedReader in = null;
-			ArrayList<EspectaculoPuntual> lista = new ArrayList<EspectaculoPuntual>();
-			ArrayList<String>  vec = new ArrayList<String>();
-			File file = new File("ficheroP.txt");
-	        file.createNewFile();
-	       
-			String f=null;
-			f=propiedades(1);
-			
-	          
-
-			try {   
-			    in = new BufferedReader(new FileReader(f));
-			    String str;
-			    while ((str = in.readLine()) != null) {
-			        vec.add(str);
-			        
-			    }
-			} catch (FileNotFoundException e) {
-			    e.printStackTrace();
-			} catch (IOException e) {
-			    e.printStackTrace();
-			} finally {
-			    if (in != null) {
-			       
-			    }
-			}
-			int aforo,localidades;
-			Date fecha;
-			categoria cat;
-			for(int ind=0;ind<vec.size();ind+=6) {
-				aforo=Integer.parseInt(vec.get(ind+3));
-				localidades=Integer.parseInt(vec.get(ind+4));
-				String date1=vec.get(ind+5);
-				fecha=Date.valueOf(date1);
-				cat=categoria.valueOf(vec.get(ind+2));
-
-					EspectaculoPuntual aux=new EspectaculoPuntual(vec.get(ind),vec.get(ind+1),cat,aforo,localidades,fecha);
-					lista.add(aux);
-			}
-				
-			
-			ListaEspectaculosP=lista;
-			
-		}*/
-		/**
-		 * Escribe un espectaculo de temporada en el fichero de espectaculos de temporada
-		 * @param e Espectaculo de temporada a a�adir al fichero
-		 */
-		/*public void escribirFicheroTemporal(EspectaculoTemporada e){
-            FileWriter fichero = null;
-            String f=null;
-            f=propiedades(2);
-            
-            
-            try {
-
-                fichero = new FileWriter(f, true);
-                fichero.write(e.getTitulo()+"\n");
-                fichero.write(e.getDescripcion()+"\n");
-                String auxCat=e.getCategoria().toString();
-                fichero.write(auxCat+"\n");
-                String auxAforo=String.valueOf(e.getAforolocalidades());
-                fichero.write(auxAforo+"\n");
-                String auxVendidas=String.valueOf(e.getLocalidadesvendidas());
-                fichero.write(auxVendidas+"\n");
-                fichero.write(e.getDia()+"\n");
-                String auxInicio=String.valueOf(e.getInicio());
-                fichero.write(auxInicio+"\n");    
-                String auxFin=String.valueOf(e.getFin());
-                fichero.write(auxFin+"\n");
-                fichero.close();
-
-            } catch (Exception ex) {
-                System.out.println("Mensaje de la excepci�n: " + ex.getMessage());
-            }
-        }*/
-		/**
-		 * Vuelca los espectaculos de temporada a la lista de espectaculos de temporada del gestor de espectaculos
-		 * @throws IOException
-		 */
-		/*public void leerFicheroTemporada() throws IOException {
-            BufferedReader in = null;
-            ArrayList<EspectaculoTemporada> lista = new ArrayList<EspectaculoTemporada>();
-            ArrayList<String>  vec = new ArrayList<String>();
-            File file = new File("ficheroT.txt");
-            file.createNewFile();
-           
-            String f=null;
-            f=propiedades(2);
-            try {   
-                in = new BufferedReader(new FileReader(f));
-                String str;
-                while ((str = in.readLine()) != null) {
-                    vec.add(str);
-                    
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (in != null) {
-                  
-                }
-            }
-            
-            int aforoAux, vendidasAux;
-            Date fechaAux, fechaAux1;
-            categoria catAux;
-            
-            for(int ind=0;ind<vec.size();ind+=8) {
-                aforoAux=Integer.parseInt(vec.get(ind+3));
-                vendidasAux=Integer.parseInt(vec.get(ind+4));
-                fechaAux=Date.valueOf(vec.get(ind+6));
-                fechaAux1=Date.valueOf(vec.get(ind+7));
-                catAux=categoria.valueOf(vec.get(ind+2));
-                EspectaculoTemporada aux=new EspectaculoTemporada(vec.get(ind),vec.get(ind+1),catAux,aforoAux,vendidasAux,vec.get(ind+5),fechaAux,fechaAux1);
-                lista.add(aux);
-            }
-                
-            ListaEspectaculosT=lista;
-            
-        }*/
-		/**
-		 * Escribe un espectaculo multiple en el fichero de espectaculos multiples
-		 * @param p Espectaculo multiple a a�adir al fichero
-		 */
-		/*public void escribirFicheroMultiple(EspectaculoMultiple p){
-            FileWriter fichero = null;
-            String f=null;
-            f=propiedades(3);
-          
-            try {
-
-                fichero = new FileWriter(f, true);  
-                fichero.write(p.getTitulo()+"\n");
-                fichero.write(p.getDescripcion()+"\n");
-                fichero.write(p.getCategoria().toString()+"\n");
-                fichero.write(String.valueOf(p.getAforolocalidades())+"\n");
-                fichero.write(String.valueOf(p.getLocalidadesvendidas())+"\n");
-                String enter=null;
-                for(int i=0;i<p.getListaFechas().size();i++) {
-                	if(i==0) {
-                		enter=p.getListaFechas().get(i).toString()+",";
-                	}else {
-                        enter+= p.getListaFechas().get(i).toString()+",";
-
-                	}
-                }
-                fichero.write(enter+"\n");
-
-                fichero.close();
-
-            } catch (Exception ex) {
-                System.out.println("Mensaje de la excepción: " + ex.getMessage());
-            }
-        }*/
-		/**
-		 * Vuelca los espectaculos multiples a la lista de espectaculos multiples del gestor de espectaculos
-		 * @throws IOException
-		 */
-         /*public void leerFicheroMultiple() throws IOException {
-            BufferedReader in = null;
-            ArrayList<EspectaculoMultiple> lista = new ArrayList<EspectaculoMultiple>();
-            ArrayList<String>  vec = new ArrayList<String>();
-            File file = new File("ficheroM.txt");
-            file.createNewFile();
-           String f=null;
-            f=propiedades(3);
-            
-            try {   
-                in = new BufferedReader(new FileReader(f));
-                String str;
-                while ((str = in.readLine()) != null) {
-                    vec.add(str);
-                    
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (in != null) {
-                   
-                }
-            }
-            int aforo,localidades;
-            for(int ind=0;ind<vec.size();ind+=6) {
-                aforo=Integer.parseInt(vec.get(ind+3));
-                localidades=Integer.parseInt(vec.get(ind+4));
-                String[] parts=vec.get(ind+5).split(",");
-                ArrayList<Date> laux = new ArrayList<Date>();
-                for(int i=0;i<parts.length;i++) {
-                    laux.add(Date.valueOf(parts[i]));
-                }
-                    EspectaculoMultiple aux=new EspectaculoMultiple(vec.get(ind),vec.get(ind+1),categoria.valueOf(vec.get(ind+2)),aforo,localidades,laux);
-                    lista.add(aux);
-            }
-                
-            
-            ListaEspectaculosM=lista;
-
-        }*/
-		 
-	
 }
