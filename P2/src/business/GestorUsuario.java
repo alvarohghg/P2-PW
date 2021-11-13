@@ -176,6 +176,11 @@ public class GestorUsuario {
 		UDAO.actualizarUsuarioBD(correo, nuevonombre, nuevoapellidos, nuevonick, nuevocorreo, opcion);
 		
 }
+	/**
+	 * Funcion para el acceso a los datos correspondientes a los usuarios
+	 * desde el fichero conf.properties
+	 * @return f 
+	 */
 	public String propiedades() {
 		Properties prop = new Properties();
 		String filename = "conf.propierties";
