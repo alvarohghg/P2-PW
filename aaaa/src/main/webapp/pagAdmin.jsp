@@ -72,7 +72,7 @@
             <% for(int i=0; i< ListaUsuarios.size();i++){ 
             	String nick=ListaUsuarios.get(i).getNick();
                 String tipo;
-                if(ListaUsuarios.get(i).getTipo().equals("0")){
+                if(ListaUsuarios.get(i).getTipo().equals("1")){
                 	tipo="Administrador";
                 }
                 else{
