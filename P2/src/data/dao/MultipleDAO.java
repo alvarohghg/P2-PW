@@ -15,11 +15,25 @@ import java.util.Properties;
 import business.AbstractEspectaculo.categoria;
 import business.EspectaculoMultiple;
 import data.common.DBConnection;
-
+/**
+ * Clase correspondiente a las funciones de creación/eliminación/modificación de
+ * espectaculos multiples y sus fechas de la base de datos
+ * @author Alvaro Berjillos
+ * @author Francisco Javier Diaz
+ * @author Alvaro Sanchez
+ *
+ */
 public class MultipleDAO {
+	/**
+	 * Funcion para obtener las secuencias de ordenes en sql del fichero
+	 * sqlM.properties 
+	 * @param r Opcion correspondiente a la línea 
+	 * que determinará los datos que se obtendrán
+	 * @return f
+	 */
 	public String propiedades(int r) {
         Properties prop = new Properties();
-        String filename = "C:\\Users\\xboxn\\AppData\\Roaming\\SPB_16.6\\git\\P2-PW\\P2\\sqlM.properties";
+        String filename = "sqlM.properties";
         String f=null;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
@@ -73,6 +87,11 @@ public class MultipleDAO {
         }
         return f;
     }
+	/**
+	 * Funcion para extraer los espectaculos multiples de la BBDD a la lista
+	 * @return listaM Una lista de espectaculos multiples
+	 * de la base de datos
+	 */
 	public ArrayList<EspectaculoMultiple> obtenerMultiple(){
 		ArrayList<EspectaculoMultiple> listaM = new ArrayList<EspectaculoMultiple>();
 		ArrayList<Date> listaFechas=new ArrayList<Date>();
@@ -120,6 +139,12 @@ public class MultipleDAO {
 		}
 		return listaM;
 	}
+	/**
+	 * Funcion para escribir un espectaculo multiple en la base de datos
+	 * pasado por argumento. Tambien escribira las fechas de las sesiones
+	 * en la tabla correspondiente
+	 * @param multiple Espectaculo que sera añadido a la base de datos
+	 */
 	public void escribirMultipleBD(EspectaculoMultiple multiple ) {
         try {
         	
@@ -155,7 +180,19 @@ public class MultipleDAO {
             e.printStackTrace();
         }
     }
-	
+	/**
+	 * Actualiza un espectaculo multiple almacenado en la b
+	 * base de datos dada una opcion
+	 * @param titulo Titulo del espectaculo a modificar
+	 * @param nuevotitulo Nuevo titulo del espectaculo
+	 * @param nuevadescripcion Nueva descripcion del espectaculo
+	 * @param nuevacategoria Nueva categoria
+	 * @param nuevoaforolocalidades Nuevo aforo
+	 * @param localidadesvendidas Nuevas localidades vendidas
+	 * @param fecha1 Fecha antigua de la sesion del espectaculo
+ 	 * @param fecha2 Nueva fecha del espectaculo
+	 * @param opcion Entero que determina la operacion sql
+	 */
 	public void actualizarMultipleBD(String titulo,String nuevotitulo,String nuevadescripcion,categoria nuevacategoria,int nuevoaforolocalidades,
 			int localidadesvendidas,Date fecha1,Date fecha2,int opcion){
 		try {
@@ -215,6 +252,10 @@ public class MultipleDAO {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Borra un espectaculo multiple de la base de datos dado el titulo
+	 * @param titulo Titulo del espectaculo
+	 */
 	public void eliminarMultipleTitulo(String titulo){
 		try {
 			System.out.println("NOmbre en dao "+ titulo);
@@ -227,15 +268,17 @@ public class MultipleDAO {
 			ps.setString(1,titulo);
 			ps1.setString(1,titulo);
 			ps1.executeUpdate();
-			ps.executeUpdate();
-			
-
-			
+			ps.executeUpdate();	
 		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Elimina una sesion del espectaculo multiple
+	 * @param titulo Titulo del espectaculo
+	 * @param fecha Sesion a eliminar
+	 */
 	public void eliminarMultipleFecha(String titulo, Date fecha){
 		try {
 			DBConnection dbConnection = new DBConnection();
