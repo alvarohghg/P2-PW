@@ -16,8 +16,20 @@ import java.util.Properties;
 import business.*;
 import business.AbstractEspectaculo.categoria;
 import data.common.DBConnection;
-
+/**
+ * Clase correspondiente a las funciones de creación/eliminación/modificación de
+ * espectaculos puntuales de la base de datos
+ * @author Alvaro Berjillos
+ * @author Francisco Javier Diaz
+ * @author Alvaro Sanchez
+ *
+ */
 public class PuntualDAO {
+	/**
+	 * Funcion para extraer los espectaculos puntuales de la BBDD a la lista
+	 * @return listaP Una lista de espectaculos puntuales
+	 * de la base de datos
+	 */
 	public ArrayList<EspectaculoPuntual> obtenerPuntual(){
 		ArrayList<EspectaculoPuntual> listaP = new ArrayList<EspectaculoPuntual>();
 		try {
@@ -50,7 +62,11 @@ public class PuntualDAO {
 		}
 		return listaP;
 	}
-	
+	/**
+	 * Funcion para escribir un espectaculo puntual en la base de datos
+	 * pasado por argumento
+	 * @param puntual Espectaculo puntual que sera añadido a la base de datos
+	 */
 	public void escribirPuntualBD(EspectaculoPuntual puntual ) {
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -75,7 +91,18 @@ public class PuntualDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Actualiza un espectaculo puntual almacenado en la
+	 * base de datos dada una opcion
+	 * @param titulo Titulo del espectaculo a modificar
+	 * @param nuevotitulo Nuevo titulo del espectaculo
+	 * @param nuevadescripcion Nueva descripcion del espectaculo
+	 * @param nuevacategoria Nueva categoria
+	 * @param nuevoaforolocalidades Nuevo aforo
+	 * @param localidadesvendidas Nuevas localidades vendidas
+	 * @param fecha Nueva fecha del espectaculo a alterar
+	 * @param opcion Entero que determina la operacion sql
+	 */
 	public void actualizarPuntualBD(String titulo,String nuevotitulo,String nuevadescripcion,categoria nuevacategoria,int nuevoaforolocalidades,
 			int localidadesvendidas,Date fecha,int opcion) {
 		try {
@@ -138,7 +165,10 @@ public class PuntualDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Borra un espectaculo puntual de la base de datos dado el titulo
+	 * @param titulo Titulo del espectaculo
+	 */
 	public void eliminarPuntualTitulo(String titulo){
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -156,7 +186,11 @@ public class PuntualDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Elimina una sesion del espectaculo puntual
+	 * @param titulo Titulo del espectaculo
+	 * @param fecha Sesion a eliminar
+	 */
 	public void eliminarPuntualFecha(String titulo, Date fecha){
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -176,7 +210,13 @@ public class PuntualDAO {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Funcion para obtener las secuencias de ordenes en sql del fichero
+	 * sqlP.properties 
+	 * @param r Opcion correspondiente a la línea 
+	 * que determinará los datos que se obtendrán
+	 * @return f
+	 */
 	public String propiedades(int r) {
 		Properties prop = new Properties();
 		String filename = "sqlP.properties";
@@ -214,12 +254,12 @@ public class PuntualDAO {
 			else {
 				f = prop.getProperty("eliminarPuntualFecha");
 			}
-			//System.out.println(f);			
+						
 		} catch (FileNotFoundException e) {
 			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return f;
