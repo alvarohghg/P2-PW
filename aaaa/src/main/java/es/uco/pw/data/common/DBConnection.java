@@ -54,7 +54,7 @@ public class DBConnection {
 		}
 	}
 	
-	
+	/*
 	public String propiedades(int r) {
 		
 		Properties prop = new Properties();
@@ -81,6 +81,6 @@ public class DBConnection {
 			e.printStackTrace();
 		}
 		return f;
-	}
+	}*/
 	
 }
