@@ -16,7 +16,7 @@ import es.uco.pw.data.common.DBConnection;
 
 
 public class UsuarioDAO {
-	public String propiedades(int r) {
+	/*public String propiedades(int r) {
 		Properties prop = new Properties();
 		String filename = "sqlU.properties";
 		String f=null;
@@ -51,7 +51,7 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}
 		return f;
-	}
+	}*/
 	
 	public ArrayList<Usuario> obtenerUsuarios(){
 		ArrayList<Usuario> listOfUsers = new ArrayList<Usuario>();
@@ -59,8 +59,8 @@ public class UsuarioDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			// Important: This query is hard-coded here for illustrative purposes only
-			//String query = "select * from usuarioEJ2";
-			String query = propiedades(1);
+			String query = "select * from usuarioEJ2";
+			//String query = propiedades(1);
 
 			// Important: We can replace this direct invocation to CRUD operations in DBConnection
 			Statement stmt = connection.createStatement();
