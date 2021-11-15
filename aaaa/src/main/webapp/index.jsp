@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
         <title>Inicio:</title>
         <style>
+		<!--Declaracion del estilo -->
 			button {
 			  background-color: #bd7df280;
 			  border: none;
@@ -36,6 +37,7 @@
 			</style>
     </head>
     <body>
+	    <!--Redireccion a las paginas correspondientes --->
        		<div style="text-align:center">
 			      <a href="/aaaa/mvc/view/loginView.jsp">
 	       			<button class="button1">Iniciar sesion</button>
