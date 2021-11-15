@@ -6,6 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Registro</title>
+		<!-- Declaración del estilo-->
 		<style>
 			<!-- Declaración del estilo-->
 			form,h2 {
