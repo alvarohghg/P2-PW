@@ -4,7 +4,7 @@
  java.time.LocalDate, java.util.Date, java.sql.*, java.util.* " %>
 
 <% //Declaracion de las variables de recepcion de los datos 
-<% String correo = request.getParameter("correo"); 
+   String correo = request.getParameter("correo"); 
    String nombre = request.getParameter("nombre"); 
    String apellidos = request.getParameter("apellidos"); 
    String nick = request.getParameter("nick"); %>
