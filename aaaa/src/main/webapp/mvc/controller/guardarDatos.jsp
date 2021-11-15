@@ -3,8 +3,8 @@
 <%@ page import ="es.uco.pw.business.user.Usuario, es.uco.pw.data.dao.UsuarioDAO, es.uco.pw.business.user.GestorUsuario,
  java.time.LocalDate, java.util.Date, java.sql.*, java.util.* " %>
 
-<% //Declaracion de las variables de recepcion de los datos %>
-<% String correo = request.getParameter("correo"); %>
+<% //Declaracion de las variables de recepcion de los datos 
+<% String correo = request.getParameter("correo"); 
    String nombre = request.getParameter("nombre"); 
    String apellidos = request.getParameter("apellidos"); 
    String nick = request.getParameter("nick"); %>
