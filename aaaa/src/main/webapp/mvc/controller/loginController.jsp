@@ -3,6 +3,8 @@
 <%@ page import ="es.uco.pw.business.user.Usuario, es.uco.pw.data.dao.UsuarioDAO, es.uco.pw.business.user.GestorUsuario,
 	 java.time.LocalDate, java.util.Date, java.sql.*, java.util.* " %>
 
+<% //Declaracion de las variables de recepcion de los datos %>
+
 <% 	String nick = request.getParameter("nick");
 	String correo = request.getParameter("correo"); 
 	UsuarioDAO UDAO=new UsuarioDAO();
@@ -10,7 +12,9 @@
 	GestorUsuario GU =new GestorUsuario();
 	int op;
 	GU.guardarBDU();
-	
+	/*
+	Cambiamos el valor de op para controlar si ha iniciado sesion correctamete y el tipo de usuario que es
+	*/
 	if(GU.existeNick(correo, nick)==true){
 		GU.ponerFecha(correo);
 		if(GU.esAdmim(correo)==true){
@@ -29,6 +33,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Comprobar inicio sesion</title>
+		<!--Declaracion del estilo -->
 		<style>
 			button {
 			  background-color: #bd7df280;
@@ -57,6 +62,7 @@
 		</style>
 	</head>
 	<body>
+		<!--Mostramos una pagina diferente segun el tipo de usuario y redireccionamos -->
 		<% if(op==0){%>
 			 	<h1>Sesion inicida correctamente</h1>
 				
