@@ -20,6 +20,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Eres espectador</title>
+		<!-- Declaración del estilo-->
 		<style>
 			button {
 			  background-color: #bd7df280;
@@ -47,16 +48,19 @@
 		</style>
 	</head>
 	<body>
+		<!-- Contenedor (div) que muestra la informacion-->
 		<div style="text-align:center" >
 			<h2>Actividad:</h2>
 			<p>Fecha actual: <%=fecha%> </p>
 			<p>Te registrastes un: <%=registro%></p>
 		</div>
 		<br>
+		<!-- Formulario para enviar mediante el método POST el usuario a modificar a "modificarDatos.jsp"-->
 		<div style="text-align:center">
 	      <form methon="post" action= "modificarDatos.jsp">
 	 		 <button class="button1" type=submit value=<%=correo%> id="correo" name="correo">Modificar datos</button>
 			</form>
+			<!-- Botón para volver al index -->
           	 	<a  href="/aaaa/index.jsp">
 		    	<button class="button button1" type="button">Desconectar</button>
 			</a>      
