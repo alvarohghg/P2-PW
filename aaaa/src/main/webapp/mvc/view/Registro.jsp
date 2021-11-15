@@ -8,7 +8,7 @@
 		<title>Registro</title>
 		<!-- Declaración del estilo-->
 		<style>
-			<!-- Declaración del estilo-->
+			
 			form,h2 {
 				 text-align:center;
 			}
