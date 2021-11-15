@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<title>Registro</title>
 		<style>
+			<!-- Declaración del estilo -->
 			form,h2 {
 				 text-align:center;
 			}
@@ -39,7 +40,7 @@
 	</head>
 	<body>
 
-
+		<!-- Formulario que se pasará mediante el método POST a "comprobarUsuario.jsp"-->
 		<form method="post" action= "../controller/comprobarUsuario.jsp" >
 			<label for="nombre">Nombre</label><br>
 			<input type="text" name="nombre" value="" id="nombre" required><br/><br/>
