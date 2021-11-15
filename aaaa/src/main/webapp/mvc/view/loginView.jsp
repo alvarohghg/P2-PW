@@ -7,7 +7,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Iniciar sesion</title>
+		<!-- Declaración del estilo-->
 		<style>
+			
 			form,h2 {
 				 text-align:center;
 			}
@@ -42,6 +44,7 @@
 
 	</head>
 	<body>
+			<!-- Formulario que se pasará mediante el método POST a "loginController.jsp"-->
 			<form method="post" action="../controller/loginController.jsp">
 				<label for="name">Nick: </label>
 				<input type="text" name="nick" value="" id="nick"><br/>
