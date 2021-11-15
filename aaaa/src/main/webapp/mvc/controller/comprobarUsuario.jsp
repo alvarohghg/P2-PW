@@ -2,24 +2,22 @@
 <%@ page import ="es.uco.pw.business.user.Usuario, es.uco.pw.data.dao.UsuarioDAO, es.uco.pw.business.user.GestorUsuario,
 	 java.time.LocalDate, java.util.Date, java.sql.*, java.util.* " %>
 
-
-	<% String nombre = request.getParameter("nombre"); %>
-
-	<% String apellidos = request.getParameter("apellidos"); %>
-
-	<% String nick = request.getParameter("nick"); %>
-
-	<% String correo = request.getParameter("correo"); %>
-
-	<% String tipo = request.getParameter("tipo"); %>
-	<% int op; %>
+	<% //Declaracion de las variables de recepcion de los datos %>
+	<% 	String nombre = request.getParameter("nombre"); 
+		String apellidos = request.getParameter("apellidos");
+		String nick = request.getParameter("nick");
+		String correo = request.getParameter("correo");
+		String tipo = request.getParameter("tipo"); 
+		int op; %>
+	<% //Conseguimos la fecha actual %>
 	<% 	 Date date = new Date();
    		 long timeInMilliSeconds = date.getTime();
 		java.sql.Date fecha = new java.sql.Date(timeInMilliSeconds) ; %>
 	
-	<% UsuarioDAO UDAO=new UsuarioDAO(); %>
-	<% Usuario user = new Usuario(); %>
-	<% GestorUsuario GU =new GestorUsuario(); %>
+	<% UsuarioDAO UDAO=new UsuarioDAO();
+	   Usuario user = new Usuario(); 
+	   GestorUsuario GU =new GestorUsuario(); %>
+	<% //Inytroducimos lo valores en la base de datos %>
 	<%	GU.guardarBDU();
 		if(GU.existeUsuario(correo)) {
 			op=0; 	
@@ -41,6 +39,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Comprobar Usuario</title>
+		<!--Declaracion del estilo -->
+
 		<style>
 			button {
 			  background-color: #bd7df280;
@@ -68,6 +68,8 @@
 		</style>
 	</head>
 	<body>
+		<!--Mostramos una pagina diferente segun el tipo de usuario y redireccionamos -->
+
 		<% if(op==0){%>
 			 <h1>Este correo ya está en uso</h1>
 				
