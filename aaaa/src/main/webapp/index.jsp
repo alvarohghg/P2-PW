@@ -9,8 +9,8 @@
     <head>
     <meta charset="UTF-8">
         <title>Inicio:</title>
+	    		<!--Declaracion del estilo -->
         <style>
-		<!--Declaracion del estilo -->
 			button {
 			  background-color: #bd7df280;
 			  border: none;
