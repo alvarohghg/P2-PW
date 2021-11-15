@@ -68,7 +68,7 @@
 		</style>
 	</head>
 	<body>
-		<!--Mostramos una pagina diferente segun el tipo de usuario y redireccionamos -->
+		<!--Mostramos una pagina diferente segun si hemos iniciado correctamente o no-->
 
 		<% if(op==0){%>
 			 <h1>Este correo ya está en uso</h1>
