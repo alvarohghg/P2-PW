@@ -63,9 +63,8 @@
 	</head>
 	<body>
 		<!-- Creamos un contenedor <div> para introducir la lista-->
+		<!-- Creamos la tabla que usaremos como lista-->
 		<div align="center">
-			
-	<!-- Creamos la tabla que usaremos como lista-->
         <table  border="0" cellpadding=5  >
 		<!-- Mostramos el título"LISTA DE USUARIOS"-->
             <caption><h2 style="text-align:center">Lista de usuarios</h2></caption>
