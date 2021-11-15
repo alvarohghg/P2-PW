@@ -17,6 +17,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Eres Admin</title>
+		<!-- Declaración del estilo-->
 		<style>
 			table {
 			  border-collapse: collapse;
@@ -61,14 +62,19 @@
 		</style>
 	</head>
 	<body>
+		<!-- Creamos un contenedor <div> para introducir la lista-->
 		<div align="center">
+			
+	<!-- Creamos la tabla que usaremos como lista-->
         <table  border="0" cellpadding=5  >
+		<!-- Mostramos el título"LISTA DE USUARIOS"-->
             <caption><h2 style="text-align:center">Lista de usuarios</h2></caption>
             <tr>
                 <th>Nick</th>
                 <th>Tipo</th>
                 <th>Ultima conexion</th>
             </tr>
+		<!-- Enseñamos correctamente el tipo de usuario,traduciendo el 0/1 de la base de datos-->
             <% for(int i=0; i< ListaUsuarios.size();i++){ 
             	String nick=ListaUsuarios.get(i).getNick();
                 String tipo;
@@ -84,8 +90,10 @@
                     <td ><%= nick %> </td>
                     <td><%= tipo %> </td>
                     <td><%= fecha %> </td>
+			<!-- Controlamos que el botón de "Modificar datos" al lado del usuario a modificar-->
                     <% if(correo.equals(ListaUsuarios.get(i).getCorreo())==true){ %>
-	                    <td > 
+	                    <td >
+			 <!-- Formulario para enviar mediante el método POST el usuario a modificar a "modificarDatos.jsp"-->
 	                    <form method="post" action= "modificarDatos.jsp">
 			    			<button class="button1" type=submit value=<%=ListaUsuarios.get(i).getCorreo()%> id="correo" name="correo">Modificar datos</button>
 						</form>
