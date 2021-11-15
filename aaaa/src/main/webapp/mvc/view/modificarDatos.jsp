@@ -8,6 +8,8 @@
  <!DOCTYPE html>
 <html>
 	<head>
+	<title>Modificar datos</title>
+	<!-- Declaración del estilo-->
 	<style>
 			form,h2,p {
 				 text-align:center;
@@ -51,9 +53,11 @@
 	</style>
 	</head>
 	<body>
-		
+		<!-- Mostrar al usuario su identificador(invariable)-->
 		<h2>Modifique sus datos</h2>
 		<p >Su correo actual es: <p style="font-family:Monospace, Times, serif"><%=correo%></p>
+		
+		<!-- Formulario que se pasará mediante el método POST a "guardarDatos.jsp"-->
 		
 		<form method="post" action="../controller/guardarDatos.jsp">
 		  <input type="hidden" id="correo" name="correo" value=<%=correo %>><br>		 
