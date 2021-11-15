@@ -62,7 +62,7 @@
 		</style>
 	</head>
 	<body>
-		<!-- Contenedor <div> para introducir la lista-->
+		<!-- Contenedor (div) para introducir la lista-->
 		<!-- Tabla que usaremos como lista-->
 		<div align="center">
         <table  border="0" cellpadding=5  >
