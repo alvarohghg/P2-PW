@@ -7,7 +7,7 @@
 		<meta charset="UTF-8">
 		<title>Registro</title>
 		<style>
-			<!-- Declaración del estilo -->
+			<!-- Declaración del estilo-->
 			form,h2 {
 				 text-align:center;
 			}
